@@ -1,0 +1,31 @@
+
+//to add this InputController to a panel, make sure the panel is focusable by
+//using the below methods:
+//    panel.setFocusable(true);
+//    panel.requestFocusInWindow();
+//panel has to be focused in order for the KeyListener to be able to listen
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class InputController implements KeyListener {
+    public void keyTyped(KeyEvent e) {
+      displayInfo(e, "KEY TYPED: ");
+    }
+
+   public void keyPressed(KeyEvent e) {
+      displayInfo(e, "KEY PRESSED: ");
+    }
+   
+    public void keyReleased(KeyEvent e) {
+      displayInfo(e, "KEY RELEASED: ");
+    }
+
+    public void displayInfo(KeyEvent e, String s) {
+      String keyString; 
+      int keyCode = e.getKeyCode();
+      keyString = s + "key code = " + keyCode + " (" + KeyEvent.getKeyText(keyCode) + ")";
+      System.out.println(keyString);
+    }
+}
+
