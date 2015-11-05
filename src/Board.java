@@ -63,8 +63,8 @@ public class Board {
 	
 	
 	/**
-	 * Returns the coordinates (-1, -1) if board is completely full.
-	 * @return the coordinates (-1, -1)
+	 * Returns the coordinates of the first empty cell .
+	 * @return returns the coordinates of the first empty cell or (-1,-1) if there are no empty cells
 	 */
 	public int[] firstEmptyCell(){
 		for(int i = 0; i < board.length;i++){
@@ -97,8 +97,8 @@ public class Board {
 	}
 	
 	/**
-	 * 
-	 * @param pentomino
+	 * removes all given values from the board
+	 * @param pentomino the value to be removed from the board
 	 */
 	public void remove(char pentomino){
 		int counter = 0;
@@ -189,21 +189,33 @@ public class Board {
 
 
 	/**
-	 *
-	 */
+	 * Get the char value from a position in the board
+	 * @param x the row you want the value from
+	 * @param y the column you want the value from
+     * @return the char value in the board at row x and column y
+     */
 	public char getCell(int x, int y)
 	{
 		if( x >= this.width || y >= this.height ){
 			return ' ';
 		}
-		return board[y][x];
+		return board[x][y];
 	}
 
+	/**
+	 * Returns how many columns the board has
+	 * @return the amount of columns of the board as an integer
+     */
 	public int getWidth(){
 		return this.width;
 	}
 
-	public int getHeight(){
+	/**
+	 * Returns how many rows the board has
+	 * @return the amount of rows the board has as an integer
+     */
+	public int getHeight()
+	{
 		return this.height;
 	}
 
