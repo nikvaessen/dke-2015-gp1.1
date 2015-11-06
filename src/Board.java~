@@ -6,7 +6,7 @@
 public class Board {
 	//instance variables
 	private char[][] board; 	//Stores the board state. 
-	//lol easter egg for jan ;)
+	
 	private int width;
 	private int height;
 	
