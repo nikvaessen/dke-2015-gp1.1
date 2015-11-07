@@ -2,12 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JComponent;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import java.awt.Graphics;
-import java.util.List;
-import java.util.ArrayList;
+
 
 public class GUI extends JFrame{
 	//declares contants
@@ -51,6 +46,9 @@ public class GUI extends JFrame{
 		this.setVisible(true);
 	}
 
+	/**
+	 * Method which sets up the main, game and info panels
+	 */
 	private void setUpPanels(){
 		//create and add mainpanel to frame
         mainPanel = new JPanel();
@@ -62,7 +60,7 @@ public class GUI extends JFrame{
 	}
 
     /**
-     *	sets up the infoPanel
+     *	sets up the GamePanel
      */
     private void setUpGamePanel(){
         //creates the GamePanel board
