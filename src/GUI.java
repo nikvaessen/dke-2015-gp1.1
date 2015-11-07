@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class GUI extends JFrame{
 	//declares contants
 	//size of gui(pixel*pixel)
-	private final int WIDTH  = 400;
-	private final int HEIGHT = 500;
+	private final int WIDTH  = 1000;
+	private final int HEIGHT = 800;
 	//size of in-game pentris board
 	private final int GAME_HEIGHT = 15;
 	private final int GAME_WIDTH  = 10;
@@ -47,29 +47,37 @@ public class GUI extends JFrame{
 		this.setTitle("test gui");
 		this.setResizable(false);
 		//makes the gui visisble
-		//this.pack();
+		this.pack();
 		this.setVisible(true);
 	}
 
 	private void setUpPanels(){
-		mainPanel = new JPanel();
+		//create and add mainpanel to frame
+        mainPanel = new JPanel();
 		this.add(mainPanel);
-
-		GamePanel gamePanel = new GamePanel(board);
-		mainPanel.add(gamePanel);
-
-		gamePanel.setFocusable(true);
-		gamePanel.requestFocus();
-		gamePanel.addKeyListener(input);
-
-		JLabel test = new JLabel("test");
-		mainPanel.add(test);
-		mainPanel.setVisible(true);
+        //call the method which creates the GamePanel ands adds it to the main panel
+        setUpGamePanel();
+        //call the method which creates the InfoPanel ands adds it to the main panel
+        //setUpInfoPanel();
 	}
 
+    /**
+     *	sets up the infoPanel
+     */
+    private void setUpGamePanel(){
+        //creates the GamePanel board
+        GamePanel gamePanel = new GamePanel(board);
+        mainPanel.add(gamePanel);
+        //requests focus so input works
+        gamePanel.setFocusable(true);
+        gamePanel.requestFocus();
+        //add the input manager
+        gamePanel.addKeyListener(input);
+    }
+
 	/**
-	*	sets up the infoPanel
-	*/
+	 *	sets up the infoPanel
+	 */
 	private void setUpInfoPanel(){
 		//instantiates the panels for the button and labe and the block
 		this.button = new JButton("Click me to print hello");
