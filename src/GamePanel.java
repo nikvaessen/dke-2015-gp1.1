@@ -12,7 +12,7 @@ public class GamePanel extends JPanel {
     private Board board;
 
     /**
-     * Constructs a GamePanel Jframe object which displays a grid representing up to 12 different pentomino pieces
+     * Constructs a GamePanel JPanel object which displays a grid representing up to 12 different pentomino pieces
      * @param board the board the GamePanel has to display
      */
     public GamePanel(Board board) {
