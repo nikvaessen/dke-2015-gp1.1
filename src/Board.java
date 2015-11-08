@@ -6,7 +6,6 @@
 public class Board {
     //instance variables
     private char[][] board; 	//Stores the board state.
-    //lol easter egg for jan ;)
     private int width;
     private int height;
 
@@ -51,6 +50,8 @@ public class Board {
      */
     public void setBoard(char[][] newboard){
         this.board = newboard;
+        this.height = newboard.length;
+        this.width = newboard[0].length;
     }
 
     /**
@@ -60,7 +61,6 @@ public class Board {
     public char[][] getBoard(){
         return this.board;
     }
-
 
     /**
      * Returns the coordinates of the first empty cell .
@@ -93,12 +93,11 @@ public class Board {
             }
         }
         return counter;
-
     }
 
     /**
-     * removes all given values from the board
-     * @param pentomino the value to be removed from the board
+     * Set all cells with the given value back to the empty state, 'o'
+     * @param pentomino the value to be removed from the board and replaced with 'o'
      */
     public void remove(char pentomino){
         int counter = 0;
@@ -144,8 +143,8 @@ public class Board {
     /**
      * Places the pentomino, starting with the first char of the pentomino being placed in the chosen cell.
      * @param pentMatrix matrix which stores the pentomino
-     * @param x coordinate x of the cell
-     * @param y coordinate y of the cell
+     * @param x coordinate x where the pentomino needs to be placed
+     * @param y coordinate y where the pentomino needs to be placed
      */
     public void placePiece(char[][] pentMatrix, int x, int y){
         y -= checkPad(pentMatrix);
@@ -183,10 +182,9 @@ public class Board {
      * @param j coordinate y of the cell
      * @param value char of the pentomino
      */
-    private void setCell(int i, int j, char value){
+    public void setCell(int i, int j, char value){
         board[i][j] = value;
     }
-
 
     /**
      * Get the char value from a position in the board
@@ -196,7 +194,8 @@ public class Board {
      */
     public char getCell(int x, int y)
     {
-        if( x >= this.width || y >= this.height ){
+        if( x >= this.height || y >= this.width ){
+            System.out.printf("out of bounds:%nx: %d height: %d%n y: %d width: %d%n");
             return ' ';
         }
         return board[x][y];
