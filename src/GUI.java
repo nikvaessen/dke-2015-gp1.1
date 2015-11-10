@@ -3,11 +3,9 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JComponent;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import java.awt.Graphics;
-import java.util.List;
-import java.util.ArrayList;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
 
 public class GUI extends JFrame{
 	//declares contants
@@ -17,11 +15,6 @@ public class GUI extends JFrame{
 	//size of in-game pentris board
 	private final int GAME_HEIGHT = 15;
 	private final int GAME_WIDTH  = 10;
-
-	//declares the panels
-	private JPanel mainPanel;
-	private JPanel gamePanel;
-	private JPanel infoPanel;
 
 	//declares the components for the game panel
 	private InputController input;
@@ -40,7 +33,6 @@ public class GUI extends JFrame{
 		this.board = board;
 		//method which sets up all components
 		this.setUpPanels();
-		//this.setUpInfoPanel();
 		//sets size, title bar and close operation
 		this.setSize(WIDTH, HEIGHT);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,17 +44,19 @@ public class GUI extends JFrame{
 	}
 
 	private void setUpPanels(){
-		mainPanel = new JPanel();
-		this.add(mainPanel);
 
-		GamePanel gamePanel = new GamePanel(board);
-		mainPanel.add(gamePanel);
+		setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
 
-		gamePanel.setFocusable(true);
-		gamePanel.requestFocus();
-		gamePanel.addKeyListener(input);
+		GamePanel gp = new GamePanel(board);
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gp.setFocusable(true);
+		gp.requestFocus();
+		gp.addKeyListener(input);
+		this.add(gp, gbc);
 
-		JLabel test = new JLabel("test");
+		/*JLabel test = new JLabel("test");
 		mainPanel.add(test);
 		mainPanel.setVisible(true);
 	}
@@ -70,12 +64,12 @@ public class GUI extends JFrame{
 	/**
 	*	sets up the infoPanel
 	*/
-	private void setUpInfoPanel(){
+	/*private void setUpInfoPanel(){
 		//instantiates the panels for the button and labe and the block
 		this.button = new JButton("Click me to print hello");
 		this.infoLabel = new JLabel("This is the info panel");
 		//adds components to the panel
 		infoPanel.add(button);
-		infoPanel.add(infoLabel);
+		infoPanel.add(infoLabel);*/
 	}
 }
