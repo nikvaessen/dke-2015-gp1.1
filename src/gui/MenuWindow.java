@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by Aleksandra on 2015-11-10.
  */
-public class MenuWindow extends JFrame{
+public class MenuWindow extends JPanel{
 
     //size of the window
     private final int HEIGHT = 400;
@@ -24,9 +24,7 @@ public class MenuWindow extends JFrame{
 
 
         this.setSize(WIDTH, HEIGHT);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("Pentris");
-        this.setResizable(false);
+
         this.setVisible(true);
     }
 }

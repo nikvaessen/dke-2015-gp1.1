@@ -1,5 +1,5 @@
 package gui;
-
+import tetris.Board;
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,8 +44,5 @@ public class GameWindow extends JFrame{
         gp.requestFocus();
         gp.addKeyListener(input);
         this.add(gp, gbc);
-
-
-
     }
 }
