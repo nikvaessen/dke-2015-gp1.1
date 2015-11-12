@@ -1,10 +1,12 @@
+package gui;
 
+import tetris.Board;
 
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by chrx on 11/5/15.
+ * Created by Nik on 11/5/15.
  */
 public class GamePanel extends JPanel {
     public static final int BLOCKSIZE = 50;

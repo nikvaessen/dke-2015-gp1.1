@@ -1,3 +1,5 @@
+package gui;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,7 +17,7 @@ public class GameWindow extends JFrame{
 
 
     public GameWindow(InputController input, Board board){
-        //sets up inputcontroller and board
+        //sets up inputcontroller and tetris
         this.input = input;
         this.board = board;
         //method which sets up all components

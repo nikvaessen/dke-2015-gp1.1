@@ -1,3 +1,5 @@
+package gui;
+
 import javax.swing.*;
 
 /**
@@ -18,12 +20,12 @@ public class MenuWindow extends JFrame{
     private JButton quit;
 
 
-    public ManuWindow(){
+    public MenuWindow(){
 
 
         this.setSize(WIDTH, HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setTitle("PENTRIS");
+        this.setTitle("Pentris");
         this.setResizable(false);
         this.setVisible(true);
     }
