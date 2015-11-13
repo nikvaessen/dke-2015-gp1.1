@@ -25,7 +25,7 @@ public class WindowHolder extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Pentris");
         this.setResizable(false);
-        this.setSize(Dimensions.WINDOW_WIDTH, Dimensions.WINDOW_HEIGHT);
+        this.setSize(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
 
         //initial frame state
         this.setVisible(true);
