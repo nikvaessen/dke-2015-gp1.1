@@ -29,7 +29,7 @@ public class GameWindow extends JFrame{
         this.setResizable(false);
         //makes the gui visisble
         //this.pack();
-        this.setVisible(true);
+        //this.setVisible(true);
 
     }
 

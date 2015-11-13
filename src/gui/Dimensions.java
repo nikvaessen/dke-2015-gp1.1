@@ -8,8 +8,8 @@ import java.awt.*;
 public abstract class Dimensions
 {
     //dimensions of window frame
-    public static final int WINDOW_HEIGHT = 1000;
-    public static final int WINDOW_WIDTH = 1000;
+    public static final int WINDOW_HEIGHT = 600;
+    public static final int WINDOW_WIDTH = 500;
 
     //dimensions of main menu
     public static final int MAIN_MENU_WIDTH =  WINDOW_WIDTH;
