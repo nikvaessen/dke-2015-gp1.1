@@ -2,39 +2,29 @@ package gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /**
- * Created by Aleksandra on 2015-11-10.
+ * Created by Aleksandra and Nik on 2015-11-10.
  */
 public class MenuWindow extends JPanel {
-
-    //size of the window
-    private final int HEIGHT = 400;
-    private final int WIDTH = 400;
-
-    //options
+    //All buttons
     private JButton singePlayerButton;
     private JButton multiPlayerButton;
     private JButton optionsMenuButton;
     private JButton highScoresButton;
     private JButton botButton;
     private JButton quitButton;
-    private JViewport imageheader;
 
     public MenuWindow() {
-        //set up the panel behaviour
-        this.setSize(WIDTH, HEIGHT);
+        //set up the layout
         this.setLayout(new GridBagLayout());
         //set up the buttons and the image header
         setUpButtons();
         setUpImage();
-
-        //set visable
-        this.setVisible(true);
     }
 
     public void setUpButtons()
@@ -60,36 +50,25 @@ public class MenuWindow extends JPanel {
         //set up constraints for the buttonpanel and add it to the panel
         GridBagConstraints c = new GridBagConstraints();
         c.gridy = 1;
-        c.weighty = 0.5;
-        this.add(buttonHolder);
+        c.weighty = 1;
+        c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(20, 0 , 0 , 0);
+        this.add(buttonHolder, c);
     }
 
     public void setUpImage()
     {
-        class ImagePanel extends JPanel
-        {
-            private BufferedImage image;
-
-            public ImagePanel()
-            {
-                try{
-                    image = ImageIO.read(new File(Config.MAIN_MENU_HEADER_IMAGE));
-                }
-                catch(Exception e)
-                {
-                    System.out.println("Did not find header image for main window");
-                }
-            }
-            public void paintComponent(Graphics g)
-            {
-                super.paintComponent(g);
-                g.drawImage(image, 0 , 0 , null);
-            }
+        try{
+            BufferedImage image = ImageIO.read(new File(Config.MAIN_MENU_HEADER_IMAGE));
+            JLabel imageLabel = new JLabel(new ImageIcon(image));
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridy = 0;
+            this.add(imageLabel, c);
         }
-        JPanel imagePanel = new ImagePanel();
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 0;
-        this.add(imagePanel, c);
+        catch(IOException e)
+        {
+            System.out.println("Could not find image for main menu in memory");
+        }
     }
 
 }
