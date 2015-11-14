@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 public class InputController implements KeyListener {
     private char currentInput;
 
-
     public InputController() {
         currentInput = ' ';
     }
@@ -23,9 +22,6 @@ public class InputController implements KeyListener {
             currentInput = 'd';
         if (e.getKeyCode() == 37)
             currentInput = 'l';
-        if (e.getKeyCode() == 38)
-            currentInput = 'u';
-        // to be removed after inital test
     }
 
     public void keyReleased(KeyEvent e) {
