@@ -3,7 +3,7 @@
 //    panel.setFocusable(true);
 //    panel.requestFocusInWindow();
 //panel has to be focused in order for the KeyListener to be able to listen
-package gui;
+package tetris;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

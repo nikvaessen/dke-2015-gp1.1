@@ -2,6 +2,7 @@ package gui;
 
 import tetris.Board;
 import tetris.BoardHandler;
+import tetris.InputController;
 
 import javax.swing.*;
 

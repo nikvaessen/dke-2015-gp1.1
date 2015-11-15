@@ -13,5 +13,4 @@ public abstract class Config
     public static final int MAIN_MENU_HEIGHT = 500;
     public static final String MAIN_MENU_HEADER_IMAGE = "data/img/pentris_header_smaller.png";
 
-
 }

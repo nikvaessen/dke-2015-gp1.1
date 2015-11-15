@@ -101,11 +101,10 @@ public class MainMenu extends JFrame {
     private void setUpImage()
     {
         try{
-            BufferedImage image = ImageIO.read(new File(Config.MAIN_MENU_HEADER_IMAGE));
-            JLabel imageLabel = new JLabel(new ImageIcon(image));
+            ImageHolderPanel image = new ImageHolderPanel(ImageIO.read(new File(Config.MAIN_MENU_HEADER_IMAGE)));
             GridBagConstraints c = new GridBagConstraints();
             c.gridy = 0;
-            mainPanel.add(imageLabel, c);
+            mainPanel.add(image, c);
         }
         catch(IOException e)
         {
@@ -137,7 +136,6 @@ public class MainMenu extends JFrame {
         c.weighty = 0.5;
         c.anchor = GridBagConstraints.WEST;
         mainPanel.add(textArea, c);
-
     }
 
     private void setUpActionListeners()
