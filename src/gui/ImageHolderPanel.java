@@ -15,7 +15,11 @@ public class ImageHolderPanel extends JPanel {
     public ImageHolderPanel(BufferedImage image)
     {
         this.image = image;
-        this.setSize(image.getWidth(),image.getHeight());
+    }
+
+    public Dimension getPreferredSize()
+    {
+        return new Dimension(image.getWidth(), image.getHeight());
     }
 
     public void paintComponent(Graphics g)

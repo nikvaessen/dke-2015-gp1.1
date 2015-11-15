@@ -47,8 +47,9 @@ public class MainMenu extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Pentris");
         this.setResizable(false);
-        this.setSize(Config.WINDOW_WIDTH, Config.WINDOW_HEIGHT);
+        this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         startDisplaying(mainPanel);
+        this.pack();
         this.setVisible(true);
     }
 
@@ -56,9 +57,11 @@ public class MainMenu extends JFrame {
     {
         mainPanel = new JPanel(); //to hold image and buttons
         mainPanel.setLayout(new GridBagLayout());
+        mainPanel.setPreferredSize(new Dimension(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT));
         setUpButtons();
         setUpActionListeners();
         setUpImage();
+        setUpMadeByText();
     }
 
     private void setUpOtherPanels()
@@ -91,6 +94,7 @@ public class MainMenu extends JFrame {
         c.gridy = 1;
         c.weighty = 1;
         c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(30,0,0,0);
         mainPanel.add(buttonHolder, c);
     }
 
@@ -107,6 +111,33 @@ public class MainMenu extends JFrame {
         {
             System.out.println("Could not find image for main menu in memory");
         }
+    }
+
+    private void setUpMadeByText()
+    {
+        //create text area to show who made me :)
+        JTextPane textArea = new JTextPane();
+        textArea.setContentType("text/html");
+        textArea.setSize(Config.MAIN_MENU_WIDTH, 100);
+        textArea.setText(
+                "<html>" +
+                        "<pre>" +
+                        "<b>Made by:</b><br />" +
+                        "Bianca Iancu     Jonty Small<br />" +
+                        "Stefan Kischel   Aleksandra Smuda<br />" +
+                        "Jan Sainio       Nik Vaessen<br /><" +
+                        "</pre>" +
+                "</html>");
+        textArea.setEditable(false);
+        textArea.setOpaque(false);
+
+        //set gridbragconstraints and add it the the main panel
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 2;
+        c.weighty = 0.5;
+        c.anchor = GridBagConstraints.WEST;
+        mainPanel.add(textArea, c);
+
     }
 
     private void setUpActionListeners()
