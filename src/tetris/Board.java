@@ -1,69 +1,68 @@
 package tetris;
-
 /**
- * Class is used to create an empty tetris, ready to be filled with pentominoes. Char 'o' represents an empty cell.
- * @author 
+ * Class is used to create an empty board, ready to be filled with pentominoes. Char 'o' represents an empty cell.
+ * @author
  *
  */
 public class Board {
 	//instance variables
-	private char[][] board; 	//Stores the tetris state.
-	//lol easter egg for jan ;)
+	private char[][] board; 	//Stores the board state.
 	private int width;
 	private int height;
-	
+
 	/**
-	 * Creates a tetris of given height and width
-	 * @param height height of the tetris
-	 * @param width width of the tetris
+	 * Creates a board of given height and width
+	 * @param height height of the board
+	 * @param width width of the board
 	 */
 	public Board(int height, int width)
 	{
 		this.width = width;
 		this.height = height;
-		
+
 		this.board = new char[height][width];
-		// Fill all the tetris with o's (empty fields).
+		// Fill all the board with o's (empty fields).
 		for( int i = 0 ; i < board.length ; i++)
 		{
-			for( int j = 0 ; j < board[0].length ; j++) 
+			for( int j = 0 ; j < board[0].length ; j++)
 			{
-				board[i][j] = 'o';				
-			} 
+				board[i][j] = 'o';
+			}
 		}
 	}
-	
+
 	/**
-	 * Prints the tetris.
+	 * Prints the board.
 	 */
 	public void printBoard()
 	{
 		for(int i=0;i<board.length;i++)
 		{
 			for(int j=0;j<board[0].length;j++)
-			System.out.print(board[i][j] + " ");
-		System.out.println();
-		}	
+				System.out.print(board[i][j] + " ");
+			System.out.println();
+		}
 		System.out.println();
 	}
-	
+
 	/**
-	 * Sets the tetris to a given matrix of chars.
+	 * Sets the board to a given matrix of chars.
 	 * @param newboard the given matrix of chars
 	 */
 	public void setBoard(char[][] newboard){
 		this.board = newboard;
+		this.height = newboard.length;
+		this.width = newboard[0].length;
 	}
-	
+
 	/**
-	 * Gets the tetris of a given matrix of chars.
-	 * @return tetris of a given matrix of chars.
+	 * Gets the board of a given matrix of chars.
+	 * @return board of a given matrix of chars.
 	 */
 	public char[][] getBoard(){
 		return this.board;
 	}
-	
-	
+
 	/**
 	 * Returns the coordinates of the first empty cell .
 	 * @return returns the coordinates of the first empty cell or (-1,-1) if there are no empty cells
@@ -80,7 +79,7 @@ public class Board {
 		int[] coords = {-1,-1};
 		return coords;
 	}
-	
+
 	/**
 	 * Counts the amount of empty cells.
 	 * @return the amount of empty cells
@@ -95,12 +94,11 @@ public class Board {
 			}
 		}
 		return counter;
-		
 	}
-	
+
 	/**
-	 * removes all given values from the tetris
-	 * @param pentomino the value to be removed from the tetris
+	 * Set all cells with the given value back to the empty state, 'o'
+	 * @param pentomino the value to be removed from the board and replaced with 'o'
 	 */
 	public void remove(char pentomino){
 		int counter = 0;
@@ -116,9 +114,9 @@ public class Board {
 			}
 		}
 	}
-	
+
 	/**
-	 * Checks if the pentomino can be placed in the cell of the tetris in its current state. Returns true if it can.
+	 * Checks if the pentomino can be placed in the cell of the board in its current state. Returns true if it can.
 	 * @param pentMatrix matrix which stores the pentomino
 	 * @param x coordinate x of the checked cell
 	 * @param y coordinate y of the checked cell
@@ -126,7 +124,7 @@ public class Board {
 	 */
 	public boolean canPlace(char[][] pentMatrix, int x, int y){
 		y -= checkPad(pentMatrix);
-		//Checks whether the given matrix goes out of bounds of the tetris. Return false if it does.
+		//Checks whether the given matrix goes out of bounds of the board. Return false if it does.
 		if(x+pentMatrix.length > board.length || y+pentMatrix[0].length > board[0].length || y < 0){
 			return false;
 		}
@@ -142,24 +140,24 @@ public class Board {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * Places the pentomino, starting with the first char of the pentomino being placed in the chosen cell.
 	 * @param pentMatrix matrix which stores the pentomino
-	 * @param x coordinate x of the cell
-	 * @param y coordinate y of the cell
+	 * @param x coordinate x where the pentomino needs to be placed
+	 * @param y coordinate y where the pentomino needs to be placed
 	 */
 	public void placePiece(char[][] pentMatrix, int x, int y){
 		y -= checkPad(pentMatrix);
 		for(int i = 0; i < pentMatrix.length;i++){
 			for(int j = 0; j < pentMatrix[i].length;j++){
 				if(pentMatrix[i][j] != 'o'){
-					setCell(x+i, y+j, pentMatrix[i][j]);						
+					setCell(x+i, y+j, pentMatrix[i][j]);
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Checks if the first chars of the pentomino matrix is an empty cell. Returns the amount of empty cells in the top left corner of the matrix.
 	 * @param matrix matrix which stores the pentomino
@@ -178,44 +176,44 @@ public class Board {
 		}
 		return pad;
 	}
-	
+
 	/**
 	 * Sets the char of the pentomino in the cell.
 	 * @param i coordinate x of the cell
 	 * @param j coordinate y of the cell
 	 * @param value char of the pentomino
 	 */
-	private void setCell(int i, int j, char value){
+	public void setCell(int i, int j, char value){
 		board[i][j] = value;
 	}
 
-
 	/**
-	 * Get the char value from a position in the tetris
+	 * Get the char value from a position in the board
 	 * @param x the row you want the value from
 	 * @param y the column you want the value from
-     * @return the char value in the tetris at row x and column y
-     */
+	 * @return the char value in the board at row x and column y
+	 */
 	public char getCell(int x, int y)
 	{
-		if( x >= this.width || y >= this.height ){
+		if( x >= this.height || y >= this.width ){
+			System.out.printf("out of bounds:%nx: %d height: %d%n y: %d width: %d%n");
 			return ' ';
 		}
 		return board[x][y];
 	}
 
 	/**
-	 * Returns how many columns the tetris has
-	 * @return the amount of columns of the tetris as an integer
-     */
+	 * Returns how many columns the board has
+	 * @return the amount of columns of the board as an integer
+	 */
 	public int getWidth(){
 		return this.width;
 	}
 
 	/**
-	 * Returns how many rows the tetris has
-	 * @return the amount of rows the tetris has as an integer
-     */
+	 * Returns how many rows the board has
+	 * @return the amount of rows the board has as an integer
+	 */
 	public int getHeight()
 	{
 		return this.height;
