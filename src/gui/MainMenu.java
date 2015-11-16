@@ -34,12 +34,10 @@ public class MainMenu extends JFrame {
     private JButton botButton;
     private JButton quitButton;
 
-    //holding this panel is currently being displayed
-    private JPanel currentlyDisplayed;
+    //current window
+    private JPanel currentlyDisplayedPanel;
 
     public MainMenu() {
-        //set up the layout
-        this.setLayout(new GridBagLayout());
         //set up the panels and their buttons and the image header
         setUpMainPanel();
         setUpOtherPanels();
@@ -49,7 +47,6 @@ public class MainMenu extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Pentris");
         this.setResizable(false);
-        this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         startDisplaying(mainPanel);
         this.pack();
         this.setVisible(true);
@@ -203,7 +200,7 @@ public class MainMenu extends JFrame {
             @Override
             public void ancestorRemoved(AncestorEvent ancestorEvent) {
                 System.out.println("This should get us back to the main menu");
-                displayMainPanel();
+                startDisplaying(mainPanel);
             }
 
             @Override
@@ -215,29 +212,18 @@ public class MainMenu extends JFrame {
 
     private void startDisplaying(JPanel panelToDisplay)
     {
-        if(currentlyDisplayed != null)
-        {
-            System.out.println("Want to display " + panelToDisplay.getClass().getName());
-            //stop displaying the current
-            this.remove(currentlyDisplayed);
-            currentlyDisplayed = panelToDisplay;
-            this.add(panelToDisplay);
-            this.validate();
-            this.pack();
+         if(this.getContentPane().getComponentCount() != 0)
+         {
+            for(int i = 0; i < this.getContentPane().getComponentCount(); i++)
+            {
+                System.out.println(getComponent(i).getClass().getName());
+                this.getContentPane().remove(i);
+            }
         }
-        else{
-            currentlyDisplayed = panelToDisplay;
-            this.add(panelToDisplay);
-            this.validate();
-        }
-    }
-
-    private void displayMainPanel()
-    {
-        currentlyDisplayed = mainPanel;
-        this.add(mainPanel);
+        this.add(panelToDisplay);
+        this.setPreferredSize(panelToDisplay.getPreferredSize());
         this.validate();
+        this.pack();
     }
-
 
 }

@@ -5,6 +5,7 @@ import tetris.BoardHandler;
 import tetris.InputController;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by baxie on 15-11-15.
@@ -22,5 +23,10 @@ public class SinglePlayerWindow extends JPanel {
         gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         this.add(gamePanel);
         this.add(new BackButton(this));
+    }
+
+    public Dimension getPreferedDimension()
+    {
+        return Config.SINGLE_PLAYER_DIMENSION;
     }
 }

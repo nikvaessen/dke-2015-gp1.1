@@ -45,8 +45,8 @@ public class GamePanel extends JPanel {
         int rows = board.getHeight();
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                System.out.printf("i: %d j: %d \t placing at x,y: %d,%3d\t actual width: %d actual height: %d\n",
-                        i,j, i*BLOCKSIZE, j*BLOCKSIZE, board.getWidth(), board.getHeight());
+                //System.out.printf("i: %d j: %d \t placing at x,y: %d,%3d\t actual width: %d actual height: %d\n",
+                //        i,j, i*BLOCKSIZE, j*BLOCKSIZE, board.getWidth(), board.getHeight());
                 if (board.getCell(i, j) == 'p') {
                     g2d.setPaint(new Color(255, 20, 147));
                     g2d.fillRect(j * BLOCKSIZE, i * BLOCKSIZE, BLOCKSIZE -1, BLOCKSIZE -1);
