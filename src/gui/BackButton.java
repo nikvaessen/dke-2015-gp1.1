@@ -9,13 +9,13 @@ import java.awt.event.ActionListener;
  */
 public class BackButton extends JButton {
 
-    public BackButton(final JPanel toRemove)
+    public BackButton(final MainMenu mainMenu)
     {
         super("< back");
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                ((JFrame) toRemove.getParent()).getContentPane().remove(toRemove);
+                mainMenu.goBackToMainMenu();
             }
         });
     }

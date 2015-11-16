@@ -12,13 +12,15 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * Created by Aleksandra and Nik on 2015-11-10.
  */
 public class MainMenu extends JFrame {
     //Every panel the we want to potentially display
-    private SinglePlayerWindow  singlePlayerWindow;
+    private JPanel              mainPanel;          //holds the image header and all the buttons
+    private SinglePlayerWindow  singlePlayerWindow; //holds the window where tetris singleplayer can be played in
     private MultiPlayerWindow   multiPlayerWindow;
     private HighScoreWindow     highScoreWindow;
     private BotWindow           botWindow;
@@ -32,9 +34,10 @@ public class MainMenu extends JFrame {
     private final String botWindowName = "bot";
     private final String optionMenuName = "opt";
 
-    private JPanel mainPanel; //holds the image header and all the buttons
+    //variables needed for panel rotation in the CardLayout
     private JPanel cardPanel; //holds all panels to switch between
     private CardLayout cardLayout; //holds the layout manager
+    private HashMap<String, JPanel> panels;
 
     //the buttons to go to each panel
     private JButton singlePlayerButton;
@@ -44,11 +47,9 @@ public class MainMenu extends JFrame {
     private JButton botButton;
     private JButton quitButton;
 
-    //current window
-    private JPanel currentlyDisplayedPanel;
-
     public MainMenu() {
         //set up the panels and their buttons and the image header
+        this.panels = new HashMap<String, JPanel>();
         setUpMainPanel();
         setUpOtherPanels();
         setUpCardLayout();
@@ -58,8 +59,16 @@ public class MainMenu extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Pentris");
         this.setResizable(false);
-        startDisplaying("main");
-        this.pack();
+
+        //set icon image in taksbar
+        try{
+            this.setIconImage(ImageIO.read(new File(Config.ICON_FILE_PATH)));
+        }
+        catch(IOException e)
+        {
+            System.out.println("Could not load icon for task bar from memory");
+        }
+        startDisplaying(mainMenuName);
         this.setVisible(true);
     }
 
@@ -72,26 +81,31 @@ public class MainMenu extends JFrame {
         setUpActionListeners();
         setUpImage();
         setUpMadeByText();
+
+        //add mainpanel to hashmap
+        this.panels.put(mainMenuName, mainPanel);
     }
 
     private void setUpOtherPanels()
     {
-        singlePlayerWindow = new SinglePlayerWindow();
-        setUpAncestorListeners();
+        singlePlayerWindow = new SinglePlayerWindow(this);
+
+        //add panels to hashmap
+        this.panels.put(singlePlayerName, singlePlayerWindow);
+        //// TODO: 16-11-15 add the other panels when they are done
     }
 
     private void setUpCardLayout()
     {
         this.cardLayout = new CardLayout();
         this.cardPanel = new JPanel(this.cardLayout);
-        this.cardPanel.setPreferredSize(Config.MAIN_MENU_DIMENSION);
+        //this.cardPanel.setPreferredSize(Config.MAIN_MENU_DIMENSION);
         //set up the cardbox layout and add all panels
         cardPanel.add(mainMenuName, mainPanel);
         cardPanel.add(singlePlayerName, singlePlayerWindow);
-        //todo the rest of the panels
+        // TODO: 16-11-15 add the others panels when they're done
 
         this.add(cardPanel);
-
     }
 
     private void setUpButtons()
@@ -214,30 +228,17 @@ public class MainMenu extends JFrame {
         });
     }
 
-    public void setUpAncestorListeners()
-    {
-        singlePlayerWindow.addAncestorListener(new AncestorListener() {
-            @Override
-            public void ancestorAdded(AncestorEvent ancestorEvent) {
-
-            }
-
-            @Override
-            public void ancestorRemoved(AncestorEvent ancestorEvent) {
-                System.out.println("This should get us back to the main menu");
-                startDisplaying(mainMenuName);
-            }
-
-            @Override
-            public void ancestorMoved(AncestorEvent ancestorEvent) {
-
-            }
-        });
-    }
 
     private void startDisplaying(String nameOfPanelToDisplay)
     {
         cardLayout.show(cardPanel, nameOfPanelToDisplay);
+        cardPanel.setPreferredSize(panels.get(nameOfPanelToDisplay).getPreferredSize());
+        this.pack();
+    }
+
+    public void goBackToMainMenu()
+    {
+        startDisplaying(mainMenuName);
     }
 
 }

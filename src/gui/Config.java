@@ -13,6 +13,7 @@ public abstract class Config
     public static final int MAIN_MENU_HEIGHT = 500;
     public static final Dimension MAIN_MENU_DIMENSION = new Dimension(MAIN_MENU_WIDTH, MAIN_MENU_HEIGHT);
     public static final String MAIN_MENU_HEADER_IMAGE = "data/img/pentris_header_smaller.png";
+    public static final String ICON_FILE_PATH = "data/img/icon.png";
 
     //dimensions of single player window
 

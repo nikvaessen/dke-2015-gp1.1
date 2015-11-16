@@ -12,7 +12,7 @@ import java.awt.*;
  */
 public class SinglePlayerWindow extends JPanel {
 
-    public SinglePlayerWindow()
+    public SinglePlayerWindow(MainMenu mainMenu)
     {
         Board board = new Board(15,10);
         InputController in = new InputController();
@@ -22,7 +22,7 @@ public class SinglePlayerWindow extends JPanel {
         this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         this.add(gamePanel);
-        this.add(new BackButton(this));
+        this.add(new BackButton(mainMenu));
     }
 
     public Dimension getPreferedDimension()
