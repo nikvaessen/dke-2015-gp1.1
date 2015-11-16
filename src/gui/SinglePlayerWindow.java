@@ -21,5 +21,6 @@ public class SinglePlayerWindow extends JPanel {
         this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         this.add(gamePanel);
+        this.add(new BackButton(this));
     }
 }

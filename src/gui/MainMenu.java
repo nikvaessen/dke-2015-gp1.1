@@ -4,6 +4,8 @@ import tetris.Board;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,6 +69,7 @@ public class MainMenu extends JFrame {
     private void setUpOtherPanels()
     {
         singlePlayerWindow = new SinglePlayerWindow();
+        setUpAncestorListeners();
     }
 
     private void setUpButtons()
@@ -189,6 +192,27 @@ public class MainMenu extends JFrame {
         });
     }
 
+    public void setUpAncestorListeners()
+    {
+        singlePlayerWindow.addAncestorListener(new AncestorListener() {
+            @Override
+            public void ancestorAdded(AncestorEvent ancestorEvent) {
+
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent ancestorEvent) {
+                System.out.println("This should get us back to the main menu");
+                displayMainPanel();
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent ancestorEvent) {
+
+            }
+        });
+    }
+
     private void startDisplaying(JPanel panelToDisplay)
     {
         if(currentlyDisplayed != null)
@@ -204,7 +228,16 @@ public class MainMenu extends JFrame {
         else{
             currentlyDisplayed = panelToDisplay;
             this.add(panelToDisplay);
+            this.validate();
         }
     }
+
+    private void displayMainPanel()
+    {
+        currentlyDisplayed = mainPanel;
+        this.add(mainPanel);
+        this.validate();
+    }
+
 
 }
