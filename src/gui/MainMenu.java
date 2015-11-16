@@ -24,7 +24,17 @@ public class MainMenu extends JFrame {
     private BotWindow           botWindow;
     private OptionsWindow       optionsWindow;
 
+    //strings representing all windows in the CardLayout
+    private final String mainMenuName = "main";
+    private final String singlePlayerName = "sp";
+    private final String multiPlayerName = "mp";
+    private final String highScoreName = "hs";
+    private final String botWindowName = "bot";
+    private final String optionMenuName = "opt";
+
     private JPanel mainPanel; //holds the image header and all the buttons
+    private JPanel cardPanel; //holds all panels to switch between
+    private CardLayout cardLayout; //holds the layout manager
 
     //the buttons to go to each panel
     private JButton singlePlayerButton;
@@ -41,13 +51,14 @@ public class MainMenu extends JFrame {
         //set up the panels and their buttons and the image header
         setUpMainPanel();
         setUpOtherPanels();
+        setUpCardLayout();
 
         //and set the behavior of the main menu and start displayed the main menu
         //set behavior of the frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Pentris");
         this.setResizable(false);
-        startDisplaying(mainPanel);
+        startDisplaying("main");
         this.pack();
         this.setVisible(true);
     }
@@ -67,6 +78,20 @@ public class MainMenu extends JFrame {
     {
         singlePlayerWindow = new SinglePlayerWindow();
         setUpAncestorListeners();
+    }
+
+    private void setUpCardLayout()
+    {
+        this.cardLayout = new CardLayout();
+        this.cardPanel = new JPanel(this.cardLayout);
+        this.cardPanel.setPreferredSize(Config.MAIN_MENU_DIMENSION);
+        //set up the cardbox layout and add all panels
+        cardPanel.add(mainMenuName, mainPanel);
+        cardPanel.add(singlePlayerName, singlePlayerWindow);
+        //todo the rest of the panels
+
+        this.add(cardPanel);
+
     }
 
     private void setUpButtons()
@@ -144,7 +169,7 @@ public class MainMenu extends JFrame {
         singlePlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                startDisplaying(singlePlayerWindow);
+                startDisplaying(singlePlayerName);
             }
         });
 
@@ -152,7 +177,7 @@ public class MainMenu extends JFrame {
         multiPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                startDisplaying(multiPlayerWindow);
+                startDisplaying(multiPlayerName);
             }
         });
 
@@ -160,7 +185,7 @@ public class MainMenu extends JFrame {
         highScoresButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                startDisplaying(highScoreWindow);
+                startDisplaying(highScoreName);
             }
         });
 
@@ -168,7 +193,7 @@ public class MainMenu extends JFrame {
         botButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                startDisplaying(botWindow);
+                startDisplaying(botWindowName);
             }
         });
 
@@ -176,7 +201,7 @@ public class MainMenu extends JFrame {
         optionsMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                startDisplaying(optionsWindow);
+                startDisplaying(optionMenuName);
             }
         });
 
@@ -200,7 +225,7 @@ public class MainMenu extends JFrame {
             @Override
             public void ancestorRemoved(AncestorEvent ancestorEvent) {
                 System.out.println("This should get us back to the main menu");
-                startDisplaying(mainPanel);
+                startDisplaying(mainMenuName);
             }
 
             @Override
@@ -210,20 +235,9 @@ public class MainMenu extends JFrame {
         });
     }
 
-    private void startDisplaying(JPanel panelToDisplay)
+    private void startDisplaying(String nameOfPanelToDisplay)
     {
-         if(this.getContentPane().getComponentCount() != 0)
-         {
-            for(int i = 0; i < this.getContentPane().getComponentCount(); i++)
-            {
-                System.out.println(getComponent(i).getClass().getName());
-                this.getContentPane().remove(i);
-            }
-        }
-        this.add(panelToDisplay);
-        this.setPreferredSize(panelToDisplay.getPreferredSize());
-        this.validate();
-        this.pack();
+        cardLayout.show(cardPanel, nameOfPanelToDisplay);
     }
 
 }
