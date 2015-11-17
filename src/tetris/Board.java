@@ -141,6 +141,48 @@ public class Board {
 		return true;
 	}
 
+
+	public boolean canPlace(char[][] pentMatrix, int[][] coord) {
+		//Checks whether the given matrix goes out of bounds of the board. Return false if it does. (Jonty thinks and hopes this is true)
+
+		for (int row = 0; row < 2; row++) {
+			for (int column = 0 column < 5; column++) {
+				if (coord[row][column] + 1 > board.length || coord[row][column] + 1 > board[0].length) {
+					return false;
+				}
+			}
+		}
+		//for (int row = 0; row < 2; row++) {
+			for (int column = 0; column < 5; column++) {
+				if (!isCellEmpty(coord[0][column], coord[1][column])) {
+					// i think we should do some test for proving its not touching another one that moves down
+					// if we start with lowest/most right/most left point then we could move it then remove it and there shouldnt be a problem
+					// note, i dont know how we would do that
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+		y -= checkPad(pentMatrix);
+		//Checks whether the given matrix goes out of bounds of the board. Return false if it does.
+		if(x+pentMatrix.length > board.length || y+pentMatrix[0].length > board[0].length || y < 0){
+			return false;
+		}
+		//Checks whether the given matrix will overlap already placed pentominoes. Returns false when it does.
+		for(int i = 0; i < pentMatrix.length;i++){
+			for(int j = 0; j < pentMatrix[i].length;j++){
+				if(!isCellEmpty(x+i,y+j)){
+					if(pentMatrix[i][j] != 'o'){
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Places the pentomino, starting with the first char of the pentomino being placed in the chosen cell.
 	 * @param pentMatrix matrix which stores the pentomino
@@ -189,17 +231,17 @@ public class Board {
 
 	/**
 	 * Get the char value from a position in the board
-	 * @param x the row you want the value from
-	 * @param y the column you want the value from
+	 * @param row the row you want the value from
+	 * @param column the column you want the value from
 	 * @return the char value in the board at row x and column y
 	 */
-	public char getCell(int x, int y)
+	public char getCell(int row, int column)
 	{
-		if( x >= this.height || y >= this.width ){
+		if( row >= this.height || column >= this.width ){
 			System.out.printf("out of bounds:%nx: %d height: %d%n y: %d width: %d%n");
 			return ' ';
 		}
-		return board[x][y];
+		return board[row][column];
 	}
 
 	/**
