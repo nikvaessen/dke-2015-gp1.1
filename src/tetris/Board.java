@@ -146,7 +146,7 @@ public class Board {
 		//Checks whether the given matrix goes out of bounds of the board. Return false if it does. (Jonty thinks and hopes this is true)
 
 		for (int row = 0; row < 2; row++) {
-			for (int column = 0 column < 5; column++) {
+			for (int column = 0; column < 5; column++) {
 				if (coord[row][column] + 1 > board.length || coord[row][column] + 1 > board[0].length) {
 					return false;
 				}
@@ -161,25 +161,7 @@ public class Board {
 					return false;
 				}
 			}
-		}
-		return true;
-	}
 
-		y -= checkPad(pentMatrix);
-		//Checks whether the given matrix goes out of bounds of the board. Return false if it does.
-		if(x+pentMatrix.length > board.length || y+pentMatrix[0].length > board[0].length || y < 0){
-			return false;
-		}
-		//Checks whether the given matrix will overlap already placed pentominoes. Returns false when it does.
-		for(int i = 0; i < pentMatrix.length;i++){
-			for(int j = 0; j < pentMatrix[i].length;j++){
-				if(!isCellEmpty(x+i,y+j)){
-					if(pentMatrix[i][j] != 'o'){
-						return false;
-					}
-				}
-			}
-		}
 		return true;
 	}
 
