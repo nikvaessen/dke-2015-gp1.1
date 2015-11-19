@@ -53,7 +53,7 @@ public class GameLoop extends Thread {
             boardHandler.spawnPiece();
         }
         try{
-            //System.out.println("sleeping for a second");
+            //System.out.println(sleeping for a second");
             this.sleep(100);
             //System.out.println("Done sleeping for a second");
         }
@@ -69,7 +69,7 @@ public class GameLoop extends Thread {
             boardHandler.movePentominoTo(direction);
             gamePanel.repaint();
         }
-        if(count > 10) //1000 ms have passed
+        if(count > 8) //1000 ms have passed
         {
             ////System.out.println("10 loops have happened, moving the piece down");
             count = 0;
