@@ -139,33 +139,33 @@ public class BoardHandler {
             }
         }
     }
-/*
+
     public boolean isGameOver()
     {
-        for(int row=0; row<5; row++)
-            for(int column=0; column<board.getWidth(); column++)
-                if(board.getCell(row,column)!='o')
-                    return true;
-                    else
-                        return false;
+//        for(int row=0; row<5; row++)
+//            for(int column=0; column<board.getWidth(); column++)
+//                if(board.getCell(row,column)!='o')
+//                    return true;
+//                    else
+        return false;
     }
 
-    public boolean isLineFull()
-    {
-        for(int row=board.getWidth(); row>0; row--)
-        { int counter=0;
-            for(int column=board.getWidth(); column>0; column--) {
-                if (board.getCell(row, column)!=0){
-                    counter++;
-                            if(counter==board.getWidth())
-                            {
-                                clearLine(row);
-                            }
-                }
-
-            }
-        }
-    }
+//    public boolean isLineFull()
+//    {
+//        for(int row=board.getWidth(); row>0; row--)
+//        { int counter=0;
+//            for(int column=board.getWidth(); column>0; column--) {
+//                if (board.getCell(row, column)!=0){
+//                    counter++;
+//                            if(counter==board.getWidth())
+//                            {
+//                                clearLine(row);
+//                            }
+//                }
+//
+//            }
+//        }
+//    }
 
   /*  public void clearLine(int row)
     {

@@ -24,7 +24,7 @@ public class SinglePlayerWindow extends JPanel {
 
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
-        Board board = new Board(15, 10);
+        Board board = new Board(10, 20);
         InputController inputController = new InputController();
         this.addKeyListener(inputController);
         this.setFocusable(true);
