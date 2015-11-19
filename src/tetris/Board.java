@@ -155,16 +155,16 @@ public class Board {
 				}
 			}
 
-//			//for (int row = 0; row < 2; row++) {
-//			for (int column = 0; column < 5; column++) {
-//				if (!isCellEmpty(coord[0][column], coord[1][column])) {
-//					// i think we should do some test for proving its not touching another one that moves down
-//					// if we start with lowest/most right/most left point then we could move it then remove it and there
-//					// shouldnt be a problem
-//					// note, i dont know how we would do that
-//					return false;
-//				}
-//			}
+			//for (int row = 0; row < 2; row++) {
+			for (int column = 0; column < 5; column++) {
+				if (!isCellEmpty(coord[0][column], coord[1][column])) {
+					// i think we should do some test for proving its not touching another one that moves down
+					// if we start with lowest/most right/most left point then we could move it then remove it and there
+					// shouldnt be a problem
+					// note, i dont know how we would do that
+					return false;
+				}
+			}
 		return true;
 	}
 

@@ -5,7 +5,18 @@ import javax.swing.*;
 
 public class Main {
 	public static void main(String[] argv){
-		new MainMenu();
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() {
+					new MainMenu();
+				}
+			});
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		//testFlip();
 	}
 

@@ -19,6 +19,8 @@ public class BoardHandler {
                                         // { {x1,..x5},{y1,..,y5} }
     private char kindOfPent; // letter corresponding to the shape of the pentomino
 
+    private boolean needNewPiece;
+
     public BoardHandler(Board board, InputController input)
     {
         this.board = board;
@@ -35,6 +37,7 @@ public class BoardHandler {
         fallingPentMatrix = getRandomPentomino();
         board.placePiece(fallingPentMatrix, 0, (board.getWidth()/2) -1);
         coordsFallingPent = getInitialCoordinates();
+        needNewPiece = false;
     }
 
     /**
@@ -111,12 +114,12 @@ public class BoardHandler {
             }
 
         }
-
+        for (int column = 0; column < 5; column++) {
+            board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
+        }
         if(board.canPlace(newCoords)){
             try {
-                for (int column = 0; column < 5; column++) {
-                    board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
-                }
+
                 for (int column = 0; column < 5; column++) {
                     board.setCell(newCoords[0][column], newCoords[1][column], kindOfPent);
 
@@ -126,6 +129,25 @@ public class BoardHandler {
             }
             coordsFallingPent = newCoords;
         }
+        else{
+            for (int column = 0; column < 5; column++) {
+                board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], kindOfPent);
+            }
+            if(direction == 'd')
+            {
+                needNewPiece = true;
+            }
+        }
+    }
+
+    public boolean isGameOver()
+    {
+        return false;
+    }
+
+    public boolean isPieceDoneFalling()
+    {
+        return needNewPiece;
     }
 
 }
