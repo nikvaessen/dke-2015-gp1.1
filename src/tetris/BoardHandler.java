@@ -17,7 +17,7 @@ public class BoardHandler {
     private char[][] fallingPentMatrix; //the matrix of the currently falling
     private int[][] coordsFallingPent;  //coordinates of the pentomino current falling in the form of
                                         // { {x1,..x5},{y1,..,y5} }
-
+    private char kindOfPent; // letter corresponding to the shape of the pentomino
 
     public BoardHandler(Board board, InputController input)
     {
@@ -45,6 +45,7 @@ public class BoardHandler {
     {
         char[] everyPentomiChar = pentominoes.getCharForTheList();
         int randomNumber = rng.nextInt(everyPentomiChar.length);
+        kindOfPent = everyPentomiChar[randomNumber];
         char[][] toReturn = pentominoes.getMatrix(everyPentomiChar[randomNumber], 0);
         if(rng.nextBoolean())
         {
@@ -88,36 +89,43 @@ public class BoardHandler {
     }
 
     //direction can be 'l' for left, 'r' for roght and 'd' for down
-    public void movePentominoTo(char direction)
-    {
+    public void movePentominoTo(char direction) {
         int rowTranslation = 0;
         int columnTranslation = 0;
-        if(direction == 'l')
-        {
+        if (direction == 'l') {
             columnTranslation = -1;
-        }
-        else if(direction == 'r')
-        {
+        } else if (direction == 'r') {
             columnTranslation = 1;
-        }
-        else if(direction == 'd')
-        {
+        } else if (direction == 'd') {
             rowTranslation = 1;
         }
 
         int[][] newCoords = new int[2][5];
-        for(int row = 0; row < 2; row++)
-        {
-            for(int column = 0; column < 5; column++)
-            {
-                if(row == 0)
+        for (int row = 0; row < 2; row++) {
+            for (int column = 0; column < 5; column++) {
+                if (row == 0)
                     newCoords[row][column] = coordsFallingPent[row][column] + rowTranslation;
+
                 else
                     newCoords[row][column] = coordsFallingPent[row][column] + columnTranslation;
             }
+
         }
 
+        if(board.canPlace(newCoords)){
+            try {
+                for (int column = 0; column < 5; column++) {
+                    board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
+                }
+                for (int column = 0; column < 5; column++) {
+                    board.setCell(newCoords[0][column], newCoords[1][column], kindOfPent);
 
-
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("the new coordinates are still out of bounds");
+            }
+            coordsFallingPent = newCoords;
+        }
     }
+
 }

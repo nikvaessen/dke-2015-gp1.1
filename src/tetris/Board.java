@@ -142,26 +142,29 @@ public class Board {
 	}
 
 
-	public boolean canPlace(char[][] pentMatrix, int[][] coord) {
-		//Checks whether the given matrix goes out of bounds of the board. Return false if it does. (Jonty thinks and hopes this is true)
-
-		for (int row = 0; row < 2; row++) {
+	public boolean canPlace(int[][] coord) {
+		//Checks whether the given matrix goes out of bounds of the board. Return false if it does. (Jonty thinks and
+		// hopes this is true)
 			for (int column = 0; column < 5; column++) {
-				if (coord[row][column] + 1 > board.length || coord[row][column] + 1 > board[0].length) {
+				if (coord[0][column] >= height || coord[0][column] < 0) {
+					System.out.println("returned false because the new coords are shit");
 					return false;
 				}
-			}
-		}
-		//for (int row = 0; row < 2; row++) {
-			for (int column = 0; column < 5; column++) {
-				if (!isCellEmpty(coord[0][column], coord[1][column])) {
-					// i think we should do some test for proving its not touching another one that moves down
-					// if we start with lowest/most right/most left point then we could move it then remove it and there shouldnt be a problem
-					// note, i dont know how we would do that
+				else if( coord[1][column] >= width || coord[1][column] < 0) {
 					return false;
 				}
 			}
 
+//			//for (int row = 0; row < 2; row++) {
+//			for (int column = 0; column < 5; column++) {
+//				if (!isCellEmpty(coord[0][column], coord[1][column])) {
+//					// i think we should do some test for proving its not touching another one that moves down
+//					// if we start with lowest/most right/most left point then we could move it then remove it and there
+//					// shouldnt be a problem
+//					// note, i dont know how we would do that
+//					return false;
+//				}
+//			}
 		return true;
 	}
 

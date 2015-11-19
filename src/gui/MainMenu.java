@@ -1,6 +1,7 @@
 package gui;
 
 import tetris.Board;
+import tetris.InputController;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -47,9 +48,13 @@ public class MainMenu extends JFrame {
     private JButton botButton;
     private JButton quitButton;
 
+    //listener for input
+    private InputController in;
+
     public MainMenu() {
         //set up the panels and their buttons and the image header
         this.panels = new HashMap<String, JPanel>();
+        this.in = new InputController();
         setUpMainPanel();
         setUpOtherPanels();
         setUpCardLayout();
@@ -59,6 +64,9 @@ public class MainMenu extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Pentris");
         this.setResizable(false);
+        this.addKeyListener(in);
+        this.setFocusable(true);
+        this.requestFocus();
 
         //set icon image in taksbar
         try{
@@ -88,7 +96,7 @@ public class MainMenu extends JFrame {
 
     private void setUpOtherPanels()
     {
-        singlePlayerWindow = new SinglePlayerWindow(this);
+        singlePlayerWindow = new SinglePlayerWindow(this, in);
 
         //add panels to hashmap
         this.panels.put(singlePlayerName, singlePlayerWindow);
