@@ -22,6 +22,8 @@ public class InputController implements KeyListener {
             currentInput = 'd';
         if (e.getKeyCode() == 37)
             currentInput = 'l';
+
+        displayInfo(e, "Pressed: ");
     }
 
     public void keyReleased(KeyEvent e) {
