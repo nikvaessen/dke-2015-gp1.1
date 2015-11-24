@@ -89,9 +89,11 @@ public class MainMenu extends JFrame {
     private void setUpOtherPanels()
     {
         singlePlayerWindow = new SinglePlayerWindow(this);
+        highScoreWindow = new HighScoreWindow(this);
 
         //add panels to hashmap
         this.panels.put(singlePlayerName, singlePlayerWindow);
+        this.panels.put(highScoreName, highScoreWindow);
         //// TODO: 16-11-15 add the other panels when they are done
     }
 
@@ -103,6 +105,7 @@ public class MainMenu extends JFrame {
         //set up the cardbox layout and add all panels
         cardPanel.add(mainMenuName, mainPanel);
         cardPanel.add(singlePlayerName, singlePlayerWindow);
+        cardPanel.add(highScoreName, highScoreWindow);
         // TODO: 16-11-15 add the others panels when they're done
 
         this.add(cardPanel);
@@ -130,7 +133,7 @@ public class MainMenu extends JFrame {
 
         //set up constraints for the buttonpanel and add it to the panel
         GridBagConstraints c = new GridBagConstraints();
-        c.gridy = 1;
+        c.gridx = 0;
         c.weighty = 1;
         c.anchor = GridBagConstraints.NORTH;
         c.insets = new Insets(30,0,0,0);
@@ -143,7 +146,7 @@ public class MainMenu extends JFrame {
             ImageHolderPanel image = new ImageHolderPanel(ImageIO.read(new File(Config.MAIN_MENU_HEADER_IMAGE)));
             GridBagConstraints c = new GridBagConstraints();
             c.gridy = 0;
-            mainPanel.add(image, c);
+            this.add(image);
         }
         catch(IOException e)
         {
