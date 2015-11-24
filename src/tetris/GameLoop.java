@@ -65,18 +65,18 @@ public class GameLoop extends Thread {
             e.printStackTrace();
         }
         //System.out.println("Looking for user input");
-        char direction = inputController.getCurrentInput();
+        char input = inputController.getCurrentInput();
         //System.out.println("User input: " + direction);
-        if (direction != ' ') {
+        if (input != ' ') {
             //System.out.println("user input was not empty, repainting");
-            boardHandler.movePentominoTo(direction);
+            boardHandler.giveInput(input);
             gamePanel.repaint();
         }
         if(count > 8) //1000 ms have passed
         {
-            ////System.out.println("10 loops have happened, moving the piece down");
+            //System.out.println("10 loops have happened, moving the piece down");
             count = 0;
-            boardHandler.movePentominoTo('d');
+            boardHandler.giveInput('d');
             gamePanel.repaint();
         }
         ////System.out.println("restarting the game loop!");

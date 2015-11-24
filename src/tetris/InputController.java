@@ -22,8 +22,13 @@ public class InputController implements KeyListener {
             currentInput = 'd';
         if (e.getKeyCode() == 37)
             currentInput = 'l';
+        if (e.getKeyCode() == 90)
+            currentInput = 'z';
+        if (e.getKeyCode() == 88)
+            currentInput = 'x';
 
-        //displayInfo(e, "Pressed: ");
+        System.out.println(currentInput);
+        displayInfo(e, "Pressed: ");
     }
 
     public void keyReleased(KeyEvent e) {

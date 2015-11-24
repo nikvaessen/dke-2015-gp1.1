@@ -91,8 +91,51 @@ public class BoardHandler {
         return toReturn;
     }
 
+
+    public void giveInput(char input)
+    {
+        if(input == 'l' || input == 'r'  || input == 'd')
+        {
+            movePentominoTo(input);
+        }
+        else if(input == 'z' || input == 'x')
+        {
+            rotatePentomino(input);
+        }
+
+    }
+
+
+    private  void rotatePentomino(char input)
+    {
+        System.out.print("Trying to rotate piece\n");
+        int[][] newCoords = getNewCoordForLeftRotation();
+
+        for (int column = 0; column < 5; column++) {
+            board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
+        }
+        coordsFallingPent = newCoords;
+//        if(board.canPlace(newCoords)){
+//            try {
+//
+//                for (int column = 0; column < 5; column++) {
+//                    board.setCell(newCoords[0][column], newCoords[1][column], kindOfPent);
+//
+//                }
+//            } catch (ArrayIndexOutOfBoundsException e) {
+//                System.out.println("the new coordinates are still out of bounds");
+//            }
+//            coordsFallingPent = newCoords;
+//        }
+//        else{
+//            for (int column = 0; column < 5; column++) {
+//                board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], kindOfPent);
+//            }
+//        }
+    }
+
     //direction can be 'l' for left, 'r' for roght and 'd' for down
-    public void movePentominoTo(char direction) {
+    private void movePentominoTo(char direction) {
         int rowTranslation = 0;
         int columnTranslation = 0;
         if (direction == 'l') {
@@ -189,15 +232,29 @@ public class BoardHandler {
         return needNewPiece;
     }
 
-    public char[][] rotation_left(char[][] matrix)
+    public int[][] getNewCoordForLeftRotation()
     {
-        char[][] rotation= new char[matrix[0].length][matrix.length];
+        char[][] rotation= new char[fallingPentMatrix[0].length][fallingPentMatrix.length];
         int i,j;
         char[] first_row=new char[rotation[0].length];
 
-        for(i=0;i<matrix.length;i++)
-            for(j=0;j<matrix[0].length;j++)
-                rotation[j][i]=matrix[i][j];
+        //The coordinates of the non-rotated fallingPentMatrix
+        int[][] oldCoords= new int[2][5];
+        int k=0;
+
+        for(i=0; i<fallingPentMatrix.length; i++)
+            for(j=0; j<fallingPentMatrix[0].length; j++)
+                if(fallingPentMatrix[i][j]!='o')
+                {
+                    oldCoords[0][k]=i;
+                    oldCoords[1][k]=j;
+                    k++;
+
+                }
+
+        for(i=0;i<fallingPentMatrix.length;i++)
+            for(j=0;j<fallingPentMatrix[0].length;j++)
+                rotation[j][i]=fallingPentMatrix[i][j];
 
 
         for(i=0; i< rotation[0].length; i++)
@@ -210,7 +267,33 @@ public class BoardHandler {
         for(i=0;i<rotation[0].length; i++)
             rotation[rotation.length-1][i]=first_row[i];
 
-        return rotation;
+
+        //The coordinates of the rotated fallingPentMatrix
+        int[][] newCoords= new int[2][5];
+        k=0;
+
+
+        for(i=0; i<rotation.length; i++)
+            for(j=0; j<rotation[0].length; j++)
+                if(rotation[i][j]!='o')
+                {
+                    newCoords[0][k]=i;
+                    newCoords[1][k]=j;
+                    k++;
+
+                }
+        int[][] differenceBetweenPentomiMatrixCoords= new int[2][5];
+
+        for(i=0;i<differenceBetweenPentomiMatrixCoords.length; i++)
+            for(j=0;j<differenceBetweenPentomiMatrixCoords[0].length; j++)
+                differenceBetweenPentomiMatrixCoords[i][j]= oldCoords[i][j] - newCoords[i][j];
+
+        for(i=0; i<newCoords.length; i++)
+            for(j=0; j<newCoords[0].length; j++)
+                    newCoords[i][j]= coordsFallingPent[i][j] - differenceBetweenPentomiMatrixCoords[i][j];
+
+
+        return newCoords;
     }
 
 }
