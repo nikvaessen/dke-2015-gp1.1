@@ -9,7 +9,8 @@ import tetris.*;
  */
 public class GamePanel extends JPanel {
     //px*px size of blocks
-    private int blocksize = 40;
+    private int blockHeight;
+    private int blockWidth;
         
     //board to draw
     private Board board;
@@ -24,9 +25,8 @@ public class GamePanel extends JPanel {
         //set a border around the gameboard
         setBorder(BorderFactory.createLineBorder(Color.black));
         //sets the blocksize to the right size
-//        blocksize = (int)((Config.GAMEPANEL_SIZE.getHeight() * Config.GAMEPANEL_SIZE.getWidth()) /
-//                (board.getHeight() * board.getWidth()));
-//        System.out.println("Blocksize: " + blocksize);
+        blockHeight = Config.GAMEPANEL_SIZE.height / board.getHeight();
+        blockWidth  = Config.GAMEPANEL_SIZE.width  / board.getWidth();
     }
 
     /**
@@ -50,48 +50,51 @@ public class GamePanel extends JPanel {
             for (int j = 0; j < columns; j++) {
                 //System.out.printf("i: %d j: %d \t placing at x,y: %d,%3d\t actual width: %d actual height: %d\n",
                 //        i,j, i*blocksize, j*blocksize, board.getWidth(), board.getHeight());
-                if (board.getCell(i, j) == 'p') {
-                    g2d.setPaint(new Color(255, 20, 147));
-                    g2d.fillRect(j * blocksize, i * blocksize, blocksize -1, blocksize -1);
-                } else if (board.getCell(i, j) == 'o') {
+                if (board.getCell(i, j) == 'o') {
                     g2d.setPaint(new Color(192, 206, 212));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                } else if (board.getCell(i, j) == 'p') {
+                    g2d.setPaint(new Color(255, 20, 147));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'x') {
                     g2d.setColor(new Color(184, 134, 11));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'f') {
                     g2d.setColor(new Color(255, 255, 0));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'v') {
                     g2d.setColor(new Color(221, 160, 221));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'w') {
                     g2d.setColor(new Color(47, 79, 79));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'y') {
                     g2d.setColor(new Color(0, 0, 205));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'i') {
                     g2d.setColor(new Color(0, 191, 255));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 't') {
                     g2d.setColor(new Color(0, 206, 209));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'z') {
                     g2d.setColor(new Color(154, 205, 50));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'u') {
                     g2d.setColor(new Color(0, 255, 0));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'n') {
                     g2d.setColor(new Color(128, 0, 128));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 } else if (board.getCell(i, j) == 'l') {
                     g2d.setColor(new Color(186, 85, 211));
-                    g2d.fillRect(j * blocksize, i *  blocksize, blocksize -1, blocksize -1);
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 }
             }
         }
+        g2d.setColor(Color.RED);
+        g2d.setStroke(new BasicStroke(2));
+        g2d.drawLine(0, blockHeight * 5, Config.GAMEPANEL_SIZE.width, blockHeight * 5);
     }
 
 }

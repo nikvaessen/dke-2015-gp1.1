@@ -15,7 +15,7 @@ public class Board {
 	 * @param height height of the board
 	 * @param width width of the board
 	 */
-	public Board(int height, int width)
+	public Board(int width, int height)
 	{
 		this.width = width;
 		this.height = height;
