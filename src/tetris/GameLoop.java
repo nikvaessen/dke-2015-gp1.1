@@ -41,16 +41,19 @@ public class GameLoop extends Thread {
     {
         count++;
         //System.out.println(count);
-        if(boardHandler.isGameOver())
-        {
-            //System.out.println("Game over");
-            //todo handle game over
-            return;
-        }
+
         if(boardHandler.isPieceDoneFalling())
         {
             //System.out.println("Spawning new piece");
+            if(boardHandler.isGameOver())
+            {
+                //System.out.println("Game over");
+                //todo handle game over
+                return;
+            }
+            boardHandler.checkFullLines();
             boardHandler.spawnPiece();
+
         }
         try{
             //System.out.println(sleeping for a second");
