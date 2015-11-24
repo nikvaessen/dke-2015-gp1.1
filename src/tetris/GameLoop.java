@@ -47,7 +47,7 @@ public class GameLoop extends Thread {
             //System.out.println("Spawning new piece");
             if(boardHandler.isGameOver())
             {
-                //System.out.println("Game over");
+                System.out.println("Game over");
                 //todo handle game over
                 return;
             }

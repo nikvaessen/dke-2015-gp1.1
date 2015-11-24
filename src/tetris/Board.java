@@ -223,7 +223,8 @@ public class Board {
 	public char getCell(int row, int column)
 	{
 		if( row >= this.height || column >= this.width ){
-			System.out.printf("out of bounds:%nx: %d height: %d%n y: %d width: %d%n");
+			System.out.printf("out of bounds:%nx: %d height: %d%n y: %d width: %d%n", row, this.height, column,
+					this.width);
 			return ' ';
 		}
 		return board[row][column];

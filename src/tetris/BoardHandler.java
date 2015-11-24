@@ -152,19 +152,22 @@ public class BoardHandler {
 
     public void checkFullLines()
     {
-        for(int row=board.getWidth(); row>0; row--)
+        System.out.println("Checking for full rows");
+        for(int row=board.getHeight()-1; row>0; row--)
         {
-            int counter=0;
-            for(int column=board.getWidth(); column>0; column--)
+            boolean foundEmptyCell = false;
+            for(int column=board.getWidth()-1; column>0; column--)
             {
-                if (board.getCell(row, column)!='o')
+                System.out.print(board.getCell(row,column) + " ");
+                if (board.getCell(row, column) == 'o' && !foundEmptyCell)
                 {
-                    counter++;
+                    foundEmptyCell = true;
+                    //break;
                 }
-
             }
-            if(counter==board.getWidth())
-            {
+            System.out.printf("%nrow %d is full: %b%n", row, !foundEmptyCell);
+            if(!foundEmptyCell){
+                System.out.println("Clearing row " + row);
                 clearLine(row);
             }
         }
