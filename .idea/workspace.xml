@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="cce1d788-7d3b-42b2-866e-d1c4fcbe5772" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/HighScoreWindow.java" afterPath="$PROJECT_DIR$/src/gui/HighScoreWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gui/MainMenu.java" afterPath="$PROJECT_DIR$/src/gui/MainMenu.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tetris/BoardHandler.java" afterPath="$PROJECT_DIR$/src/tetris/BoardHandler.java" />
     </list>
     <ignored path="Tetris.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,11 +48,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HighScoreWindow.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HighScoreWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gui/HighScoreWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.59610707">
+            <state vertical-scroll-proportion="-7.903226">
               <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BoardHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tetris/BoardHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.18552037">
+              <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -91,7 +99,6 @@
         <option value="$PROJECT_DIR$/src/MenuWindow.java" />
         <option value="$PROJECT_DIR$/src/InputController.java" />
         <option value="$PROJECT_DIR$/src/gui/InputController.java" />
-        <option value="$PROJECT_DIR$/src/tetris/BoardHandler.java" />
         <option value="$PROJECT_DIR$/src/gui/GUIDimensions.java" />
         <option value="$PROJECT_DIR$/src/gui/MenuWindow.java" />
         <option value="$PROJECT_DIR$/src/gui/Dimensions.java" />
@@ -111,6 +118,7 @@
         <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/gui/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/gui/HighScoreWindow.java" />
+        <option value="$PROJECT_DIR$/src/tetris/BoardHandler.java" />
       </list>
     </option>
   </component>
@@ -530,7 +538,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448367914323</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fixed image">
+      <created>1448368668470</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1448368668470</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -543,10 +557,10 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3278496" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2955224" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2955224" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21368179" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21368179" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973032" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -602,7 +616,8 @@
     <MESSAGE value="worked on back button" />
     <MESSAGE value="added cardLayout" />
     <MESSAGE value="boardhandler updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="boardhandler updated" />
+    <MESSAGE value="fixed image" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed image" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -974,14 +989,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tetris/BoardHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tetris/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.144796">
@@ -1029,8 +1036,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/HighScoreWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59610707">
+        <state vertical-scroll-proportion="-7.903226">
           <caret line="41" column="47" selection-start-line="41" selection-start-column="47" selection-end-line="41" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tetris/BoardHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18552037">
+          <caret line="76" column="13" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
           <folding />
         </state>
       </provider>

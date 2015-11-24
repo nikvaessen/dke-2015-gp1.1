@@ -152,7 +152,7 @@ public class BoardHandler {
 
     public void checkFullLines()
     {
-        System.out.println("Checking for full rows");
+        //System.out.println("Checking for full rows");
         for(int row = 0; row < board.getHeight(); row++)
         {
             boolean foundEmptyCell = false;
@@ -165,7 +165,7 @@ public class BoardHandler {
                     //break;
                 }
             }
-            System.out.printf("%nrow %d is full: %b%n", row, !foundEmptyCell);
+            //System.out.printf("%nrow %d is full: %b%n", row, !foundEmptyCell);
             if(!foundEmptyCell){
                 System.out.println("Clearing row " + row);
                 clearLine(row);
@@ -187,6 +187,30 @@ public class BoardHandler {
     public boolean isPieceDoneFalling()
     {
         return needNewPiece;
+    }
+
+    public char[][] rotation_left(char[][] matrix)
+    {
+        char[][] rotation= new char[matrix[0].length][matrix.length];
+        int i,j;
+        char[] first_row=new char[rotation[0].length];
+
+        for(i=0;i<matrix.length;i++)
+            for(j=0;j<matrix[0].length;j++)
+                rotation[j][i]=matrix[i][j];
+
+
+        for(i=0; i< rotation[0].length; i++)
+            first_row[i]=rotation[0][i];
+
+        for(i=0;i<rotation[0].length; i++)
+            rotation[0][i]= rotation[rotation.length-1][i];
+
+
+        for(i=0;i<rotation[0].length; i++)
+            rotation[rotation.length-1][i]=first_row[i];
+
+        return rotation;
     }
 
 }
