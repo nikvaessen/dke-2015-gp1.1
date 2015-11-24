@@ -29,8 +29,7 @@ public class HighScoreWindow extends JPanel {
         printNames(highScores);
         printScores(highScores);
         addBackButton(mainMenu);
-        printScores();
-
+        //printScores();
     }
 
     private void setUpImage() {
@@ -40,7 +39,7 @@ public class HighScoreWindow extends JPanel {
             c.gridy = 0;
             c.gridwidth = 2;
             c.weighty = 0.4;
-            c.anchor = GridBagConstraints.CENTER;
+            c.anchor = GridBagConstraints.NORTH;
             this.add(image, c);
         } catch (IOException e) {
             System.out.println("Could not find image for main menu in memory");

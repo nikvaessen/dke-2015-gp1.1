@@ -78,13 +78,14 @@ public class MainMenu extends JFrame {
         mainPanel = new JPanel(); //to hold image and buttons
         mainPanel.setLayout(new GridBagLayout());
         mainPanel.setPreferredSize(new Dimension(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT));
+        setUpImage();
         setUpButtons();
         setUpActionListeners();
-        setUpImage();
         setUpMadeByText();
 
         //add mainpanel to hashmap
         this.panels.put(mainMenuName, mainPanel);
+        this.add(mainPanel);
     }
 
     private void setUpOtherPanels()
@@ -146,8 +147,11 @@ public class MainMenu extends JFrame {
         try{
             ImageHolderPanel image = new ImageHolderPanel(ImageIO.read(new File(Config.MAIN_MENU_HEADER_IMAGE)));
             GridBagConstraints c = new GridBagConstraints();
+            c.gridx = 0;
             c.gridy = 0;
-            this.add(image);
+            c.weighty = 0.5;
+            c.weightx = 1;
+            mainPanel.add(image);
         }
         catch(IOException e)
         {
