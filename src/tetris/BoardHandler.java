@@ -153,10 +153,10 @@ public class BoardHandler {
     public void checkFullLines()
     {
         System.out.println("Checking for full rows");
-        for(int row=board.getHeight()-1; row>0; row--)
+        for(int row = 0; row < board.getHeight(); row++)
         {
             boolean foundEmptyCell = false;
-            for(int column=board.getWidth()-1; column>0; column--)
+            for(int column= 0; column < board.getWidth(); column++)
             {
                 System.out.print(board.getCell(row,column) + " ");
                 if (board.getCell(row, column) == 'o' && !foundEmptyCell)
