@@ -1,6 +1,7 @@
 package gui;
 
 import tetris.Board;
+import tetris.InputController;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

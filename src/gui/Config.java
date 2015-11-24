@@ -17,6 +17,7 @@ public abstract class Config
 
     //dimensions of single player window
 
-    public static final Dimension SINGLE_PLAYER_DIMENSION = new Dimension(1000,1000);
+    public static final Dimension GAMEPANEL_SIZE = new Dimension(400,580);
+    public static final Dimension SINGLE_PLAYER_SIZE = new Dimension(800, 600);
 
 }
