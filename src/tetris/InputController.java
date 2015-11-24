@@ -27,8 +27,8 @@ public class InputController implements KeyListener {
         if (e.getKeyCode() == 88)
             currentInput = 'x';
 
-        System.out.println(currentInput);
-        displayInfo(e, "Pressed: ");
+        //System.out.println(currentInput);
+        //displayInfo(e, "Pressed: ");
     }
 
     public void keyReleased(KeyEvent e) {
