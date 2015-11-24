@@ -1,0 +1,5 @@
+Jan,5
+Jonty,1050
+Stefan,1100
+Adeline,1500
+Aleksandra,5000
