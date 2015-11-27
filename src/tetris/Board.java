@@ -174,15 +174,22 @@ public class Board {
 	 * @param x coordinate x where the pentomino needs to be placed
 	 * @param y coordinate y where the pentomino needs to be placed
 	 */
-	public void placePiece(char[][] pentMatrix, int x, int y){
+	public int[][] placePiece(char[][] pentMatrix, int x, int y){
+		int[][] coords = new int[2][5];
+
 		y -= checkPad(pentMatrix);
+        int count = 0;
 		for(int i = 0; i < pentMatrix.length;i++){
 			for(int j = 0; j < pentMatrix[i].length;j++){
 				if(pentMatrix[i][j] != 'o'){
 					setCell(x+i, y+j, pentMatrix[i][j]);
+                    coords[0][count] = x+i;
+                    coords[1][count] = y+j;
+                    count++;
 				}
 			}
 		}
+        return coords;
 	}
 
 	/**
@@ -223,8 +230,8 @@ public class Board {
 	public char getCell(int row, int column)
 	{
 		if( row >= this.height || column >= this.width ){
-			System.out.printf("out of bounds:%nx: %d height: %d%n y: %d width: %d%n", row, this.height, column,
-					this.width);
+			//System.out.printf("out of bounds:%nx: %d height: %d%n y: %d width: %d%n", row, this.height, column,
+			//		this.width);
 			return ' ';
 		}
 		return board[row][column];

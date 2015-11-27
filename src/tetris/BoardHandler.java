@@ -1,5 +1,6 @@
 package tetris;
 
+import java.lang.reflect.Array;
 import java.util.Random;
 import java.util.Arrays;
 
@@ -93,6 +94,8 @@ public class BoardHandler {
 
     public void giveInput(char input)
     {
+        System.out.println("The current coords of the falling piece:");
+        System.out.println(Arrays.deepToString(coordsFallingPent));
         if(input == 'l' || input == 'r'  || input == 'd')
         {
             movePentominoTo(input);
@@ -101,25 +104,41 @@ public class BoardHandler {
         {
             rotatePentomino(input);
         }
-
     }
 
 
     private void rotatePentomino(char input)
     {
-        System.out.print("Trying to rotate piece\n");
-        int[][] newCoords = getCoordsForClockwiseRotation();
-        char[][] newPentMatrix = rotateMatrixAntiClockwise(fallingPentMatrix);
-
-        System.out.print("new pentomini matrix:\n");
-        System.out.println(Arrays.deepToString(newPentMatrix));
-        System.out.print("new coordinates matrix:\n");
-        System.out.println(Arrays.deepToString(newCoords));
-
-        for (int column = 0; column < 5; column++) {
-            board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
+        char[][] rotatedMatrix = fallingPentMatrix;
+        if(input == 'z'){
+            rotatedMatrix = rotateMatrixAntiClockwise(fallingPentMatrix);
         }
-        coordsFallingPent = newCoords;
+        else if(input == 'x')
+        {
+            rotatedMatrix = rotateMatrixClockwise(fallingPentMatrix);
+        }
+        for (int column = 0; column < 5; column++) {
+                board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
+         }
+
+        coordsFallingPent = board.placePiece(rotatedMatrix,coordsFallingPent[0][0],coordsFallingPent[1][0]);
+        fallingPentMatrix = rotatedMatrix;
+
+
+//        System.out.print("Trying to rotate piece\n");
+//        int[][] newCoords = getCoordsForAntiClockwiseRotation();
+//        char[][] newPentMatrix = rotateMatrixAntiClockwise(fallingPentMatrix);
+//
+////        System.out.print("new pentomini matrix:\n");
+////        System.out.println(Arrays.deepToString(newPentMatrix));
+////        System.out.print("new coordinates matrix:\n");
+////        System.out.println(Arrays.deepToString(newCoords));
+//
+//        for (int column = 0; column < 5; column++) {
+//            board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
+//        }
+//        coordsFallingPent = newCoords;
+//        fallingPentMatrix = newPentMatrix;
 //        if(board.canPlace(newCoords)){
 //            try {
 //
@@ -154,9 +173,9 @@ public class BoardHandler {
         int[][] newCoords = new int[2][5];
         for (int row = 0; row < 2; row++) {
             for (int column = 0; column < 5; column++) {
+                //System.out.printf("row: %d column: %d\n", row, column);
                 if (row == 0)
                     newCoords[row][column] = coordsFallingPent[row][column] + rowTranslation;
-
                 else
                     newCoords[row][column] = coordsFallingPent[row][column] + columnTranslation;
             }
@@ -206,7 +225,7 @@ public class BoardHandler {
             boolean foundEmptyCell = false;
             for(int column= 0; column < board.getWidth(); column++)
             {
-                System.out.print(board.getCell(row,column) + " ");
+                //System.out.print(board.getCell(row,column) + " ");
                 if (board.getCell(row, column) == 'o' && !foundEmptyCell)
                 {
                     foundEmptyCell = true;
@@ -244,8 +263,13 @@ public class BoardHandler {
         int[][] matrix2=coordsFallingPent;
         int i,j;
 
+        System.out.print("The matrix of the piece currently falling:\n");
+        System.out.println(Arrays.deepToString(matrix));
+
         //calculate and store the rotated version of the current falling pentomino piece
         char[][] rotation= rotateMatrixAntiClockwise(fallingPentMatrix);
+        System.out.print("The anti-clockwise rotated version of the piece falling:\n");
+        System.out.println(Arrays.deepToString(rotation));
 
         //calculates and stores the coordinates of the pieces in the pre-rotated matrix
         int[][] pentMatrixCoords= new int[2][5];
@@ -259,7 +283,7 @@ public class BoardHandler {
                     pentMatrixCoords[1][k]=j;
                     k++;
                 }
-        System.out.println("old coords: ");
+        System.out.print("The matrix coordinates of the piece currently falling\n");
         System.out.println(Arrays.deepToString(pentMatrixCoords));
 
         //calculates and stores the coordinates of the pieces in the rotated matrix
@@ -274,6 +298,8 @@ public class BoardHandler {
                     rotatedPentMatrixCoords[1][k]=j;
                     k++;
                 }
+        System.out.print("The matrix coordinates of the anti-clockwise rotation of the piece falling\n");
+        System.out.println(Arrays.deepToString(rotatedPentMatrixCoords));
 
         //calculates and stores the difference between the coordinates of the pre-rotated and rotated matrix
         //to apply to the current coordinates.
@@ -283,12 +309,21 @@ public class BoardHandler {
             for(j=0;j<differentialCoords[0].length; j++)
                 differentialCoords[i][j]= pentMatrixCoords[i][j] - rotatedPentMatrixCoords[i][j];
 
+
+        System.out.print("The coordinates of the piece currently falling\n");
+        System.out.println(Arrays.deepToString(matrix2));
+        System.out.print("The differential matrix between the original and anti-clockwise rotated matrix:\n");
+        System.out.println(Arrays.deepToString(differentialCoords));
+
         //calculates and returns the new coordinates to rotate the current pentomino
         int[][] newCoords =new int[2][5];
 
         for( i=0; i< matrix2.length; i++)
             for( j=0; j<matrix2[0].length; j++)
                 newCoords[i][j]= matrix2[i][j] - differentialCoords[i][j];
+
+        System.out.print("The coordinates to rotate the matrix anti clockwise: \n");
+        System.out.println(Arrays.deepToString(newCoords));
 
         return newCoords;
     }
