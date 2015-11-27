@@ -34,6 +34,7 @@ public class BoardHandler {
      */
     public void spawnPiece()
     {
+        System.out.print("Hello????\n");
         fallingPentMatrix = getRandomPentomino();
         board.placePiece(fallingPentMatrix, 0, (board.getWidth()/2) -1);
         coordsFallingPent = getInitialCoordinates();
@@ -120,42 +121,8 @@ public class BoardHandler {
         for (int column = 0; column < 5; column++) {
                 board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
          }
-
         coordsFallingPent = board.placePiece(rotatedMatrix,coordsFallingPent[0][0],coordsFallingPent[1][0]);
         fallingPentMatrix = rotatedMatrix;
-
-
-//        System.out.print("Trying to rotate piece\n");
-//        int[][] newCoords = getCoordsForAntiClockwiseRotation();
-//        char[][] newPentMatrix = rotateMatrixAntiClockwise(fallingPentMatrix);
-//
-////        System.out.print("new pentomini matrix:\n");
-////        System.out.println(Arrays.deepToString(newPentMatrix));
-////        System.out.print("new coordinates matrix:\n");
-////        System.out.println(Arrays.deepToString(newCoords));
-//
-//        for (int column = 0; column < 5; column++) {
-//            board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], 'o');
-//        }
-//        coordsFallingPent = newCoords;
-//        fallingPentMatrix = newPentMatrix;
-//        if(board.canPlace(newCoords)){
-//            try {
-//
-//                for (int column = 0; column < 5; column++) {
-//                    board.setCell(newCoords[0][column], newCoords[1][column], kindOfPent);
-//
-//                }
-//            } catch (ArrayIndexOutOfBoundsException e) {
-//                System.out.println("the new coordinates are still out of bounds");
-//            }
-//            coordsFallingPent = newCoords;
-//        }
-//        else{
-//            for (int column = 0; column < 5; column++) {
-//                board.setCell(coordsFallingPent[0][column], coordsFallingPent[1][column], kindOfPent);
-//            }
-//        }
     }
 
     //direction can be 'l' for left, 'r' for roght and 'd' for down

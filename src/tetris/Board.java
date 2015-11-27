@@ -1,4 +1,7 @@
 package tetris;
+
+import java.util.Arrays;
+
 /**
  * Class is used to create an empty board, ready to be filled with pentominoes. Char 'o' represents an empty cell.
  * @author
@@ -177,7 +180,7 @@ public class Board {
 	public int[][] placePiece(char[][] pentMatrix, int x, int y){
 		int[][] coords = new int[2][5];
 
-		y -= checkPad(pentMatrix);
+		//y -= checkPad(pentMatrix);
         int count = 0;
 		for(int i = 0; i < pentMatrix.length;i++){
 			for(int j = 0; j < pentMatrix[i].length;j++){
@@ -189,6 +192,8 @@ public class Board {
 				}
 			}
 		}
+		System.out.println("coords returned by placing method");
+		System.out.println(Arrays.deepToString(coords));
         return coords;
 	}
 
