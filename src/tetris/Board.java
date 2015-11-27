@@ -147,7 +147,7 @@ public class Board {
 		// hopes this is true)
 			for (int column = 0; column < 5; column++) {
 				if (coord[0][column] >= height || coord[0][column] < 0) {
-					System.out.println("returned false because the new coords are shit");
+					//System.out.println("returned false because the new coords are shit");
 					return false;
 				}
 				else if( coord[1][column] >= width || coord[1][column] < 0) {
