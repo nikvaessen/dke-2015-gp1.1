@@ -103,7 +103,57 @@ public class Pentominoes {
 				{'o', 'o', 'o', 'l'},
 				{'l', 'l', 'l', 'l'} };
 		Pentomino l = new Pentomino('l', lMatrix);
-		
+
+		char[][] pMatrixflip = {
+				{'p', 'p'},
+				{'p', 'p'},
+				{'o', 'p'}};
+		Pentomino p1 = new Pentomino('p', pMatrixflip);
+
+
+		char[][] fMatrixflip = {
+				{'f', 'f', 'o'},
+				{'o', 'f', 'f'},
+				{'o', 'f', 'o'}};
+		Pentomino f1 = new Pentomino('f', fMatrixflip);
+
+		char[][] vMatrixflip = {
+				{'o', 'o', 'v'},
+				{'o', 'o', 'v'},
+				{'v', 'v', 'v'} };
+		Pentomino v1 = new Pentomino('v', vMatrixflip);
+
+		char[][] wMatrixflip = {
+				{'o', 'o', 'w'},
+				{'o', 'w', 'w'},
+				{'w', 'w', 'o'} };
+		Pentomino w1 = new Pentomino('w', wMatrixflip);
+
+		char[][] yMatrixflip = {
+				{'y', 'o'},
+				{'y', 'y'},
+				{'y', 'o'},
+				{'y', 'o'} };
+		Pentomino y1 = new Pentomino('y', yMatrixflip);
+
+		char[][] zMatrixflip = {
+				{'o', 'z', 'z'},
+				{'o', 'z', 'o'},
+				{'z', 'z', 'o'} };
+		Pentomino z1 = new Pentomino('z', zMatrixflip);
+
+		char[][] nMatrixflip = {
+				{'o', 'o', 'n', 'n'},
+				{'n', 'n', 'n', 'o'} };
+		Pentomino n1 = new Pentomino('n', nMatrixflip);
+
+		char[][] lMatrixflip = {
+				{'o', 'o', 'o', 'l'},
+				{'l', 'l', 'l', 'l'} };
+		Pentomino l1 = new Pentomino('l', lMatrixflip);
+
+
+
 		//Puts all pentominoes into the hashmap with their corresponding 'letter' as key
 		this.dict = new HashMap<Character,Pentomino>();
 		this.dict.put('l', l);
@@ -118,15 +168,28 @@ public class Pentominoes {
 		this.dict.put('x', x);
 		this.dict.put('u', u);
 		this.dict.put('n', n);
-		
-		
+
+		/*
+		 // i dont want to put it in .dict but i dont know where else to put them?
+
+		this.flip= new HashMap<Character, Pentomino>();
+		this.flip.put('l',l1);
+		this.flip.put('n', n1);
+		this.flip.put('p', p1);
+		this.flip.put('f', f1);;
+		this.flip.put('v', v1);
+		this.flip.put('y', y1);
+		this.flip.put('w', w1);
+		*/
 		//Adds all letters of dictionary to the arraylist 'keys'.
 		this.keys = new ArrayList<Character>();
 		for(char letter : new char[] {'l','x','f','v','w','y','i','t','z','u','n','p'}){
 			this.keys.add(letter);
 		}		
 	}
-	
+
+
+	}
 	/**
 	 * Returns an ArrayList of pentominoes names which can be used in the other functions of this class.
 	 * @return names of the pentominoes
