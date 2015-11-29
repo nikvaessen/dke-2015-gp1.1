@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @author 
  *
  */
-public class Pentomino {
+public class Blocks {
 	//instance variables
 	private char name;						//holds the kind of letter the pentomino stored within represents
 	private ArrayList<char[][]> matrixes; 	//stores matrixes of all possible rotations of the pentomino
@@ -19,7 +19,7 @@ public class Pentomino {
 	 * @param name the character this class has to represent
 	 * @param matrix a single form of the matrix this class has to represent
 	 */
-	public Pentomino(char name, char[][] matrix) {
+	public Blocks(char name, char[][] matrix) {
 		this.name = name;
 		this.matrixes = new ArrayList<char[][]>();
 		this.matrixes.add(matrix);

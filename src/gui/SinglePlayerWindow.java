@@ -29,7 +29,7 @@ public class SinglePlayerWindow extends JPanel {
         this.addKeyListener(inputController);
         this.setFocusable(true);
         this.requestFocusInWindow();
-        BoardHandler bh = new BoardHandler(board, inputController);
+        BoardHandler bh = new BoardHandler(board, inputController, true);
 
         //create the gamepanel and add it
         GamePanel gamePanel = new GamePanel(board);

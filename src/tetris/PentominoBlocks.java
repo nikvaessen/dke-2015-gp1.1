@@ -7,52 +7,52 @@ import java.util.HashMap;
  * @author 
  *
  */
-public class Pentominoes {
+public class PentominoBlocks implements Polyomino {
 	//instance variables
 	private ArrayList<Character> keys;			//ArrayList which will store the keys used in the HashMap
-	private HashMap<Character,Pentomino> dict;  //HashMap mapping Pentomino classes representing a pentomino of a specific letter
+	private HashMap<Character, Blocks> dict;  //HashMap mapping Blocks classes representing a pentomino of a specific letter
 												//to a key of the respective letter 
-	private HashMap<Character, Pentomino> flip; //stores flipped versions of a pentomino
+	private HashMap<Character, Blocks> flip; //stores flipped versions of a pentomino
 
 	/**
-	 * Constructs the object of the Pentomino class for a given kind of pentomino, e.g. x or p and a matrix of chars representing a single form
+	 * Constructs the object of the Blocks class for a given kind of pentomino, e.g. x or p and a matrix of chars representing a single form
 	 * of the given kind or pentomino, where 'o' is an empty cell and 'char' a non-empty cell.
 	 */
-	public Pentominoes() {
+	public PentominoBlocks() {
 		
 		char[][] pMatrix = {
 				{'p', 'p'},
 				{'p', 'p'},
 				{'p', 'o'} };
-		Pentomino p = new Pentomino('p', pMatrix);
+		Blocks p = new Blocks('p', pMatrix);
 		
 		
 		char[][] xMatrix = {
 				{'o', 'x', 'o'},
 				{'x', 'x', 'x'},
 				{'o', 'x', 'o'} };
-		Pentomino x = new Pentomino('x', xMatrix);
+		Blocks x = new Blocks('x', xMatrix);
 		
 		
 		char[][] fMatrix = {
 				{'o', 'f', 'f'},
 				{'f', 'f', 'o'},
 				{'o', 'f', 'o'} };
-		Pentomino f = new Pentomino('f', fMatrix);
+		Blocks f = new Blocks('f', fMatrix);
 		
 		
 		char[][] vMatrix = {
 				{'v', 'o', 'o'},
 				{'v', 'o', 'o'},
 				{'v', 'v', 'v'} };
-		Pentomino v = new Pentomino('v', vMatrix);
+		Blocks v = new Blocks('v', vMatrix);
 		
 		
 		char[][] wMatrix = {
 				{'w', 'o', 'o'},
 				{'w', 'w', 'o'},
 				{'o', 'w', 'w'} };
-		Pentomino w = new Pentomino('w', wMatrix);
+		Blocks w = new Blocks('w', wMatrix);
 		
 		
 		char[][] yMatrix = {
@@ -60,7 +60,7 @@ public class Pentominoes {
 				{'y', 'y'},
 				{'o', 'y'},
 				{'o', 'y'} };
-		Pentomino y = new Pentomino('y', yMatrix);
+		Blocks y = new Blocks('y', yMatrix);
 		
 		
 		char[][] iMatrix = {
@@ -69,92 +69,92 @@ public class Pentominoes {
 				{'i'},
 				{'i'},
 				{'i'} };
-		Pentomino i = new Pentomino('i', iMatrix);
+		Blocks i = new Blocks('i', iMatrix);
 		
 		
 		char[][] tMatrix = {
 				{'t', 't', 't'},
 				{'o', 't', 'o'},
 				{'o', 't', 'o'} };
-		Pentomino t = new Pentomino('t', tMatrix);
+		Blocks t = new Blocks('t', tMatrix);
 		
 		
 		char[][] zMatrix = {
 				{'z', 'z', 'o'},
 				{'o', 'z', 'o'},
 				{'o', 'z', 'z'} };
-		Pentomino z = new Pentomino('z', zMatrix);
+		Blocks z = new Blocks('z', zMatrix);
 		
 		
 		char[][] uMatrix = {
 				{'u', 'o', 'u'},
 				{'u', 'u', 'u'} };
-		Pentomino u = new Pentomino('u', uMatrix);
+		Blocks u = new Blocks('u', uMatrix);
 		
 		
 		char[][] nMatrix = {
 				{'n', 'n', 'o', 'o'},
 				{'o', 'n', 'n', 'n'} };
-		Pentomino n = new Pentomino('n', nMatrix);
+		Blocks n = new Blocks('n', nMatrix);
 		
 		
 		char[][] lMatrix = {
 				{'o', 'o', 'o', 'l'},
 				{'l', 'l', 'l', 'l'} };
-		Pentomino l = new Pentomino('l', lMatrix);
+		Blocks l = new Blocks('l', lMatrix);
 
 		char[][] pMatrixflip = {
 				{'p', 'p'},
 				{'p', 'p'},
 				{'o', 'p'}};
-		Pentomino p1 = new Pentomino('p', pMatrixflip);
+		Blocks p1 = new Blocks('p', pMatrixflip);
 
 
 		char[][] fMatrixflip = {
 				{'f', 'f', 'o'},
 				{'o', 'f', 'f'},
 				{'o', 'f', 'o'}};
-		Pentomino f1 = new Pentomino('f', fMatrixflip);
+		Blocks f1 = new Blocks('f', fMatrixflip);
 
 		char[][] vMatrixflip = {
 				{'o', 'o', 'v'},
 				{'o', 'o', 'v'},
 				{'v', 'v', 'v'} };
-		Pentomino v1 = new Pentomino('v', vMatrixflip);
+		Blocks v1 = new Blocks('v', vMatrixflip);
 
 		char[][] wMatrixflip = {
 				{'o', 'o', 'w'},
 				{'o', 'w', 'w'},
 				{'w', 'w', 'o'} };
-		Pentomino w1 = new Pentomino('w', wMatrixflip);
+		Blocks w1 = new Blocks('w', wMatrixflip);
 
 		char[][] yMatrixflip = {
 				{'y', 'o'},
 				{'y', 'y'},
 				{'y', 'o'},
 				{'y', 'o'} };
-		Pentomino y1 = new Pentomino('y', yMatrixflip);
+		Blocks y1 = new Blocks('y', yMatrixflip);
 
 		char[][] zMatrixflip = {
 				{'o', 'z', 'z'},
 				{'o', 'z', 'o'},
 				{'z', 'z', 'o'} };
-		Pentomino z1 = new Pentomino('z', zMatrixflip);
+		Blocks z1 = new Blocks('z', zMatrixflip);
 
 		char[][] nMatrixflip = {
 				{'o', 'o', 'n', 'n'},
 				{'n', 'n', 'n', 'o'} };
-		Pentomino n1 = new Pentomino('n', nMatrixflip);
+		Blocks n1 = new Blocks('n', nMatrixflip);
 
 		char[][] lMatrixflip = {
 				{'o', 'o', 'o', 'l'},
 				{'l', 'l', 'l', 'l'} };
-		Pentomino l1 = new Pentomino('l', lMatrixflip);
+		Blocks l1 = new Blocks('l', lMatrixflip);
 
 
 
 		//Puts all pentominoes into the hashmap with their corresponding 'letter' as key
-		this.dict = new HashMap<Character,Pentomino>();
+		this.dict = new HashMap<Character, Blocks>();
 		this.dict.put('l', l);
 		this.dict.put('p', p);
 		this.dict.put('i', i);
@@ -170,7 +170,7 @@ public class Pentominoes {
 
 		// i dont want to put it in .dict but i dont know where else to put them?
 
-		this.flip= new HashMap<Character, Pentomino>();
+		this.flip= new HashMap<Character, Blocks>();
 		this.flip.put('l', l1);
 		this.flip.put('n', n1);
 		this.flip.put('p', p1);
@@ -214,11 +214,11 @@ public class Pentominoes {
 	}
 	
 	/**
-	 * Returns a Pentomino, which stores every form of the pentomino.
+	 * Returns a Blocks, which stores every form of the pentomino.
 	 * @param name name of the pentomino
 	 * @return the pentomino
 	 */
-	public Pentomino getPentomino(char name){
+	public Blocks getPentomino(char name){
 		return this.dict.get(name);
 	}
 	
@@ -279,7 +279,7 @@ public class Pentominoes {
 	public ArrayList<char[][]> createTheListOfLists(){
 		ArrayList<char[][]> theList = new ArrayList<char[][]>();
 		for(char key : this.keys){
-			Pentomino p = dict.get(key);
+			Blocks p = dict.get(key);
 			int matrixes = p.getAmountOfMatrixes();
 			for(int i = 0; i < matrixes; i++){
 				theList.add(p.getMatrix(i));
@@ -296,7 +296,7 @@ public class Pentominoes {
 		char[] keys = new char[63];
 		ArrayList<Character> temp = new ArrayList<Character>();
 		for(char key : this.keys){
-			Pentomino p = dict.get(key);
+			Blocks p = dict.get(key);
 			int matrixes = p.getAmountOfMatrixes();
 			for(int i = 0; i < matrixes; i++){
 				temp.add(key);

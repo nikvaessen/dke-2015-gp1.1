@@ -1,6 +1,5 @@
 package tetris;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Arrays;
@@ -11,7 +10,7 @@ import java.util.Arrays;
 public class BoardHandler {
     //classes needed to run this class
     private Board board;
-    private Pentominoes pentominoes;
+    private Polyomino polyomino;
     private InputController input;
     private Random rng;
 
@@ -25,11 +24,19 @@ public class BoardHandler {
     //score
     private int score;
 
-    public BoardHandler(Board board, InputController input)
+    public BoardHandler(Board board, InputController input, boolean tetris)
     {
         this.board = board;
         this.input = input;
-        pentominoes = new Pentominoes();
+        if(tetris)
+        {
+           polyomino = new TetrisBlocks();
+        }
+        else
+        {
+            polyomino = new PentominoBlocks();
+        }
+
         rng = new Random();
     }
 
@@ -51,13 +58,13 @@ public class BoardHandler {
      */
     private char[][] getRandomPentomino()
     {
-        ArrayList<Character> everyPentomiChar = pentominoes.getKeys();
+        ArrayList<Character> everyPentomiChar = polyomino.getKeys();
         kindOfPent = everyPentomiChar.get(rng.nextInt(everyPentomiChar.size()));
-        char[][] toReturn = pentominoes.getMatrix(kindOfPent, 0);
-        if(pentominoes.hasFlip(kindOfPent)) {
+        char[][] toReturn = polyomino.getMatrix(kindOfPent, 0);
+        if(polyomino.hasFlip(kindOfPent)) {
             if(rng.nextBoolean())
             {
-                toReturn = pentominoes.getFlippdMatrix(kindOfPent);
+                toReturn = polyomino.getFlippdMatrix(kindOfPent);
             }
         }
         return toReturn;

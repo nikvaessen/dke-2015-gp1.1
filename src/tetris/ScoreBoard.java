@@ -13,10 +13,8 @@ import java.io.PrintWriter;
 
 public class ScoreBoard
 {
-
     private HashMap<String, Integer> highScores;
     private final String FILEPATH = "data/HighScores.txt" ;
-
 
     public ScoreBoard(){
 
@@ -75,7 +73,6 @@ public class ScoreBoard
         PrintWriter writer;
         try {
             writer = new PrintWriter(FILEPATH);
-
             writer.println(file);
             writer.close();
         } catch (FileNotFoundException e) {

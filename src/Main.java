@@ -1,12 +1,7 @@
 import gui.*;
-import tetris.Board;
-import tetris.Pentomino;
-import tetris.Pentominoes;
-import tetris.ScoreBoard;
+import tetris.PentominoBlocks;
 
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Main {
 	public static void main(String[] argv) {
@@ -17,7 +12,7 @@ public class Main {
 
 	public static void testRotations()
 	{
-		Pentominoes p = new Pentominoes();
+		PentominoBlocks p = new PentominoBlocks();
 		ArrayList<char[][]> originalMatrixes = new ArrayList<char[][]>();
 		for(char key: p.getKeys())
 		{
