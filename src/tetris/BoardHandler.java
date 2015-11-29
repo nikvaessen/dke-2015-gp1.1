@@ -40,6 +40,16 @@ public class BoardHandler {
         rng = new Random();
     }
 
+    public void switchToTetris()
+    {
+        polyomino = new TetrisBlocks();
+    }
+
+    public void switchToPentris()
+    {
+        polyomino = new PentominoBlocks();
+    }
+
     /**
      * Spawns a random pentomino in the top row(s) of the board.
      */

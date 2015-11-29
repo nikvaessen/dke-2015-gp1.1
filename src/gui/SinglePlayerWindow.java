@@ -19,6 +19,7 @@ public class SinglePlayerWindow extends JPanel {
 
     private Thread gameLoop;
     private boolean gameLoopHasStarted;
+    private BoardHandler bh;
 
     private InputController inputController;
 
@@ -29,7 +30,27 @@ public class SinglePlayerWindow extends JPanel {
         this.addKeyListener(inputController);
         this.setFocusable(true);
         this.requestFocusInWindow();
-        BoardHandler bh = new BoardHandler(board, inputController, true);
+
+        this.bh = new BoardHandler(board, inputController, true);
+
+        //create the combobox to choose between tetris and pentris
+        String[] optionStrings = {"Tetris", "Pentris"};
+        final JComboBox optionList = new JComboBox(optionStrings);
+        optionList.setSelectedIndex(0);
+        optionList.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(optionList.getSelectedIndex() == 0)
+                {
+                    bh.switchToTetris();
+                }
+                else if(optionList.getSelectedIndex() == 1)
+                {
+                    bh.switchToPentris();
+                }
+            }
+        });
+        this.add(optionList);
 
         //create the gamepanel and add it
         GamePanel gamePanel = new GamePanel(board);
