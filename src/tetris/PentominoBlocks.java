@@ -104,51 +104,51 @@ public class PentominoBlocks implements Polyomino {
 		Blocks l = new Blocks('l', lMatrix);
 
 		char[][] pMatrixflip = {
-				{'p', 'p'},
-				{'p', 'p'},
-				{'o', 'p'}};
+				{'a', 'a'},
+				{'a', 'a'},
+				{'o', 'a'}};
 		Blocks p1 = new Blocks('p', pMatrixflip);
 
 
 		char[][] fMatrixflip = {
-				{'f', 'f', 'o'},
-				{'o', 'f', 'f'},
-				{'o', 'f', 'o'}};
+				{'b', 'b', 'o'},
+				{'o', 'b', 'b'},
+				{'o', 'b', 'o'}};
 		Blocks f1 = new Blocks('f', fMatrixflip);
 
 		char[][] vMatrixflip = {
-				{'o', 'o', 'v'},
-				{'o', 'o', 'v'},
-				{'v', 'v', 'v'} };
+				{'o', 'o', 'c'},
+				{'o', 'o', 'c'},
+				{'c', 'c', 'c'} };
 		Blocks v1 = new Blocks('v', vMatrixflip);
 
 		char[][] wMatrixflip = {
-				{'o', 'o', 'w'},
-				{'o', 'w', 'w'},
-				{'w', 'w', 'o'} };
+				{'o', 'o', 'd'},
+				{'o', 'd', 'd'},
+				{'d', 'd', 'o'} };
 		Blocks w1 = new Blocks('w', wMatrixflip);
 
 		char[][] yMatrixflip = {
-				{'y', 'o'},
-				{'y', 'y'},
-				{'y', 'o'},
-				{'y', 'o'} };
+				{'e', 'o'},
+				{'e', 'e'},
+				{'e', 'o'},
+				{'e', 'o'} };
 		Blocks y1 = new Blocks('y', yMatrixflip);
 
 		char[][] zMatrixflip = {
-				{'o', 'z', 'z'},
-				{'o', 'z', 'o'},
-				{'z', 'z', 'o'} };
+				{'o', 'g', 'g'},
+				{'o', 'g', 'o'},
+				{'g', 'g', 'o'} };
 		Blocks z1 = new Blocks('z', zMatrixflip);
 
 		char[][] nMatrixflip = {
-				{'o', 'o', 'n', 'n'},
-				{'n', 'n', 'n', 'o'} };
+				{'o', 'o', 'k', 'k'},
+				{'k', 'k', 'k', 'o'} };
 		Blocks n1 = new Blocks('n', nMatrixflip);
 
 		char[][] lMatrixflip = {
-				{'o', 'o', 'o', 'l'},
-				{'l', 'l', 'l', 'l'} };
+				{'o', 'o', 'o', 'm'},
+				{'m', 'm', 'm', 'm'} };
 		Blocks l1 = new Blocks('l', lMatrixflip);
 
 
