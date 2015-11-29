@@ -53,7 +53,7 @@ public class GameLoop extends Thread {
             }
             boardHandler.checkFullLines();
             boardHandler.spawnPiece();
-
+            gamePanel.repaint();
         }
         try{
             //System.out.println(sleeping for a second");

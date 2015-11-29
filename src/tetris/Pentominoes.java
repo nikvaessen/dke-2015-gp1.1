@@ -12,12 +12,11 @@ public class Pentominoes {
 	private ArrayList<Character> keys;			//ArrayList which will store the keys used in the HashMap
 	private HashMap<Character,Pentomino> dict;  //HashMap mapping Pentomino classes representing a pentomino of a specific letter
 												//to a key of the respective letter 
-	
+	private HashMap<Character, Pentomino> flip; //stores flipped versions of a pentomino
+
 	/**
 	 * Constructs the object of the Pentomino class for a given kind of pentomino, e.g. x or p and a matrix of chars representing a single form
-	 * of the given kind or pentomino, where 'o' is an empty cell and 'char' a non-empty cell. 
-	 * @param name the character representing the pentomino
-	 * @param matrix matrix of chars storing the basic form of the pentomino
+	 * of the given kind or pentomino, where 'o' is an empty cell and 'char' a non-empty cell.
 	 */
 	public Pentominoes() {
 		
@@ -169,18 +168,17 @@ public class Pentominoes {
 		this.dict.put('u', u);
 		this.dict.put('n', n);
 
-		/*
-		 // i dont want to put it in .dict but i dont know where else to put them?
+		// i dont want to put it in .dict but i dont know where else to put them?
 
 		this.flip= new HashMap<Character, Pentomino>();
-		this.flip.put('l',l1);
+		this.flip.put('l', l1);
 		this.flip.put('n', n1);
 		this.flip.put('p', p1);
 		this.flip.put('f', f1);;
 		this.flip.put('v', v1);
 		this.flip.put('y', y1);
 		this.flip.put('w', w1);
-		*/
+
 		//Adds all letters of dictionary to the arraylist 'keys'.
 		this.keys = new ArrayList<Character>();
 		for(char letter : new char[] {'l','x','f','v','w','y','i','t','z','u','n','p'}){
@@ -188,8 +186,6 @@ public class Pentominoes {
 		}		
 	}
 
-
-	}
 	/**
 	 * Returns an ArrayList of pentominoes names which can be used in the other functions of this class.
 	 * @return names of the pentominoes
@@ -241,7 +237,31 @@ public class Pentominoes {
 	public void removedPentomino(char name){
 		this.dict.get(name).setUsedForAll(false);
 	}
-		
+
+
+    public boolean hasFlip(char name)
+    {
+        if(this.flip.containsKey(name))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public char[][] getFlippdMatrix(char name) throws IllegalArgumentException
+    {
+        if(hasFlip(name))
+        {
+            return flip.get(name).getMatrix(0);
+        }
+        else{
+            throw new IllegalArgumentException();
+        }
+    }
+
 	/**
 	 * 
 	 * @param name name of the pentomino

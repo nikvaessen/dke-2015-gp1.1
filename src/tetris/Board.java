@@ -126,9 +126,9 @@ public class Board {
 	 * @return true if the pentomino can be placed in the cell, false when it cannot
 	 */
 	public boolean canPlace(char[][] pentMatrix, int x, int y){
-		y -= checkPad(pentMatrix);
+		//y -= checkPad(pentMatrix);
 		//Checks whether the given matrix goes out of bounds of the board. Return false if it does.
-		if(x+pentMatrix.length > board.length || y+pentMatrix[0].length > board[0].length || y < 0){
+		if(x < 0 || x + pentMatrix.length > board.length || y + pentMatrix[0].length > board[0].length || y < 0){
 			return false;
 		}
 		//Checks whether the given matrix will overlap already placed pentominoes. Returns false when it does.
@@ -192,8 +192,6 @@ public class Board {
 				}
 			}
 		}
-		System.out.println("coords returned by placing method");
-		System.out.println(Arrays.deepToString(coords));
         return coords;
 	}
 
@@ -218,12 +216,12 @@ public class Board {
 
 	/**
 	 * Sets the char of the pentomino in the cell.
-	 * @param i coordinate x of the cell
-	 * @param j coordinate y of the cell
+	 * @param row coordinate x or the row of the cell
+	 * @param column coordinate y or the column of the cell
 	 * @param value char of the pentomino
 	 */
-	public void setCell(int i, int j, char value){
-		board[i][j] = value;
+	public void setCell(int row, int column, char value){
+		board[row][column] = value;
 	}
 
 	/**
