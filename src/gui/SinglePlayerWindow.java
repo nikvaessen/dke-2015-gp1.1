@@ -53,17 +53,19 @@ public class SinglePlayerWindow extends JPanel {
         this.add(optionList);
 
         //create the gamepanel and add it
-        GamePanel gamePanel = new GamePanel(board);
+        final GamePanel gamePanel = new GamePanel(board);
         this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
+        this.add(gamePanel);
 
         //set the Thread
         gameLoop = new GameLoop(bh, inputController, gamePanel);
         gameLoopHasStarted = false;
 
         //add the buttons
-        this.add(gamePanel);
+        //backbutton
         this.add(new BackButton(mainMenu));
+        //startbutton
         JButton startButton = new JButton("Start");
         startButton.requestFocus(false);
         startButton.addActionListener(new ActionListener() {
@@ -91,6 +93,27 @@ public class SinglePlayerWindow extends JPanel {
             }
         });
         this.add(startButton);
+        //reset button
+        JButton resetButton = new JButton("Reset");
+        this.add(resetButton);
+        resetButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                bh.resetBoard();
+                optionList.setEnabled(true);
+                gameLoopHasStarted = false;
+                gamePanel.repaint();
+            }
+        });
+        //pause button
+        JButton pauseButton = new JButton("Pause");
+        this.add(pauseButton);
+        pauseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gameLoop.
+            }
+        });
 
         this.addFocusListener(new FocusListener() {
             @Override

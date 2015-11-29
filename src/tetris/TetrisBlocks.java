@@ -63,7 +63,7 @@ public class TetrisBlocks implements Polyomino {
         Blocks l1 = new Blocks('y', lMatrixflip);
 
         char[][] zMatrixflip = {
-                {'0', 'z'},
+                {'o', 'z'},
                 {'z', 'z'},
                 {'z', 'o'}};
         Blocks z1 = new Blocks('z', zMatrixflip);
