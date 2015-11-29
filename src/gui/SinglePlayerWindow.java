@@ -20,7 +20,6 @@ public class SinglePlayerWindow extends JPanel {
     private Thread gameLoop;
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
-    private JComboBox optionList;
 
     private InputController inputController;
 
