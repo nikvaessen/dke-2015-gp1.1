@@ -18,17 +18,35 @@ public class GameLoop extends Thread {
     boolean shouldMovePieceDown;
     int count;
 
+    private volatile boolean isPaused;
+
     public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel)
     {
         this.boardHandler = boardHandler;
         this.inputController = inputController;
         this.gamePanel = gamePanel;
+        isPaused = true;
 
         shouldMovePieceDown = false;
         count = 0;
     }
 
-    public void start()
+    public void run()
+    {
+        if(isPaused)
+        {
+            isPaused = false;
+            gameLoop();
+        }
+        startLoop();
+    }
+
+    public void interrupt()
+    {
+        isPaused = true;
+    }
+
+    private void startLoop()
     {
         //System.out.println("try to spawn piece");
         boardHandler.spawnPiece();
@@ -37,8 +55,23 @@ public class GameLoop extends Thread {
         gameLoop();
     }
 
-    public void gameLoop()
+    private void gameLoop()
     {
+        if(isPaused)
+        {
+            try {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        gameLoop();
+                    }
+                });
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
         count++;
         //System.out.println(count);
 
@@ -58,7 +91,6 @@ public class GameLoop extends Thread {
         try{
             //System.out.println(sleeping for a second");
             this.sleep(100);
-            //System.out.println("Done sleeping for a second");
         }
         catch(Exception e)
         {
