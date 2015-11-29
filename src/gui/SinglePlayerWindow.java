@@ -20,6 +20,7 @@ public class SinglePlayerWindow extends JPanel {
     private Thread gameLoop;
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
+    private JComboBox optionList;
 
     private InputController inputController;
 
@@ -78,6 +79,7 @@ public class SinglePlayerWindow extends JPanel {
                        public void run(){
                            gameLoopHasStarted = true;
                            gameLoop.start();
+                           optionList.setEnabled(false);
                            requestFocusInWindow();
                         }
                         });
