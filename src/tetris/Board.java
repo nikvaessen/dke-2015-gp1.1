@@ -24,15 +24,21 @@ public class Board {
 		this.height = height;
 
 		this.board = new char[height][width];
-		// Fill all the board with o's (empty fields).
-		for( int i = 0 ; i < board.length ; i++)
-		{
-			for( int j = 0 ; j < board[0].length ; j++)
-			{
-				board[i][j] = 'o';
-			}
-		}
+        // Fill all the board with o's (empty fields).
+        emptyBoard();
 	}
+
+    public void emptyBoard()
+    {
+        // Fill all the board with o's (empty fields).
+        for( int i = 0 ; i < board.length ; i++)
+        {
+            for( int j = 0 ; j < board[0].length ; j++)
+            {
+                board[i][j] = 'o';
+            }
+        }
+    }
 
 	/**
 	 * Prints the board.

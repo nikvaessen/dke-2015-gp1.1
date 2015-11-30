@@ -107,8 +107,6 @@ public class BoardHandler {
         }
         //first remove the piece currently on the board
         removeCurrentPiece();
-
-        System.out.println("Rotated matrix: \n" + Arrays.deepToString(rotatedMatrix).replace("],","]\n"));
         //then try to place it in the new location
         if(board.canPlace(rotatedMatrix, rowOfPiece, columnOfPiece) ){
             try
@@ -119,7 +117,7 @@ public class BoardHandler {
                 fallingPentMatrix = rotatedMatrix;
             } catch (ArrayIndexOutOfBoundsException e)
             {
-                System.out.println("the new coordinates are still out of bounds");
+                e.printStackTrace();
             }
         }
         else{
@@ -143,8 +141,6 @@ public class BoardHandler {
         int newRow = rowOfPiece + rowTranslation;
         int newColumn = columnOfPiece + columnTranslation;
 
-        //System.out.println("new row of piece: "+ newRow + " column of piece: " + newColumn);
-
         //first remove the piece currently on the board
         removeCurrentPiece();
 
@@ -157,7 +153,7 @@ public class BoardHandler {
                 columnOfPiece = newColumn;
             } catch (ArrayIndexOutOfBoundsException e)
             {
-                System.out.println("the new coordinates are still out of bounds");
+                e.printStackTrace();
             }
         }
         else{
@@ -207,20 +203,16 @@ public class BoardHandler {
 
     public void checkFullLines()
     {
-        //System.out.println("Checking for full rows");
         for(int row = 0; row < board.getHeight(); row++)
         {
             boolean foundEmptyCell = false;
             for(int column= 0; column < board.getWidth(); column++)
             {
-                //System.out.print(board.getCell(row,column) + " ");
                 if (board.getCell(row, column) == 'o' && !foundEmptyCell)
                 {
                     foundEmptyCell = true;
-                    //break;
                 }
             }
-            //System.out.printf("%nrow %d is full: %b%n", row, !foundEmptyCell);
             if(!foundEmptyCell){
                 score++;
                 clearLine(row);
@@ -244,10 +236,12 @@ public class BoardHandler {
         return needNewPiece;
     }
 
+    public void resetBoard()
+    {
+        board.emptyBoard();
+    }
+
     private static char[][] rotateMatrix(char[][] matrixToRotate, boolean clockwise){
-
-        //char[] firstColumn =new char[rotation[0].length];
-
 		/*
 		step 1: To rotate a matrix, first transpose the matrix so that the first column becomes the
 				first row, the second column becomes the second row, ect.
