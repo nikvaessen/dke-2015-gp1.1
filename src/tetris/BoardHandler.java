@@ -21,9 +21,6 @@ public class BoardHandler {
     private char kindOfPent; // letter corresponding to the shape of the pentomino
     private boolean needNewPiece;
 
-    //score
-    private int score;
-
     public BoardHandler(Board board, InputController input, boolean tetris)
     {
         this.board = board;
@@ -50,6 +47,28 @@ public class BoardHandler {
         polyomino = new Pentomino();
     }
 
+    public boolean isPentris()
+    {
+        if(polyomino instanceof Pentomino)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public boolean isTetris()
+    {
+        if(polyomino instanceof  Tetromino)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     /**
      * Spawns a random pentomino in the top row(s) of the board.
      */
@@ -69,7 +88,6 @@ public class BoardHandler {
     private char[][] getRandomPentomino()
     {
         ArrayList<Character> everyPentomiChar = polyomino.getAllKeys();
-        System.out.println(everyPentomiChar);
         char kindOfPent = everyPentomiChar.get(rng.nextInt(everyPentomiChar.size()));
         char[][] toReturn = new char[1][1];
         if(polyomino.hasKey(kindOfPent))
@@ -205,8 +223,9 @@ public class BoardHandler {
         return false;
     }
 
-    public void checkFullLines()
+    public int checkFullLines()
     {
+        int rowsCleared = 0;
         for(int row = 0; row < board.getHeight(); row++)
         {
             boolean foundEmptyCell = false;
@@ -218,10 +237,11 @@ public class BoardHandler {
                 }
             }
             if(!foundEmptyCell){
-                score++;
+                rowsCleared++;
                 clearLine(row);
             }
         }
+        return rowsCleared;
     }
 
    private void clearLine(int row1)
@@ -237,12 +257,12 @@ public class BoardHandler {
 
     public boolean isPieceDoneFalling()
     {
-        board.printBoard();
         return needNewPiece;
     }
 
     public void resetBoard()
     {
+        this.needNewPiece = false;
         board.emptyBoard();
     }
 

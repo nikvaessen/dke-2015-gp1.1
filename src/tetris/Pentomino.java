@@ -106,44 +106,44 @@ public class Pentomino extends Polyomino {
 
 
 		char[][] fMatrixflip = {
-				{'b', 'b', 'o'},
-				{'o', 'b', 'b'},
-				{'o', 'b', 'o'}};
+				{'f', 'f', 'o'},
+				{'o', 'f', 'f'},
+				{'o', 'f', 'o'}};
 		Blocks f1 = new Blocks('f', fMatrixflip);
 
 		char[][] vMatrixflip = {
-				{'o', 'o', 'c'},
-				{'o', 'o', 'c'},
-				{'c', 'c', 'c'} };
+				{'o', 'o', 'v'},
+				{'o', 'o', 'v'},
+				{'v', 'v', 'v'} };
 		Blocks v1 = new Blocks('v', vMatrixflip);
 
 		char[][] wMatrixflip = {
-				{'o', 'o', 'd'},
-				{'o', 'd', 'd'},
-				{'d', 'd', 'o'} };
+				{'o', 'o', 'w'},
+				{'o', 'w', 'w'},
+				{'w', 'w', 'o'} };
 		Blocks w1 = new Blocks('w', wMatrixflip);
 
 		char[][] yMatrixflip = {
-				{'e', 'o'},
-				{'e', 'e'},
-				{'e', 'o'},
-				{'e', 'o'} };
+				{'y', 'o'},
+				{'y', 'y'},
+				{'y', 'o'},
+				{'y', 'o'} };
 		Blocks y1 = new Blocks('y', yMatrixflip);
 
 		char[][] zMatrixflip = {
-				{'o', 'g', 'g'},
-				{'o', 'g', 'o'},
-				{'g', 'g', 'o'} };
+				{'o', 'z', 'z'},
+				{'o', 'z', 'o'},
+				{'z', 'z', 'o'} };
 		Blocks z1 = new Blocks('z', zMatrixflip);
 
 		char[][] nMatrixflip = {
-				{'o', 'o', 'k', 'k'},
-				{'k', 'k', 'k', 'o'} };
+				{'o', 'o', 'n', 'n'},
+				{'n', 'n', 'n', 'o'} };
 		Blocks n1 = new Blocks('n', nMatrixflip);
 
 		char[][] lMatrixflip = {
-				{'o', 'o', 'o', 'm'},
-				{'m', 'm', 'm', 'm'} };
+				{'o', 'o', 'o', 'l'},
+				{'l', 'l', 'l', 'l'} };
 		Blocks l1 = new Blocks('l', lMatrixflip);
 		
 		//Puts all pentominoes into the hashmap with their corresponding 'letter' as key
@@ -162,12 +162,12 @@ public class Pentomino extends Polyomino {
 
 		// i dont want to put it in .dict but i dont know where else to put them?
 		//JONTY: can you please put the new characters here :)?
-		super.addFlippedMatrix('b', l1);
-		super.addFlippedMatrix('g', n1);
-		super.addFlippedMatrix('e', p1);
-		super.addFlippedMatrix('d', f1);
-		super.addFlippedMatrix('c', v1);
-		super.addFlippedMatrix('k', y1);
-		super.addFlippedMatrix('m', w1);
+		super.addFlippedMatrix('f', l1);
+		super.addFlippedMatrix('z', n1);
+		super.addFlippedMatrix('y', p1);
+		super.addFlippedMatrix('w', f1);
+		super.addFlippedMatrix('v', v1);
+		super.addFlippedMatrix('n', y1);
+		super.addFlippedMatrix('l', w1);
     }
 }

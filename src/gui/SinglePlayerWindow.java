@@ -17,7 +17,7 @@ import java.awt.event.FocusListener;
  */
 public class SinglePlayerWindow extends JPanel {
 
-    private Thread gameLoop;
+    private GameLoop gameLoop;
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
 
@@ -26,7 +26,7 @@ public class SinglePlayerWindow extends JPanel {
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
         Board board = new Board(10, 20);
-        InputController inputController = new InputController();
+        final InputController inputController = new InputController();
         this.bh = new BoardHandler(board, inputController, true);
 
         //behaviour
@@ -34,7 +34,13 @@ public class SinglePlayerWindow extends JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setLayout(new GridBagLayout());
+
+        //create the scoreboard
+        final ScoreBoard scoreBoard = new ScoreBoard();
         GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
+        this.add(scoreBoard, c);
 
         //create the combobox to choose between tetris and pentris
         String[] optionStrings = {"Tetris", "Pentris"};
@@ -51,6 +57,16 @@ public class SinglePlayerWindow extends JPanel {
                 {
                     bh.switchToPentris();
                 }
+            }
+        });
+        optionList.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                optionList.requestFocus();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
             }
         });
         c = new GridBagConstraints();
@@ -73,7 +89,8 @@ public class SinglePlayerWindow extends JPanel {
         this.add(gamePanel, c);
 
         //set the Thread
-        gameLoop = new GameLoop(bh, inputController, gamePanel);
+        gameLoop = new GameLoop(bh, inputController, gamePanel, scoreBoard);
+        gameLoop.start();
         gameLoopHasStarted = false;
 
         //add the buttons
@@ -95,22 +112,22 @@ public class SinglePlayerWindow extends JPanel {
         this.add(new BackButton(mainMenu), c);
 
         //startbutton
-        JButton startButton = new JButton("Start");
+        final JButton startButton = new JButton("Start");
         startButton.requestFocus(false);
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                if(!gameLoopHasStarted)
                {
-                   System.out.println("started GameLoop");
                    try{
                    SwingUtilities.invokeLater(new Runnable() {
                        @Override
                        public void run(){
                            gameLoopHasStarted = true;
-                           gameLoop.start();
+                           gameLoop.startNewGame();
                            optionList.setEnabled(false);
                            requestFocusInWindow();
+                           startButton.setEnabled(false);
                         }
                         });
                    }
@@ -122,6 +139,23 @@ public class SinglePlayerWindow extends JPanel {
             }
         });
         buttonPanel.add(startButton);
+        //pause button
+        final JButton pauseButton = new JButton("Pause  ");
+        buttonPanel.add(pauseButton);
+        pauseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!gameLoop.isPaused()) {
+                    gameLoop.setPaused(true);
+                    pauseButton.setText("Unpause");
+                }
+                else if(gameLoop.isPaused())
+                {
+                    gameLoop.setPaused(false);
+                    pauseButton.setText("Pause  ");
+                }
+            }
+        });
         //reset button
         JButton resetButton = new JButton("Reset");
         buttonPanel.add(resetButton);
@@ -130,34 +164,32 @@ public class SinglePlayerWindow extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 bh.resetBoard();
                 optionList.setEnabled(true);
+                if(gameLoop.isRunning())
+                {
+                    gameLoop.apruptGameEnd();
+                }
                 gameLoopHasStarted = false;
                 gamePanel.repaint();
-            }
-        });
-        //pause button
-        JButton pauseButton = new JButton("Pause");
-        buttonPanel.add(pauseButton);
-        pauseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gameLoop.interrupt();
+                startButton.setEnabled(true);
+                gameLoop.setPaused(false);
+                pauseButton.setText("Pause");
+                scoreBoard.setScore(0);
             }
         });
 
-        //focuslistener for inputController
-        this.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
 
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                requestFocusInWindow();
-            }
-        });
-
-        //make it pretty
+//        //focuslistener for inputController
+//        this.addFocusListener(new FocusListener() {
+//            @Override
+//            public void focusGained(FocusEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void focusLost(FocusEvent e) {
+//                requestFocusInWindow();
+//            }
+//        });
     }
 
     public Dimension getPreferredSize()
