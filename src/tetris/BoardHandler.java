@@ -2,7 +2,6 @@ package tetris;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Arrays;
 
 /**
  * Created by Nik on 11/12/15.
@@ -30,11 +29,11 @@ public class BoardHandler {
         this.input = input;
         if(tetris)
         {
-           polyomino = new TetrisBlocks();
+           polyomino = new Tetromino();
         }
         else
         {
-            polyomino = new PentominoBlocks();
+            polyomino = new Pentomino();
         }
 
         rng = new Random();
@@ -42,12 +41,12 @@ public class BoardHandler {
 
     public void switchToTetris()
     {
-        polyomino = new TetrisBlocks();
+        polyomino = new Tetromino();
     }
 
     public void switchToPentris()
     {
-        polyomino = new PentominoBlocks();
+        polyomino = new Pentomino();
     }
 
     /**
@@ -75,6 +74,7 @@ public class BoardHandler {
             if(rng.nextBoolean())
             {
                 toReturn = polyomino.getFlippdMatrix(kindOfPent);
+
             }
         }
         return toReturn;

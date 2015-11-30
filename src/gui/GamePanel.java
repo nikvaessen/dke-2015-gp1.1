@@ -90,8 +90,6 @@ public class    GamePanel extends JPanel {
                     g2d.setColor(new Color(186, 85, 211));
                     g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 }
-
-
                 else if (board.getCell(i, j) == 'a') {
                     g2d.setPaint(new Color(79, 79, 79));
                     g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
@@ -125,9 +123,6 @@ public class    GamePanel extends JPanel {
                     g2d.setPaint(new Color(72, 209, 204));
                     g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 }
-
-
-
             }
         }
         g2d.setColor(Color.RED);

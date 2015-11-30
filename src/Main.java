@@ -1,5 +1,5 @@
 import gui.*;
-import tetris.PentominoBlocks;
+import tetris.Pentomino;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class Main {
 
 	public static void testRotations()
 	{
-		PentominoBlocks p = new PentominoBlocks();
+		Pentomino p = new Pentomino();
 		ArrayList<char[][]> originalMatrixes = new ArrayList<char[][]>();
 		for(char key: p.getKeys())
 		{

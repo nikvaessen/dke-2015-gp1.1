@@ -6,7 +6,7 @@ import java.util.HashMap;
 /**
  * Created by baxie on 29-11-15.
  */
-public class TetrisBlocks implements Polyomino {
+public class Tetromino implements Polyomino {
 
     //instance variables
     private ArrayList<Character> keys;			//ArrayList which will store the keys used in the HashMap
@@ -18,7 +18,7 @@ public class TetrisBlocks implements Polyomino {
      * Constructs the object of the Blocks class for a given kind of pentomino, e.g. x or p and a matrix of chars representing a single form
      * of the given kind or pentomino, where 'o' is an empty cell and 'char' a non-empty cell.
      */
-    public TetrisBlocks() {
+    public Tetromino() {
 
         //i tetromino
         char[][] iMatrix = {
