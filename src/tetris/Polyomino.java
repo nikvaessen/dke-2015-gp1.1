@@ -27,12 +27,9 @@ public class Polyomino {
 
         //Adds all letters of dictionary to the arraylist 'keys'.
         this.keys = new ArrayList<Character>();
-        for(char letter : new char[] {'l','x','f','v','w','y','i','t','z','u','n','p'}){
-            this.keys.add(letter);
-        }
 
         //add all letters of the flipped matrixeses to the arraylist 'flippedKeys
-
+        this.flippedKeys = new ArrayList<Character>();
     }
 
     /**
@@ -62,7 +59,19 @@ public class Polyomino {
         return this.dict.get(name).getAmountOfMatrixes();
     }
 
-    public boolean keyExists(char name)
+    public void addMatrix(char key, Blocks block)
+    {
+        this.dict.put(key, block);
+        this.keys.add(key);
+    }
+
+    public void addFlippedMatrix(char key, Blocks block)
+    {
+        this.flip.put(key, block);
+        this.flippedKeys.add(key);
+    }
+
+    public boolean hasKey(char name)
     {
         if(dict.containsKey(name))
         {
@@ -110,7 +119,7 @@ public class Polyomino {
     }
 
 
-    public boolean flipKeyExists(char name)
+    public boolean hasflipKey(char name)
     {
         if(this.flip.containsKey(name))
         {
@@ -124,7 +133,7 @@ public class Polyomino {
 
     public char[][] getFlippdMatrix(char name) throws IllegalArgumentException
     {
-        if(flipKeyExists(name))
+        if(hasflipKey(name))
         {
             return flip.get(name).getMatrix(0);
         }

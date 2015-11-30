@@ -8,18 +8,13 @@ import java.util.HashMap;
  *
  */
 public class Pentomino extends Polyomino {
-	//instance variables
-	private ArrayList<Character> keys;			//ArrayList which will store the keys used in the HashMap
-	private HashMap<Character, Blocks> dict;  //HashMap mapping Blocks classes representing a pentomino of a specific letter
-												//to a key of the respective letter 
-	private HashMap<Character, Blocks> flip; //stores flipped versions of a pentomino
 
 	/**
 	 * Constructs the object of the Blocks class for a given kind of pentomino, e.g. x or p and a matrix of chars representing a single form
 	 * of the given kind or pentomino, where 'o' is an empty cell and 'char' a non-empty cell.
 	 */
 	public Pentomino() {
-		
+		super();
 		char[][] pMatrix = {
 				{'p', 'p'},
 				{'p', 'p'},
@@ -150,39 +145,29 @@ public class Pentomino extends Polyomino {
 				{'o', 'o', 'o', 'm'},
 				{'m', 'm', 'm', 'm'} };
 		Blocks l1 = new Blocks('l', lMatrixflip);
-
-
-
+		
 		//Puts all pentominoes into the hashmap with their corresponding 'letter' as key
-		this.dict = new HashMap<Character, Blocks>();
-		this.dict.put('l', l);
-		this.dict.put('p', p);
-		this.dict.put('i', i);
-		this.dict.put('f', f);
-		this.dict.put('v', v);
-		this.dict.put('w', w);
-		this.dict.put('y', y);
-		this.dict.put('t', t);
-		this.dict.put('z', z);
-		this.dict.put('x', x);
-		this.dict.put('u', u);
-		this.dict.put('n', n);
+		super.addMatrix('l', l);
+		super.addMatrix('p', p);
+		super.addMatrix('i', i);
+		super.addMatrix('f', f);
+		super.addMatrix('v', v);
+		super.addMatrix('w', w);
+		super.addMatrix('y', y);
+		super.addMatrix('t', t);
+		super.addMatrix('z', z);
+		super.addMatrix('x', x);
+		super.addMatrix('u', u);
+		super.addMatrix('n', n);
 
 		// i dont want to put it in .dict but i dont know where else to put them?
-
-		this.flip= new HashMap<Character, Blocks>();
-		this.flip.put('l', l1);
-		this.flip.put('n', n1);
-		this.flip.put('p', p1);
-		this.flip.put('f', f1);;
-		this.flip.put('v', v1);
-		this.flip.put('y', y1);
-		this.flip.put('w', w1);
-
-		//Adds all letters of dictionary to the arraylist 'keys'.
-		this.keys = new ArrayList<Character>();
-		for(char letter : new char[] {'l','x','f','v','w','y','i','t','z','u','n','p'}){
-			this.keys.add(letter);
-		}		
-	}
+		//JONTY: can you please put the new characters here :)?
+		super.addFlippedMatrix('b', l1);
+		super.addFlippedMatrix('g', n1);
+		super.addFlippedMatrix('e', p1);
+		super.addFlippedMatrix('d', f1);
+		super.addFlippedMatrix('c', v1);
+		super.addFlippedMatrix('k', y1);
+		super.addFlippedMatrix('m', w1);
+    }
 }

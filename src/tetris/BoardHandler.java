@@ -1,6 +1,7 @@
 package tetris;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -67,16 +68,19 @@ public class BoardHandler {
      */
     private char[][] getRandomPentomino()
     {
-        ArrayList<Character> everyPentomiChar = polyomino.getKeys();
-        kindOfPent = everyPentomiChar.get(rng.nextInt(everyPentomiChar.size()));
-        char[][] toReturn = polyomino.getMatrix(kindOfPent, 0);
-        if(polyomino.hasFlip(kindOfPent)) {
-            if(rng.nextBoolean())
-            {
-                toReturn = polyomino.getFlippdMatrix(kindOfPent);
-
-            }
+        ArrayList<Character> everyPentomiChar = polyomino.getAllKeys();
+        System.out.println(everyPentomiChar);
+        char kindOfPent = everyPentomiChar.get(rng.nextInt(everyPentomiChar.size()));
+        char[][] toReturn = new char[1][1];
+        if(polyomino.hasKey(kindOfPent))
+        {
+            toReturn = polyomino.getMatrix(kindOfPent, 0);
         }
+        else if(polyomino.hasflipKey(kindOfPent))
+        {
+            toReturn = polyomino.getFlippdMatrix(kindOfPent);
+        }
+        this.kindOfPent = kindOfPent;
         return toReturn;
     }
 
@@ -233,6 +237,7 @@ public class BoardHandler {
 
     public boolean isPieceDoneFalling()
     {
+        board.printBoard();
         return needNewPiece;
     }
 
