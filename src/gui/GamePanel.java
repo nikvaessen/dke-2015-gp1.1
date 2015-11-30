@@ -7,7 +7,7 @@ import tetris.*;
 /**
  * Created by Nik on 7/11/15.
  */
-public class GamePanel extends JPanel {
+public class    GamePanel extends JPanel {
     //px*px size of blocks
     private int blockHeight;
     private int blockWidth;
@@ -90,6 +90,44 @@ public class GamePanel extends JPanel {
                     g2d.setColor(new Color(186, 85, 211));
                     g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
                 }
+
+
+                else if (board.getCell(i, j) == 'a') {
+                    g2d.setPaint(new Color(79, 79, 79));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+
+                 else if (board.getCell(i, j) == 'b') {
+                    g2d.setPaint(new Color(128, 0, 128));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+                 else if (board.getCell(i, j) == 'c') {
+                    g2d.setPaint(new Color(0, 191, 255));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+                 else if (board.getCell(i, j) == 'd') {
+                    g2d.setPaint(new Color(0, 255, 127));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+                 else if (board.getCell(i, j) == 'e') {
+                    g2d.setPaint(new Color(255, 140, 0));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+                 else if (board.getCell(i, j) == 'g') {
+                    g2d.setPaint(new Color(255, 255, 0));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+                 else if (board.getCell(i, j) == 'k') {
+                    g2d.setPaint(new Color(0, 0, 0));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+                 else if (board.getCell(i, j) == 'm') {
+                    g2d.setPaint(new Color(72, 209, 204));
+                    g2d.fillRect(j * blockWidth, i * blockHeight, blockWidth - 1, blockHeight- 1);
+                }
+
+
+
             }
         }
         g2d.setColor(Color.RED);
