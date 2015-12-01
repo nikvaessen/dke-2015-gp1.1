@@ -14,7 +14,7 @@ public class GameLoop extends Thread {
     private BoardHandler boardHandler;
     private InputController inputController;
     private GamePanel gamePanel;
-    private gui.ScoreBoard scoreBoard;
+    //private gui.HighScoreList scoreBoard;
 
     boolean shouldMovePieceDown;
     int count;
@@ -24,15 +24,15 @@ public class GameLoop extends Thread {
     private volatile boolean endGameAprupt;
     private volatile boolean gameIsRunning;
 
-    private int score;
+    private volatile int score;
 
-    public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel, gui.ScoreBoard
-                    scoreBoard)
+    public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel/*,gui.HighScoreList
+                    scoreBoard*/)
     {
         this.boardHandler = boardHandler;
         this.inputController = inputController;
         this.gamePanel = gamePanel;
-        this.scoreBoard = scoreBoard;
+        //this.scoreBoard = scoreBoard;
 
         //booleans
         this.isPaused = false;
@@ -76,6 +76,11 @@ public class GameLoop extends Thread {
         startNewGame = true;
         gameIsRunning = true;
         score = 0;
+    }
+
+    public int getScore()
+    {
+        return score;
     }
 
     private void startGame()
@@ -150,7 +155,7 @@ public class GameLoop extends Thread {
                     int rowsCleared = boardHandler.checkFullLines();
                     if(rowsCleared != 0) {
                         score += rowsCleared*rowsCleared * 100;
-                        scoreBoard.setScore(score);
+                        //scoreBoard.setScore(score);
                         String line;
                         if(rowsCleared ==1)
                             line = "line";

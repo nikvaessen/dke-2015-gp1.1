@@ -41,6 +41,15 @@ public class SinglePlayerWindow extends JPanel {
         c.gridx = 0;
         c.gridy = 0;
         this.add(scoreBoard, c);
+        //add a timer that updates the scoreboard every 100 ms.
+        new Timer(100, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                //System.out.println("Trying to update score");
+                scoreBoard.setScore(gameLoop.getScore());
+              }
+            }).start();
+
 
         //create the combobox to choose between tetris and pentris
         String[] optionStrings = {"Tetris", "Pentris"};
@@ -89,7 +98,7 @@ public class SinglePlayerWindow extends JPanel {
         this.add(gamePanel, c);
 
         //set the Thread
-        gameLoop = new GameLoop(bh, inputController, gamePanel, scoreBoard);
+        gameLoop = new GameLoop(bh, inputController, gamePanel/*, scoreBoard*/);
         gameLoop.start();
         gameLoopHasStarted = false;
 
