@@ -19,13 +19,13 @@ public class SinglePlayerWindow extends JPanel {
     private BoardHandler bh;
     private HighScoreList highScoreList;
 
-    private InputController inputController;
+    private HumanInput inputController;
 
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
         Board board = new Board(10, 20);
-        final InputController inputController = new InputController();
-        this.bh = new BoardHandler(board, inputController, true);
+        final HumanInput inputController = new HumanInput();
+        this.bh = new BoardHandler(board, true);
         this.highScoreList = new HighScoreList();
 
         //behaviour

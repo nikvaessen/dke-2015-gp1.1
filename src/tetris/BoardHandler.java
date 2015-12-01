@@ -11,7 +11,6 @@ public class BoardHandler {
     //classes needed to run this class
     private Board board;
     private Polyomino polyomino;
-    private InputController input;
     private Random rng;
 
     //variables related to moving a piece
@@ -21,10 +20,9 @@ public class BoardHandler {
     private char kindOfPent; // letter corresponding to the shape of the pentomino
     private boolean needNewPiece;
 
-    public BoardHandler(Board board, InputController input, boolean tetris)
+    public BoardHandler(Board board, boolean tetris)
     {
         this.board = board;
-        this.input = input;
         if(tetris)
         {
            polyomino = new Tetromino();
@@ -34,7 +32,7 @@ public class BoardHandler {
             polyomino = new Pentomino();
         }
 
-        rng = new Random();
+        rng = new Random(System.currentTimeMillis());
     }
 
     public void switchToTetris()
