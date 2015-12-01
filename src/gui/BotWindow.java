@@ -1,5 +1,6 @@
 package gui;
 
+import bot.Bot;
 import bot.BotInput;
 import tetris.*;
 
@@ -46,7 +47,6 @@ public class BotWindow extends JPanel
                 scoreBoard.setScore(gameLoop.getScore());
             }
         }).start();
-
 
         //create the combobox to choose between tetris and pentris
         String[] optionStrings = {"Tetris", "Pentris"};
@@ -117,6 +117,9 @@ public class BotWindow extends JPanel
         c.insets = new Insets(0, 0, 20, 0);
         this.add(new BackButton(mainMenu), c);
 
+        //create bot Thread
+        final Bot bot = new Bot(input, gameLoop);
+
         //startbutton
         final JButton startButton = new JButton("Start");
         startButton.requestFocus(false);
@@ -134,6 +137,8 @@ public class BotWindow extends JPanel
                                 optionList.setEnabled(false);
                                 requestFocusInWindow();
                                 startButton.setEnabled(false);
+                                bot.run();
+
                             }
                         });
                     }

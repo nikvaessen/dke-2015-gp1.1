@@ -12,11 +12,13 @@ public class BotInput implements InputController {
     public void moveRight()
     {
         currentInput='r';
+        System.out.println("changed input to 'r'");
     }
 
     public void moveLeft()
     {
         currentInput = 'l';
+        System.out.println("changed input to 'l'");
     }
 
     public void moveDown()
@@ -41,6 +43,7 @@ public class BotInput implements InputController {
 
     public char getCurrentInput()
     {
+        System.out.println("returning input: " + currentInput);
         char returnInput=currentInput;
         currentInput=0;
         return returnInput;
