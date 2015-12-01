@@ -99,9 +99,9 @@ public class Pentomino extends Polyomino {
 		Blocks l = new Blocks('l', lMatrix);
 
 		char[][] pMatrixflip = {
-				{'a', 'a'},
-				{'a', 'a'},
-				{'o', 'a'}};
+				{'p', 'p'},
+				{'p', 'p'},
+				{'o', 'p'}};
 		Blocks p1 = new Blocks('p', pMatrixflip);
 
 

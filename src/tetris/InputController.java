@@ -16,17 +16,19 @@ public class InputController implements KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == 39)
+        if(e.getKeyCode() == 39)
             currentInput = 'r';
-        if (e.getKeyCode() == 40)
+        if(e.getKeyCode() == 40)
             currentInput = 'd';
-        if (e.getKeyCode() == 37)
+        if(e.getKeyCode() == 37)
             currentInput = 'l';
-        if (e.getKeyCode() == 90)
+        if(e.getKeyCode() == 90)
             currentInput = 'z';
-        if (e.getKeyCode() == 88)
+        if(e.getKeyCode() == 88)
             currentInput = 'x';
-
+        if (Character.isSpaceChar(e.getKeyChar())) {
+            currentInput = 's';
+        }
         //System.out.println(currentInput);
         //displayInfo(e, "Pressed: ");
     }

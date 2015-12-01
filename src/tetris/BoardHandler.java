@@ -77,6 +77,7 @@ public class BoardHandler {
         rowOfPiece = 0;
         columnOfPiece = board.getWidth()/2 - 1;
         fallingPentMatrix = getRandomPentomino();
+        kindOfPent = getKindOfPent();
         board.placePiece(fallingPentMatrix, rowOfPiece, columnOfPiece);
         needNewPiece = false;
     }
@@ -105,7 +106,7 @@ public class BoardHandler {
     {
         //System.out.println("row of piece: "+ rowOfPiece + " column of piece: " + columnOfPiece);
         //System.out.println("Matrix of piece: \n" + Arrays.deepToString(fallingPentMatrix));
-        if(input == 'l' || input == 'r'  || input == 'd')
+        if(input == 'l' || input == 'r'  || input == 'd' || input == 's')
         {
             movePentominoTo(input);
         }
@@ -156,7 +157,7 @@ public class BoardHandler {
             columnTranslation = -1;
         } else if (direction == 'r') {
             columnTranslation = 1;
-        } else if (direction == 'd') {
+        } else if (direction == 'd' || direction == 's') {
             rowTranslation = 1;
         }
         int newRow = rowOfPiece + rowTranslation;
@@ -185,6 +186,15 @@ public class BoardHandler {
             {
                 needNewPiece = true;
             }
+            else if(direction == 's')
+            {
+                needNewPiece = true;
+                return;
+            }
+        }
+        if(direction == 's')
+        {
+            movePentominoTo('s');
         }
     }
 
@@ -323,6 +333,18 @@ public class BoardHandler {
             }
         }
         return rotatedMatrix;
+    }
+
+    private char getKindOfPent()
+    {
+        for(int i = 0; i < fallingPentMatrix.length; i++)
+        {
+            if(fallingPentMatrix[i][0] != 'o')
+            {
+                return fallingPentMatrix[i][0];
+            }
+        }
+        return 'o';
     }
 
 }
