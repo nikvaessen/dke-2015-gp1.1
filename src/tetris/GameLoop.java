@@ -179,7 +179,7 @@ public class GameLoop extends Thread {
             }
             //System.out.println("Looking for user input");
             char input = inputController.getCurrentInput();
-            //System.out.println("User input: " + direction);
+            //System.out.println("User input: " + input);
             if (input != ' ') {
                 //System.out.println("user input was not empty, repainting");
                 boardHandler.giveInput(input);
