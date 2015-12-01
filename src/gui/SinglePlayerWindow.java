@@ -105,7 +105,7 @@ public class SinglePlayerWindow extends JPanel {
         this.add(gamePanel, c);
 
         //set the Thread
-        gameLoop = new GameLoop(bh, inputController, gamePanel/*, scoreBoard*/);
+        gameLoop = new GameLoop(bh, inputController, gamePanel, highScoreList);
         gameLoop.start();
         gameLoopHasStarted = false;
 
