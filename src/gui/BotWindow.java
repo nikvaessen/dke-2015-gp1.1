@@ -31,6 +31,7 @@ public class BotWindow extends JPanel
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+
         //create the scoreboard
         final ScoreBoard scoreBoard = new ScoreBoard();
         c = new GridBagConstraints();
@@ -94,7 +95,7 @@ public class BotWindow extends JPanel
         this.add(gamePanel, c);
 
         //set the Thread
-        gameLoop = new GameLoop(bh, input, gamePanel/*, scoreBoard*/);
+        gameLoop = new GameLoop(bh, input, gamePanel, new HighScoreList() );
         gameLoop.start();
         gameLoopHasStarted = false;
 
