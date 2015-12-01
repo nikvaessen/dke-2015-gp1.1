@@ -43,7 +43,7 @@ public class SinglePlayerWindow extends JPanel {
         c.gridy = 0;
         this.add(scoreBoard, c);
         //add a timer that updates the scoreboard every 100 ms.
-        new Timer(100, new ActionListener() {
+        new Timer(1000, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                 //System.out.println("Trying to update score");
@@ -194,18 +194,18 @@ public class SinglePlayerWindow extends JPanel {
         });
 
 
-//        //focuslistener for inputController
-//        this.addFocusListener(new FocusListener() {
-//            @Override
-//            public void focusGained(FocusEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void focusLost(FocusEvent e) {
-//                requestFocusInWindow();
-//            }
-//        });
+        //focuslistener for inputController
+        this.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                requestFocusInWindow();
+            }
+        });
     }
 
     public Dimension getPreferredSize()

@@ -87,19 +87,18 @@ public class BoardHandler {
      */
     private char[][] getRandomPentomino()
     {
-        ArrayList<Character> everyPentomiChar = polyomino.getAllKeys();
-        char kindOfPent = everyPentomiChar.get(rng.nextInt(everyPentomiChar.size()));
-        char[][] toReturn = new char[1][1];
-        if(polyomino.hasKey(kindOfPent))
+        ArrayList<Character> nonFlippedKeys = polyomino.getAllKeys();
+        ArrayList<Character> flippedKeys = polyomino.getFlippedKeys();
+        int randomNumber = rng.nextInt(flippedKeys.size() + nonFlippedKeys.size());
+        if(randomNumber < nonFlippedKeys.size())
         {
-            toReturn = polyomino.getMatrix(kindOfPent, 0);
+            kindOfPent = nonFlippedKeys.get(randomNumber);
+            return polyomino.getMatrix(kindOfPent, 0);
         }
-        else if(polyomino.hasflipKey(kindOfPent))
-        {
-            toReturn = polyomino.getFlippdMatrix(kindOfPent);
+        else {
+            kindOfPent = flippedKeys.get(randomNumber - nonFlippedKeys.size());
+            return polyomino.getFlippdMatrix(kindOfPent);
         }
-        this.kindOfPent = kindOfPent;
-        return toReturn;
     }
 
     public void giveInput(char input)
