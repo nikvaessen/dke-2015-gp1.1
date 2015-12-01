@@ -6,8 +6,7 @@ import java.util.ArrayList;
 
 public class Main {
 	public static void main(String[] argv) {
-		testHighScoreList();
-		//new MainMenu();
+		new MainMenu();
 	}
 
     public static void testHighScoreList()

@@ -1,9 +1,6 @@
 package gui;
 
-import tetris.Board;
-import tetris.BoardHandler;
-import tetris.GameLoop;
-import tetris.InputController;
+import tetris.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +17,7 @@ public class SinglePlayerWindow extends JPanel {
     private GameLoop gameLoop;
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
+    private HighScoreList highScoreList;
 
     private InputController inputController;
 
@@ -28,16 +26,19 @@ public class SinglePlayerWindow extends JPanel {
         Board board = new Board(10, 20);
         final InputController inputController = new InputController();
         this.bh = new BoardHandler(board, inputController, true);
+        this.highScoreList = new HighScoreList();
 
         //behaviour
         this.addKeyListener(inputController);
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
 
         //create the scoreboard
         final ScoreBoard scoreBoard = new ScoreBoard();
-        GridBagConstraints c = new GridBagConstraints();
+        c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
         this.add(scoreBoard, c);
@@ -50,6 +51,12 @@ public class SinglePlayerWindow extends JPanel {
               }
             }).start();
 
+        //create the highscore board
+        HighScoreBoard highScoreBoard = new HighScoreBoard(highScoreList);
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 1;
+        this.add(highScoreBoard, c);
 
         //create the combobox to choose between tetris and pentris
         String[] optionStrings = {"Tetris", "Pentris"};
@@ -80,8 +87,8 @@ public class SinglePlayerWindow extends JPanel {
         });
         c = new GridBagConstraints();
         c.gridx = 0;
+        c.gridy = 2;
         c.weightx = 0.5;
-        c.gridy = 1;
         this.add(optionList, c);
 
         //create the gamepanel and add it

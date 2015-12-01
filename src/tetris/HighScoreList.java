@@ -38,7 +38,6 @@ public class HighScoreList
         HashMap<String, Integer> copyHighScores = (HashMap<String, Integer>) highScores.clone();
         int maximum = 0;
         String maxName = "";
-        String file = "";
         for (int i = 0; i<highScores.size(); i++) {
             for (String name : copyHighScores.keySet()) {
                 if (copyHighScores.get(name) > maximum) {
@@ -65,7 +64,7 @@ public class HighScoreList
 
                 String name = line.substring(0, i);
                 int score = Integer.parseInt(line.substring(i+1));
-                add(name, score);
+                highScores.put(name, score);
             }
             in.close();
         } catch (FileNotFoundException e) {
@@ -80,7 +79,7 @@ public class HighScoreList
         for(int i = 0; i < toPrint.size(); i++)
         {
             String line = toPrint.get(i);
-            System.out.printf("%d: %s with %s points%n", i + 1, line.substring(0,line.indexOf(",")),
+            System.out.printf("%d: %10s with %7s points%n", i + 1, line.substring(0,line.indexOf(",")),
                     line.substring(line.indexOf(",")+1));
         }
     }
@@ -90,7 +89,6 @@ public class HighScoreList
     {
         PrintWriter writer;
         try {
-            System.out.printf("I'm writing line: \"%s\" to file%n", newScore);
             writer = new PrintWriter(FILEPATH);
             writer.println(newScore);
             writer.close();
