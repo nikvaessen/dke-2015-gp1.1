@@ -14,7 +14,7 @@ public class GameLoop extends Thread {
     private BoardHandler boardHandler;
     private InputController inputController;
     private GamePanel gamePanel;
-    //private gui.HighScoreList scoreBoard;
+    private tetris.HighScoreList highScoreList;
 
     boolean shouldMovePieceDown;
     int count;
@@ -24,15 +24,17 @@ public class GameLoop extends Thread {
     private volatile boolean endGameAprupt;
     private volatile boolean gameIsRunning;
 
-    private volatile int score;
 
-    public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel/*,gui.HighScoreList
-                    scoreBoard*/)
+    private volatile int score;
+    private String nameOfPlayer ;
+
+    public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel,tetris.HighScoreList
+                    highScoreList)
     {
         this.boardHandler = boardHandler;
         this.inputController = inputController;
         this.gamePanel = gamePanel;
-        //this.scoreBoard = scoreBoard;
+        this.highScoreList =  highScoreList;
 
         //booleans
         this.isPaused = false;
@@ -206,13 +208,15 @@ public class GameLoop extends Thread {
 
     private void gameOver()
     {
-        //handle score board
+        showPopUpWindow() ;
+        highScoreList.add(showPopUpWindow() , score) ;
         System.out.printf("final score: %d\n", score);
         score = 0;
         //wait for new game
         //startNewGame = false;
         gameIsRunning = false;
         count = 0;
+
         try {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -225,6 +229,14 @@ public class GameLoop extends Thread {
         {
             e.printStackTrace();
         }
+    }
+
+    private String showPopUpWindow()
+    {
+        JFrame fuuck = new JFrame() ;
+        int messageType = JOptionPane.INFORMATION_MESSAGE ;
+        nameOfPlayer = JOptionPane.showInputDialog(fuuck , " What's your name ? " , " Input Name " , messageType) ;
+        return nameOfPlayer ;
     }
 
     private void pauseLoop()
