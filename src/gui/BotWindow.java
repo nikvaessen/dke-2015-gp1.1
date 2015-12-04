@@ -25,7 +25,6 @@ public class BotWindow extends JPanel
         //create the variables
         Board board = new Board(10, 20);
         this.bh = new BoardHandler(board, true);
-        this.input = new BotInput();
         //behaviour
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -94,11 +93,6 @@ public class BotWindow extends JPanel
         c.anchor = GridBagConstraints.CENTER;
         this.add(gamePanel, c);
 
-        //set the Thread
-        gameLoop = new GameLoop(bh, input, gamePanel, new HighScoreList() );
-        gameLoop.start();
-        gameLoopHasStarted = false;
-
         //add the buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setAlignmentX(30);
@@ -118,7 +112,8 @@ public class BotWindow extends JPanel
         this.add(new BackButton(mainMenu), c);
 
         //create bot Thread
-        final Bot bot = new Bot(input, gameLoop);
+
+        final Bot bot = new Bot(board, new BoardHandler(board, false), gamePanel);
 
         //startbutton
         final JButton startButton = new JButton("Start");
@@ -132,8 +127,6 @@ public class BotWindow extends JPanel
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run(){
-                                gameLoopHasStarted = true;
-                                gameLoop.startNewGame();
                                 optionList.setEnabled(false);
                                 requestFocusInWindow();
                                 startButton.setEnabled(false);
