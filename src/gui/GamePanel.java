@@ -25,8 +25,9 @@ public class    GamePanel extends JPanel {
         //set a border around the gameboard
         setBorder(BorderFactory.createLineBorder(Color.black));
         //sets the blocksize to the right size
-        blockHeight = Config.GAMEPANEL_SIZE.height / board.getHeight();
-        blockWidth  = Config.GAMEPANEL_SIZE.width  / board.getWidth();
+        blockHeight = Config.GAME_PANEL_SIZE.height / board.getHeight();
+        blockWidth  = Config.GAME_PANEL_SIZE.width  / board.getWidth();
+        // System.out.println("size of panel set")
     }
 
     /**
@@ -35,7 +36,7 @@ public class    GamePanel extends JPanel {
      * class in the constructor
      */
     public Dimension getPreferredSize() {
-        return new Dimension(Config.GAMEPANEL_SIZE);
+        return new Dimension(Config.GAME_PANEL_SIZE);
     }
 
     /**
@@ -126,7 +127,7 @@ public class    GamePanel extends JPanel {
         }
         g2d.setColor(Color.RED);
         g2d.setStroke(new BasicStroke(2));
-        g2d.drawLine(0, blockHeight * 5, Config.GAMEPANEL_SIZE.width, blockHeight * 5);
+        g2d.drawLine(0, blockHeight * 5, Config.GAME_PANEL_SIZE.width, blockHeight * 5);
     }
 
 }

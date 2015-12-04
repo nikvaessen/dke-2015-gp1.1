@@ -93,11 +93,12 @@ public class MainMenu extends JFrame {
         singlePlayerWindow = new SinglePlayerWindow(this);
         highScoreWindow = new HighScoreWindow(this);
         botWindow = new BotWindow(this);
-
+        multiPlayerWindow = new MultiPlayerWindow(this);
         //add panels to hashmap
         this.panels.put(singlePlayerName, singlePlayerWindow);
         this.panels.put(highScoreName, highScoreWindow);
         this.panels.put(botWindowName, botWindow);
+        this.panels.put(multiPlayerName, multiPlayerWindow);
         //// TODO: 16-11-15 add the other panels when they are done
     }
 
@@ -111,8 +112,9 @@ public class MainMenu extends JFrame {
         cardPanel.add(singlePlayerName, singlePlayerWindow);
         cardPanel.add(highScoreName, highScoreWindow);
         cardPanel.add(botWindowName, botWindow);
-        // TODO: 16-11-15 add the others panels when they're done
+        cardPanel.add(multiPlayerName, multiPlayerWindow);
 
+        // TODO: 16-11-15 add the others panels when they're done
         this.add(cardPanel);
     }
 
@@ -198,7 +200,7 @@ public class MainMenu extends JFrame {
             }
         });
 
-        //actionlistener for the mutliplayer window
+        //actionlistener for the mutltiplayer window
         multiPlayerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
