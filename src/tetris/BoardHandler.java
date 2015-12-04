@@ -146,7 +146,7 @@ public class BoardHandler {
         }
     }
 
-    //direction can be 'l' for left, 'r' for roght and 'd' for down
+    //direction can be 'l' for left, 'r' for roght and 'd' for down and 'space' for super down
     private void movePentominoTo(char direction) {
         //determine the new values to move the piece left or right
         int rowTranslation = 0;
@@ -157,6 +157,13 @@ public class BoardHandler {
             columnTranslation = 1;
         } else if (direction == 'd' || direction == 's') {
             rowTranslation = 1;
+        } else if (direction == ' ') {
+            removeCurrentPiece();
+            while (isPieceDoneFalling()==false ){
+                rowTranslation=1;
+                int newRow = rowOfPiece + rowTranslation;
+                rowTranslation=0;
+        }
         }
         int newRow = rowOfPiece + rowTranslation;
         int newColumn = columnOfPiece + columnTranslation;

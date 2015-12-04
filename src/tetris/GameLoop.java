@@ -100,6 +100,7 @@ public class GameLoop extends Thread {
         System.out.printf("Starting new game of %s!\n", game);
         boardHandler.spawnPiece();
         gamePanel.repaint();
+        gamePanel.revalidate();
         try {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
@@ -174,6 +175,7 @@ public class GameLoop extends Thread {
                     }
                     boardHandler.spawnPiece();
                     gamePanel.repaint();
+                    gamePanel.revalidate();
                 }
             }
             try {
@@ -189,6 +191,7 @@ public class GameLoop extends Thread {
                 //System.out.println("user input was not empty, repainting");
                 boardHandler.giveInput(input);
                 gamePanel.repaint();
+                gamePanel.revalidate();
             }
             if (count > 10) //1000 ms have passed
             {
@@ -196,6 +199,7 @@ public class GameLoop extends Thread {
                 count = 0;
                 boardHandler.giveInput('d');
                 gamePanel.repaint();
+                gamePanel.revalidate();
             }
             ////System.out.println("restarting the game loop!");
             try {

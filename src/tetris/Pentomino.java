@@ -142,8 +142,8 @@ public class Pentomino extends Polyomino {
 		Blocks n1 = new Blocks('n', nMatrixflip);
 
 		char[][] lMatrixflip = {
-				{'o', 'o', 'o', 'l'},
-				{'l', 'l', 'l', 'l'} };
+				{'l', 'l', 'l', 'l'},
+				{'o', 'o', 'o', 'l'} };
 		Blocks l1 = new Blocks('l', lMatrixflip);
 		
 		//Puts all pentominoes into the hashmap with their corresponding 'letter' as key

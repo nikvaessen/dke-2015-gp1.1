@@ -156,7 +156,7 @@ public class SinglePlayerWindow extends JPanel {
         });
         buttonPanel.add(startButton);
         //pause button
-        final JButton pauseButton = new JButton("Pause  ");
+        final JButton pauseButton = new JButton("  Pause  ");
         buttonPanel.add(pauseButton);
         pauseButton.addActionListener(new ActionListener() {
             @Override
@@ -168,7 +168,7 @@ public class SinglePlayerWindow extends JPanel {
                 else if(gameLoop.isPaused())
                 {
                     gameLoop.setPaused(false);
-                    pauseButton.setText("Pause  ");
+                    pauseButton.setText("  Pause  ");
                 }
             }
         });
@@ -188,7 +188,7 @@ public class SinglePlayerWindow extends JPanel {
                 gamePanel.repaint();
                 startButton.setEnabled(true);
                 gameLoop.setPaused(false);
-                pauseButton.setText("Pause");
+                pauseButton.setText("  Pause  ");
                 scoreBoard.setScore(0);
             }
         });
