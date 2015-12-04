@@ -43,6 +43,7 @@ public class    GamePanel extends JPanel {
      * @param g the Graphics class which is going to represent the board
      */
     public void paintComponent(Graphics g) {
+        //System.out.println("painting the screen :)");
         Graphics2D g2d = (Graphics2D) g;
         int columns = board.getWidth();
         int rows = board.getHeight();

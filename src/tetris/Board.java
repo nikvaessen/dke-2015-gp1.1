@@ -105,6 +105,14 @@ public class Board {
 		return counter;
 	}
 
+	public boolean isBoardEmpty() {
+        for (int i = 0; i < board.length; i++)
+            for (int j = 0; j < board[i].length; j++)
+                if (!isCellEmpty(i, j)) return false;
+            return true;
+
+    }
+
 	/**
 	 * Set all cells with the given value back to the empty state, 'o'
 	 * @param pentomino the value to be removed from the board and replaced with 'o'
@@ -218,6 +226,84 @@ public class Board {
 			}
 		}
 		return pad;
+	}
+
+	public void removePiece(char[][] matrix, int x , int y)
+	{
+		for(int i = 0; i < matrix.length; i++)
+		{
+			for(int j = 0; j < matrix[i].length; j++)
+			{
+				if(matrix[i][j] != 'o')
+				{
+					board[i+x][j+y] = 'o';
+				}
+			}
+		}
+	}
+
+	public int getScore(char[][] matrix, int x, int y)
+	{
+		int score = 0;
+		for(int i = 0; i < matrix.length; i++)
+		{
+			for(int j = 0; j < matrix[i].length; j++)
+			{
+				if(matrix[i][j] != 'o')
+				{
+
+					try {
+						if (board[i + x - 1][j + y - 1] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e) {}
+
+					try {
+						if (board[i + x - 1][j + y] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e){}
+
+					try {
+						if (board[i + x - 1][j + y + 1] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e){}
+
+					try {
+						if (board[i + x ][j + y - 1] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e){}
+
+					try {
+						if (board[i + x][j + y + 1] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e){}
+
+					try {
+						if (board[i + x + 1][j + y - 1] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e){}
+
+					try {
+						if (board[i + x + 1][j + y] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e){}
+
+					try {
+						if (board[i + x + 1][j + y + 1] != 'o')
+							score++;
+					}
+					catch(ArrayIndexOutOfBoundsException e){}
+
+				}
+			}
+		}
+		return score;
 	}
 
 	/**

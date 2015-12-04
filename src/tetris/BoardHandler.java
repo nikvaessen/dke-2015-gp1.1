@@ -31,7 +31,7 @@ public class BoardHandler {
         {
             polyomino = new Pentomino();
         }
-
+        needNewPiece = true;
         rng = new Random(System.currentTimeMillis());
     }
 
@@ -43,6 +43,26 @@ public class BoardHandler {
     public void switchToPentris()
     {
         polyomino = new Pentomino();
+    }
+
+    public char[][] getFallingPentMatrix()
+    {
+        return fallingPentMatrix;
+    }
+
+    public char getFallingPentName()
+    {
+        return kindOfPent;
+    }
+
+    public int getCurrentRow()
+    {
+        return rowOfPiece;
+    }
+
+    public int getCurrentColumn()
+    {
+        return columnOfPiece;
     }
 
     public boolean isPentris()
@@ -273,7 +293,7 @@ public class BoardHandler {
         board.emptyBoard();
     }
 
-    private static char[][] rotateMatrix(char[][] matrixToRotate, boolean clockwise){
+    public static char[][] rotateMatrix(char[][] matrixToRotate, boolean clockwise){
 		/*
 		step 1: To rotate a matrix, first transpose the matrix so that the first column becomes the
 				first row, the second column becomes the second row, ect.

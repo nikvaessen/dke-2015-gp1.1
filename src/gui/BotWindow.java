@@ -92,6 +92,17 @@ public class BotWindow extends JPanel
         c.gridheight = 3;
         c.anchor = GridBagConstraints.CENTER;
         this.add(gamePanel, c);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Timer(100, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        gamePanel.repaint();
+                    }
+                }).start();
+            }
+        }).start();
 
         //add the buttons
         JPanel buttonPanel = new JPanel();
