@@ -208,7 +208,7 @@ public class GameLoop extends Thread {
 
     private void gameOver()
     {
-
+        showPopUpWindow() ;
         highScoreList.add(showPopUpWindow() , score) ;
         System.out.printf("final score: %d\n", score);
         score = 0;
