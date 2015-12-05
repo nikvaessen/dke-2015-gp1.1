@@ -19,7 +19,7 @@ public class BotWindow extends JPanel
     private GameLoop gameLoop;
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
-    private BotInput input;
+
 
     public BotWindow(MainMenu mainMenu) {
         //create the variables
@@ -124,7 +124,7 @@ public class BotWindow extends JPanel
 
         //create bot Thread
 
-        final Bot bot = new Bot(board, new BoardHandler(board, false), gamePanel);
+        final Bot bot = new Bot(board, bh, gamePanel);
 
         //startbutton
         final JButton startButton = new JButton("Start");

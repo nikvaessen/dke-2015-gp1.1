@@ -160,14 +160,12 @@ public class Pentomino extends Polyomino {
 		super.addMatrix('u', u);
 		super.addMatrix('n', n);
 
-		// i dont want to put it in .dict but i dont know where else to put them?
-		//JONTY: can you please put the new characters here :)?
-		super.addFlippedMatrix('f', l1);
-		super.addFlippedMatrix('z', n1);
-		super.addFlippedMatrix('y', p1);
-		super.addFlippedMatrix('w', f1);
+		super.addFlippedMatrix('l', l1);
+		super.addFlippedMatrix('n', n1);
+		super.addFlippedMatrix('p', p1);
+		super.addFlippedMatrix('f', f1);
 		super.addFlippedMatrix('v', v1);
-		super.addFlippedMatrix('n', y1);
-		super.addFlippedMatrix('l', w1);
+		super.addFlippedMatrix('y', y1);
+		super.addFlippedMatrix('w', w1);
     }
 }

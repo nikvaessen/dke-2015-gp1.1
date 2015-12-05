@@ -232,7 +232,7 @@ public class Bot extends Thread{
         ArrayList <Integer> xCoords= new ArrayList<>();
         ArrayList <Integer> yCoords= new ArrayList<>();
         int highestRow = board.length - 1;
-        for(int i=board.length-1; i>=0; i--)
+        for(int i=board.length-1; i>=5; i--)
         {
             for (int j = board[0].length-1; j >= 0; j--)
             {
