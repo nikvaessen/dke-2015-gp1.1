@@ -1,5 +1,5 @@
 Nik,0
 Bianca,0
-Jonty, 0
+Jonty,0
 Aleksandra,0
 Stefan,0
