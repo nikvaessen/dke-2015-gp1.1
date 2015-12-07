@@ -1,5 +1,6 @@
 package tetris;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -10,19 +11,26 @@ import java.util.Random;
 public class BoardHandler {
     //classes needed to run this class
     private Board board;
+    private Board nextPieceBoard;
     private Polyomino polyomino;
     private Random rng;
 
     //variables related to moving a piece
-    private char[][] fallingPentMatrix; //the matrix of the currently falling
+    private char[][] fallingPentMatrix;     //the matrix of the currently falling
+    private char[][] nextPiece;             //the matrix of the next piece
     private int rowOfPiece;
     private int columnOfPiece;
-    private char kindOfPent; // letter corresponding to the shape of the pentomino
+    private char kindOfPent;                // letter corresponding to the shape of the pentomino
     private boolean needNewPiece;
 
-    public BoardHandler(Board board, boolean tetris)
+    //random pieces
+    private char[] keys;
+    private boolean[] keysFlipped;
+
+    public BoardHandler(Board board, Board nextPieceBoard, boolean tetris)
     {
         this.board = board;
+        this.nextPieceBoard = nextPieceBoard;
         if(tetris)
         {
            polyomino = new Tetromino();
@@ -87,18 +95,27 @@ public class BoardHandler {
         }
     }
 
+
     /**
      * Spawns a random pentomino in the top row(s) of the board.
      */
     public void spawnPiece()
     {
+        if(nextPiece == null)
+        {
+            nextPiece = getRandomPentomino();
+        }
         rowOfPiece = 0;
         columnOfPiece = board.getWidth()/2 - 1;
-        fallingPentMatrix = getRandomPentomino();
+        fallingPentMatrix = nextPiece;
+        nextPiece = getRandomPentomino();
+        nextPieceBoard.emptyBoard();
+        nextPieceBoard.placePiece(nextPiece, 0, 0);
         kindOfPent = getKindOfPent();
         board.placePiece(fallingPentMatrix, rowOfPiece, columnOfPiece);
         needNewPiece = false;
     }
+
 
     /**
      * returns a random matrix of a pentomino
@@ -106,18 +123,56 @@ public class BoardHandler {
      */
     private char[][] getRandomPentomino()
     {
-        ArrayList<Character> nonFlippedKeys = polyomino.getAllKeys();
-        ArrayList<Character> flippedKeys = polyomino.getFlippedKeys();
-        int randomNumber = rng.nextInt(flippedKeys.size() + nonFlippedKeys.size());
-        if(randomNumber < nonFlippedKeys.size())
+        if (keys == null || keys.length == 0) {
+            ArrayList<Character> nonFlippedKeys = polyomino.getKeys();
+            ArrayList<Character> flippedKeys = polyomino.getFlippedKeys();
+            //System.out.printf("non flipped keys: %s\n", nonFlippedKeys.toString());
+            //System.out.printf("flipped keys: %s\n", flippedKeys.toString());
+            keys = new char[nonFlippedKeys.size()+flippedKeys.size()];
+            keysFlipped = new boolean[nonFlippedKeys.size()+flippedKeys.size()];
+            for (int i=0; i<nonFlippedKeys.size(); i++)
+            {
+                keys[i] = nonFlippedKeys.get(i);
+                keysFlipped[i] = false;
+            }
+            for (int i = nonFlippedKeys.size(); i<nonFlippedKeys.size()+flippedKeys.size(); i++)
+            {
+                keys[i] = flippedKeys.get(i-nonFlippedKeys.size());
+                keysFlipped[i] = true;
+            }
+        }
+        int randomNumber = rng.nextInt(keys.length);
+//        System.out.printf("Random number: %d key value: %c flipped: %b\n", randomNumber, keys[randomNumber],
+//                keysFlipped[randomNumber]);
+//        System.out.printf("Keys: %s\nBoolean array: %s\n", Arrays.toString(keys), Arrays.toString(keysFlipped));
+        char[][] toReturn;
+        if(!keysFlipped[randomNumber])
         {
-            kindOfPent = nonFlippedKeys.get(randomNumber);
-            return polyomino.getMatrix(kindOfPent, 0);
+            toReturn = polyomino.getMatrix(keys[randomNumber], 0);
         }
         else {
-            kindOfPent = flippedKeys.get(randomNumber - nonFlippedKeys.size());
-            return polyomino.getFlippdMatrix(kindOfPent);
+            kindOfPent = keys[randomNumber];
+            toReturn = polyomino.getFlippdMatrix(keys[randomNumber]);
         }
+        char[] copy = new char[keys.length-1];
+        boolean[] copy1 = new boolean[keys.length-1];
+        boolean skipped = false;
+        for (int i=0; i<keys.length; i++ )
+        {
+            if (i == randomNumber) {
+                skipped = true;
+                continue;
+            } else if (!skipped){
+                copy[i]=keys[i];
+                copy1[i]=keysFlipped[i];
+            } else {
+                copy[i-1]=keys[i];
+                copy1[i-1]=keysFlipped[i];
+            }
+        }
+        keys = copy;
+        keysFlipped = copy1;
+        return toReturn;
     }
 
     public void giveInput(char input)

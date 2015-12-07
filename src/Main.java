@@ -11,6 +11,8 @@ public class Main {
 	public static void main(String[] argv) {
 		new MainMenu();
 	    //testBotMethod();
+
+        //testBoard();
     }
 
     public static void testHighScoreList()
@@ -102,6 +104,42 @@ public class Main {
         }
 
         return new int[] {bestX, bestY, bestR};
+    }
+
+    public static void testBoard()
+    {
+        Board board = new Board(10,15);
+        board.setCell(14, 1, 'l');
+        board.setCell(14, 0, 'l');
+        board.setCell(13, 0, 'l');
+        board.setCell(12, 0, 'l');
+        board.setCell(11, 0, 'l');
+
+        board.setCell(12, 1, 't');
+        board.setCell(12, 2, 't');
+        board.setCell(12, 3, 't');
+        board.setCell(13, 2, 't');
+        board.setCell(14, 2, 't');
+
+        board.setCell(14, 3, 'i');
+        board.setCell(14, 4, 'i');
+        board.setCell(14, 5, 'i');
+        board.setCell(14, 6, 'i');
+        board.setCell(14, 7, 'i');
+
+        board.setCell(14, 9, 't');
+        board.setCell(14, 8, 't');
+
+
+        board.printBoard();
+
+        int height= board.aggregateHeight();
+        int holes= board.amountOfHoles();
+        int bumpiness= board.bumpiness();
+        int rowsCleared=board.checkFullLines();
+        System.out.printf(" Aggregate height: %d %n Amount of holes: %d %n Bumpiness: %d %n " +
+                "Full lines: %d %n ", height, holes, bumpiness, rowsCleared);
+
     }
 
 
