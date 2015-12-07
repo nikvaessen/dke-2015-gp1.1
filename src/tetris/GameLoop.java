@@ -95,7 +95,6 @@ public class GameLoop extends Thread {
         else if(boardHandler.isTetris())
             game = "tetris";
         System.out.printf("Starting new game of %s!\n", game);
-        boardHandler.startGame();
         boardHandler.spawnPiece();
         nextPiecePanel.repaint();
         gamePanel.repaint();
