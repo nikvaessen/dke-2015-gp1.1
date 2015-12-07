@@ -94,7 +94,25 @@ public class BoardHandler {
             return false;
         }
     }
-
+    /**
+     * Spawns a random pentomino in the top row(s) of the board.
+     */
+    public void hardSpawnPiece(char[][] q)
+    {
+        if(nextPiece == null)
+        {
+            nextPiece = q;
+        }
+        rowOfPiece = 0;
+        columnOfPiece = board.getWidth()/2 - 1;
+        fallingPentMatrix = nextPiece;
+        nextPiece = q;
+        nextPieceBoard.emptyBoard();
+        nextPieceBoard.placePiece(nextPiece, 0, 0);
+        kindOfPent = getKindOfPent();
+        board.placePiece(fallingPentMatrix, rowOfPiece, columnOfPiece);
+        needNewPiece = false;
+    }
 
     /**
      * Spawns a random pentomino in the top row(s) of the board.
