@@ -2,6 +2,7 @@ package gui;
 
 import tetris.Board;
 import tetris.InputController;
+import tetris.Simulation;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,6 +26,7 @@ public class MainMenu extends JFrame {
     private MultiPlayerWindow   multiPlayerWindow;
     private HighScoreWindow     highScoreWindow;
     private BotWindow           botWindow;
+    private Simulation          simWindow;
     private OptionsWindow       optionsWindow;
 
     //strings representing all windows in the CardLayout
@@ -33,7 +35,9 @@ public class MainMenu extends JFrame {
     private final String multiPlayerName = "mp";
     private final String highScoreName = "hs";
     private final String botWindowName = "bot";
+    private final String simulationWindowname = "sim";
     private final String optionMenuName = "opt";
+
 
     //variables needed for panel rotation in the CardLayout
     private JPanel cardPanel; //holds all panels to switch between
@@ -46,6 +50,7 @@ public class MainMenu extends JFrame {
     private JButton optionsMenuButton;
     private JButton highScoresButton;
     private JButton botButton;
+    private JButton simButton;
     private JButton quitButton;
 
     public MainMenu() {
@@ -94,10 +99,13 @@ public class MainMenu extends JFrame {
         highScoreWindow = new HighScoreWindow(this);
         botWindow = new BotWindow(this);
         multiPlayerWindow = new MultiPlayerWindow(this);
+        simWindow = new Simulation(this);
+
         //add panels to hashmap
         this.panels.put(singlePlayerName, singlePlayerWindow);
         this.panels.put(highScoreName, highScoreWindow);
         this.panels.put(botWindowName, botWindow);
+        this.panels.put(simulationWindowname, simWindow);
        // this.panels.put(multiPlayerName, multiPlayerWindow);
         //// TODO: 16-11-15 add the other panels when they are done
     }
@@ -112,6 +120,7 @@ public class MainMenu extends JFrame {
         cardPanel.add(singlePlayerName, singlePlayerWindow);
         cardPanel.add(highScoreName, highScoreWindow);
         cardPanel.add(botWindowName, botWindow);
+        cardPanel.add(simulationWindowname, simWindow);
         //cardPanel.add(multiPlayerName, multiPlayerWindow);
 
         // TODO: 16-11-15 add the others panels when they're done
@@ -123,9 +132,10 @@ public class MainMenu extends JFrame {
         //set up the the buttons
         singlePlayerButton = new JButton("Single Player");
         multiPlayerButton = new JButton("Multiplayer");
-        optionsMenuButton = new JButton("Options");
         highScoresButton  = new JButton("View Highscore");
         botButton         = new JButton("Watch bot");
+        simButton         = new JButton("Optimal ordering");
+        optionsMenuButton = new JButton("Options");
         quitButton        = new JButton("Quit");
 
         //add the buttons to a panel and add the panel to the frame.
@@ -135,6 +145,7 @@ public class MainMenu extends JFrame {
         buttonHolder.add(multiPlayerButton);
         buttonHolder.add(highScoresButton);
         buttonHolder.add(botButton);
+        buttonHolder.add(simButton);
         buttonHolder.add(optionsMenuButton);
         buttonHolder.add(quitButton);
 

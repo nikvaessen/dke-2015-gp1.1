@@ -18,18 +18,16 @@ public class Simulation extends JPanel {
 
     //variables keeping track of board
 
-boolean SimulationHasStarted;
+    boolean SimulationHasStarted;
     Board b;
     Pentomino a;
     BoardHandler c;
+
     public Simulation() {
         b = new Board(5, 12);
-       a = new Pentomino();
-       c = new BoardHandler(b, true);
-        SimulationHasStarted= false;
-
-
-
+        a = new Pentomino();
+        c = new BoardHandler(b, new Board(5,5,), true);
+        SimulationHasStarted = false;
 
         //create the gamepanel and add it
         final GamePanel gamePanel = new GamePanel(board);
@@ -47,11 +45,11 @@ boolean SimulationHasStarted;
         //add the buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setAlignmentX(30);
-        buttonPanel.setLayout(new GridLayout(3,1,10,10));
+        buttonPanel.setLayout(new GridLayout(3, 1, 10, 10));
         d = new GridBagConstraints();
         d.gridx = 2;
         d.weightx = 0.2;
-        d.insets = new Insets(250,0,0,0);
+        d.insets = new Insets(250, 0, 0, 0);
         this.add(buttonPanel, d);
 
 
@@ -61,12 +59,11 @@ boolean SimulationHasStarted;
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!SimulationHasStarted)
-                {
-                    try{
+                if (!SimulationHasStarted) {
+                    try {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
-                            public void run(){
+                            public void run() {
                                 SimulationHasStarted = true;
                                 startButton.setEnabled(false);
 
@@ -334,10 +331,7 @@ boolean SimulationHasStarted;
             }
         });
         buttonPanel.add(startButton);
-
-
     }
-
 
 
 }
