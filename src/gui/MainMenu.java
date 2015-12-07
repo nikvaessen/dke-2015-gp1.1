@@ -29,6 +29,7 @@ public class MainMenu extends JFrame {
     private Simulation          simWindow;
     private OptionsWindow       optionsWindow;
 
+
     //strings representing all windows in the CardLayout
     private final String mainMenuName = "main";
     private final String singlePlayerName = "sp";
