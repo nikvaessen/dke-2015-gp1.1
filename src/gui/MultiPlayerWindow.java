@@ -1,3 +1,4 @@
+/*
 package gui;
 
 import tetris.*;
@@ -9,9 +10,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
+*/
 /**
  * Created by baxie on 15-11-15.
- */
+ *//*
+
 public class MultiPlayerWindow extends JPanel
 {
 
@@ -266,9 +269,12 @@ public class MultiPlayerWindow extends JPanel
 
     }
 
-    /*public Dimension getPreferredSize()
+    */
+/*public Dimension getPreferredSize()
     {
         return Config.MULTI_PLAYER_SIZE;
-    }*/
+    }*//*
+
 
 }
+*/

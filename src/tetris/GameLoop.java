@@ -14,6 +14,7 @@ public class GameLoop extends Thread {
     private BoardHandler boardHandler;
     private InputController inputController;
     private GamePanel gamePanel;
+    private NextPiecePanel nextPiecePanel;
     private tetris.HighScoreList highScoreList;
 
     boolean shouldMovePieceDown;
@@ -28,12 +29,13 @@ public class GameLoop extends Thread {
     private volatile int score;
     private String nameOfPlayer ;
 
-    public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel,tetris.HighScoreList
-                    highScoreList)
+    public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel,
+                    NextPiecePanel nextPiecePanel, tetris.HighScoreList highScoreList)
     {
         this.boardHandler = boardHandler;
         this.inputController = inputController;
         this.gamePanel = gamePanel;
+        this.nextPiecePanel = nextPiecePanel;
         this.highScoreList =  highScoreList;
 
         //booleans
@@ -93,7 +95,9 @@ public class GameLoop extends Thread {
         else if(boardHandler.isTetris())
             game = "tetris";
         System.out.printf("Starting new game of %s!\n", game);
+        boardHandler.startGame();
         boardHandler.spawnPiece();
+        nextPiecePanel.repaint();
         gamePanel.repaint();
         try {
             SwingUtilities.invokeLater(new Runnable() {
@@ -169,6 +173,7 @@ public class GameLoop extends Thread {
                     }
                     boardHandler.spawnPiece();
                     gamePanel.repaint();
+                    nextPiecePanel.repaint();
                 }
             }
             try {

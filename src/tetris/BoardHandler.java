@@ -10,19 +10,22 @@ import java.util.Random;
 public class BoardHandler {
     //classes needed to run this class
     private Board board;
+    private Board nextPieceBoard;
     private Polyomino polyomino;
     private Random rng;
 
     //variables related to moving a piece
-    private char[][] fallingPentMatrix; //the matrix of the currently falling
+    private char[][] fallingPentMatrix;     //the matrix of the currently falling
+    private char[][] nextPiece;             //the matrix of the next piece
     private int rowOfPiece;
     private int columnOfPiece;
-    private char kindOfPent; // letter corresponding to the shape of the pentomino
+    private char kindOfPent;                // letter corresponding to the shape of the pentomino
     private boolean needNewPiece;
 
-    public BoardHandler(Board board, boolean tetris)
+    public BoardHandler(Board board, Board nextPieceBoard, boolean tetris)
     {
         this.board = board;
+        this.nextPieceBoard = nextPieceBoard;
         if(tetris)
         {
            polyomino = new Tetromino();
@@ -87,6 +90,12 @@ public class BoardHandler {
         }
     }
 
+    public void startGame()
+    {
+        nextPiece = getRandomPentomino();
+        fallingPentMatrix = getRandomPentomino();
+    }
+
     /**
      * Spawns a random pentomino in the top row(s) of the board.
      */
@@ -94,11 +103,16 @@ public class BoardHandler {
     {
         rowOfPiece = 0;
         columnOfPiece = board.getWidth()/2 - 1;
-        fallingPentMatrix = getRandomPentomino();
+        //System.arraycopy(nextPiece, 0, fallingPentMatrix, 0, nextPiece.length);
+        fallingPentMatrix = nextPiece;
+        nextPiece = getRandomPentomino();
+        nextPieceBoard.emptyBoard();
+        nextPieceBoard.placePiece(nextPiece, 0, 0);
         kindOfPent = getKindOfPent();
         board.placePiece(fallingPentMatrix, rowOfPiece, columnOfPiece);
         needNewPiece = false;
     }
+
 
     /**
      * returns a random matrix of a pentomino

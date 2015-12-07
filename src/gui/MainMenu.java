@@ -22,9 +22,9 @@ public class MainMenu extends JFrame {
     //Every panel the we want to potentially display
     private JPanel              mainPanel;          //holds the image header and all the buttons
     private SinglePlayerWindow  singlePlayerWindow; //holds the window where tetris singleplayer can be played in
-    private MultiPlayerWindow   multiPlayerWindow;
+   // private MultiPlayerWindow   multiPlayerWindow;
     private HighScoreWindow     highScoreWindow;
-    private BotWindow           botWindow;
+  //  private BotWindow           botWindow;
     private OptionsWindow       optionsWindow;
 
     //strings representing all windows in the CardLayout
@@ -92,13 +92,13 @@ public class MainMenu extends JFrame {
     {
         singlePlayerWindow = new SinglePlayerWindow(this);
         highScoreWindow = new HighScoreWindow(this);
-        botWindow = new BotWindow(this);
-        multiPlayerWindow = new MultiPlayerWindow(this);
+       // botWindow = new BotWindow(this);
+        //multiPlayerWindow = new MultiPlayerWindow(this);
         //add panels to hashmap
         this.panels.put(singlePlayerName, singlePlayerWindow);
         this.panels.put(highScoreName, highScoreWindow);
-        this.panels.put(botWindowName, botWindow);
-        this.panels.put(multiPlayerName, multiPlayerWindow);
+      //  this.panels.put(botWindowName, botWindow);
+       // this.panels.put(multiPlayerName, multiPlayerWindow);
         //// TODO: 16-11-15 add the other panels when they are done
     }
 
@@ -111,8 +111,8 @@ public class MainMenu extends JFrame {
         cardPanel.add(mainMenuName, mainPanel);
         cardPanel.add(singlePlayerName, singlePlayerWindow);
         cardPanel.add(highScoreName, highScoreWindow);
-        cardPanel.add(botWindowName, botWindow);
-        cardPanel.add(multiPlayerName, multiPlayerWindow);
+      //  cardPanel.add(botWindowName, botWindow);
+       // cardPanel.add(multiPlayerName, multiPlayerWindow);
 
         // TODO: 16-11-15 add the others panels when they're done
         this.add(cardPanel);
