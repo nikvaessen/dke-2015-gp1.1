@@ -126,8 +126,8 @@ public class BoardHandler {
         if (keys == null || keys.length == 0) {
             ArrayList<Character> nonFlippedKeys = polyomino.getKeys();
             ArrayList<Character> flippedKeys = polyomino.getFlippedKeys();
-            System.out.printf("non flipped keys: %s\n", nonFlippedKeys.toString());
-            System.out.printf("flipped keys: %s\n", flippedKeys.toString());
+            //System.out.printf("non flipped keys: %s\n", nonFlippedKeys.toString());
+            //System.out.printf("flipped keys: %s\n", flippedKeys.toString());
             keys = new char[nonFlippedKeys.size()+flippedKeys.size()];
             keysFlipped = new boolean[nonFlippedKeys.size()+flippedKeys.size()];
             for (int i=0; i<nonFlippedKeys.size(); i++)
@@ -142,9 +142,9 @@ public class BoardHandler {
             }
         }
         int randomNumber = rng.nextInt(keys.length);
-        System.out.printf("Random number: %d key value: %c flipped: %b\n", randomNumber, keys[randomNumber],
-                keysFlipped[randomNumber]);
-        System.out.printf("Keys: %s\nBoolean array: %s\n", Arrays.toString(keys), Arrays.toString(keysFlipped));
+//        System.out.printf("Random number: %d key value: %c flipped: %b\n", randomNumber, keys[randomNumber],
+//                keysFlipped[randomNumber]);
+//        System.out.printf("Keys: %s\nBoolean array: %s\n", Arrays.toString(keys), Arrays.toString(keysFlipped));
         char[][] toReturn;
         if(!keysFlipped[randomNumber])
         {
