@@ -33,12 +33,12 @@ public class SinglePlayerWindow extends JPanel {
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+
 
 
         //create the scoreboard
         final ScoreBoard scoreBoard = new ScoreBoard();
-        c = new GridBagConstraints();
+        GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
         this.add(scoreBoard, c);
@@ -93,7 +93,7 @@ public class SinglePlayerWindow extends JPanel {
 
         //create the gamepanel and add it
         final GamePanel gamePanel = new GamePanel(board);
-        this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
+        this.setSize(Config.SINGLE_PLAYER_SIZE);
         gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         c = new GridBagConstraints();
         c.gridx = 1;
@@ -208,8 +208,8 @@ public class SinglePlayerWindow extends JPanel {
         });
     }
 
-    public Dimension getPreferredSize()
+    /*public Dimension getPreferredSize()
     {
         return Config.SINGLE_PLAYER_SIZE;
-    }
+    }*/
 }
