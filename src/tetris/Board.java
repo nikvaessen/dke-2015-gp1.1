@@ -361,4 +361,74 @@ public class Board {
 		}
 		return true;
 	}
+
+	public int aggregateHeight()
+	{
+		int height=0;
+
+			for(int j=0; j<board[0].length; j++)
+			height+=columnHeight(j);
+
+		return height;
+	}
+
+	public int amountOfHoles()
+	{
+		int holes=0;
+
+		for(int i=5; i<board.length; i++)
+			for(int j=0; j<board[0].length; j++)
+				if(board[i][j] == 'o' && board[i-1][j] != 'o') holes++;
+		return holes;
+	}
+
+	public int columnHeight(int column)
+	{
+		int height=0;
+
+		for(int i=5; i<=board.length-1; i++)
+			if(board[i][column] != 'o') { height=board.length-i; break;}
+		return height;
+	}
+
+	public int bumpiness()
+	{
+		int bumpiness=0;
+
+		for(int i=1; i<board[0].length; i++)
+			bumpiness+=Math.abs(columnHeight(i-1) - columnHeight(i) );
+
+		return bumpiness;
+	}
+
+	public int checkFullLines()
+	{
+		int rowsCleared = 0;
+		for(int row = 5; row < board.length; row++)
+		{
+			boolean foundEmptyCell = false;
+			for(int column= 0; column < board[0].length; column++)
+			{
+				if (board[row][column] == 'o' && !foundEmptyCell)
+				{
+					foundEmptyCell = true;
+				}
+			}
+			if(!foundEmptyCell) rowsCleared++;
+
+
+		}
+		return rowsCleared;
+	}
+
+	public Board clone()
+	{
+		Board boardToReturn= new Board(board[0].length, board.length);
+
+		for(int i=0; i<board.length; i++)
+			for(int j=0; j<board[0].length; j++)
+				boardToReturn.setCell(i, j, board[i][j]);
+
+		 return boardToReturn;
+	}
 }

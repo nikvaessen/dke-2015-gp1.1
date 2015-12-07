@@ -212,9 +212,9 @@ public class Bot extends Thread{
     {
         char action = actionCommands[0];
         char[] newActionCommands = new char[actionCommands.length - 1];
-        System.out.println("old array: " + Arrays.toString(actionCommands));
-        System.arraycopy(actionCommands, 1, newActionCommands, 0, newActionCommands.length);
-        System.out.println("new array: " + Arrays.toString(newActionCommands));
+       // System.out.println("old array: " + Arrays.toString(actionCommands));
+       System.arraycopy(actionCommands, 1, newActionCommands, 0, newActionCommands.length);
+//        System.out.println("new array: " + Arrays.toString(newActionCommands));
         actionCommands = newActionCommands;
         return action;
     }
@@ -258,7 +258,8 @@ public class Bot extends Thread{
         int bestX = 0;
         int bestY = 0;
         int bestR = 0;
-        int bestScore = 0;
+        double bestScore = -100000000;
+        Board bestBoard = new Board(15,20);
         for(int i=0; i<xCoords.size(); i++)
         {
             int x = xCoords.get(i);
@@ -269,24 +270,36 @@ public class Bot extends Thread{
                 if(testBoard.canPlace(possiblePieces.get(rot), x, y))
                 {
                     testBoard.placePiece(possiblePieces.get(rot), x, y);
-                    System.out.println(Arrays.deepToString(possiblePieces.get(rot)));
-                    int tempScore = testBoard.getScore(possiblePieces.get(rot), x , y);
-                    System.out.println("Score: " + tempScore);
-                    testBoard.removePiece(possiblePieces.get(rot), x , y);
+                    //System.out.println(Arrays.deepToString(possiblePieces.get(rot)));
+                    double tempScore = -0.510066*testBoard.aggregateHeight() + 0.760666* testBoard.checkFullLines()
+                            + -0.35663 * testBoard.amountOfHoles() + -0.184483 * testBoard.bumpiness();
+//                    testBoard.printBoard();
+//                    System.out.printf(" Aggregate height: %d %n Amount of holes: %d %n Bumpiness: %d %n " +
+//                            "Full lines: %d %n ", testBoard.aggregateHeight(), testBoard.amountOfHoles(),
+//                            testBoard.bumpiness(), testBoard.checkFullLines());
+//                    System.out.println("Score: " + tempScore);
+
                     if(tempScore > bestScore){
                         bestX = x;
                         bestY = y;
                         bestR = rot;
                         bestScore=tempScore;
-              //          System.out.println("Max score: " + bestScore);
+                        System.out.print("Found new best board\n");
+                        bestBoard= testBoard.clone();
+                        //System.out.println("Max score: " + bestScore);
 
                     }
+                    testBoard.removePiece(possiblePieces.get(rot), x , y);
                 }
             }
         }
 
+        System.out.println("Printing best board:");
+        bestBoard.printBoard();
         return new int[] {bestX, bestY, bestR};
     }
+
+
 
 }
 
