@@ -31,7 +31,6 @@ public class BotWindow extends JPanel
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-
         //create the scoreboard
         final ScoreBoard scoreBoard = new ScoreBoard();
         c = new GridBagConstraints();
@@ -161,7 +160,6 @@ public class BotWindow extends JPanel
     {
         return Config.SINGLE_PLAYER_SIZE;
     }
-
 
 
 }

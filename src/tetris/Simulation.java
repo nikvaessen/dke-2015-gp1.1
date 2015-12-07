@@ -1,7 +1,9 @@
 package tetris;
 
+import gui.BackButton;
 import gui.Config;
 import gui.GamePanel;
+import gui.MainMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,14 +25,15 @@ public class Simulation extends JPanel {
     Pentomino a;
     BoardHandler c;
 
-    public Simulation() {
+    public Simulation(MainMenu main) {
+
         b = new Board(5, 12);
         a = new Pentomino();
-        c = new BoardHandler(b, new Board(5,5,), true);
+        c = new BoardHandler(b, new Board(5,5), true);
         SimulationHasStarted = false;
 
         //create the gamepanel and add it
-        final GamePanel gamePanel = new GamePanel(board);
+        final GamePanel gamePanel = new GamePanel(b);
         this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         GridBagConstraints d = new GridBagConstraints();
@@ -52,6 +55,9 @@ public class Simulation extends JPanel {
         d.insets = new Insets(250, 0, 0, 0);
         this.add(buttonPanel, d);
 
+
+        BackButton backButton = new BackButton(main);
+        this.add(backButton);
 
         //startbutton
         final JButton startButton = new JButton("Start");
@@ -333,6 +339,10 @@ public class Simulation extends JPanel {
         buttonPanel.add(startButton);
     }
 
+    public Dimension getPreferredSize()
+    {
+        return Config.SINGLE_PLAYER_SIZE;
+    }
 
 }
 

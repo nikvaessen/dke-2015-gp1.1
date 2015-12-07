@@ -29,7 +29,6 @@ public class MainMenu extends JFrame {
     private Simulation          simWindow;
     private OptionsWindow       optionsWindow;
 
-
     //strings representing all windows in the CardLayout
     private final String mainMenuName = "main";
     private final String singlePlayerName = "sp";
@@ -38,7 +37,6 @@ public class MainMenu extends JFrame {
     private final String botWindowName = "bot";
     private final String simulationWindowname = "sim";
     private final String optionMenuName = "opt";
-
 
     //variables needed for panel rotation in the CardLayout
     private JPanel cardPanel; //holds all panels to switch between
@@ -141,7 +139,7 @@ public class MainMenu extends JFrame {
 
         //add the buttons to a panel and add the panel to the frame.
         JPanel buttonHolder = new JPanel();
-        buttonHolder.setLayout(new GridLayout(6, 0, 0, 20));
+        buttonHolder.setLayout(new GridLayout(7, 0, 0, 10));
         buttonHolder.add(singlePlayerButton);
         buttonHolder.add(multiPlayerButton);
         buttonHolder.add(highScoresButton);
@@ -241,6 +239,14 @@ public class MainMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 startDisplaying(optionMenuName);
+            }
+        });
+
+        //actionlistener for the simulation
+        simButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                startDisplaying(simulationWindowname);
             }
         });
 
