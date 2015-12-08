@@ -24,6 +24,7 @@ public class Bot extends Thread{
     final static char ACTION_ROTATE_ANTICLOCKWISE = 'z';
 
     private final int TIME_BETWEEN_ACTIONS = 1000;
+    private static final double[] weights = new double[] {};
 
     private Random rng;
     private Board board;
@@ -243,8 +244,8 @@ public class Bot extends Thread{
                     testBoard.placePiece(possiblePieces.get(rot), x, y);
                     //System.out.println(Arrays.deepToString(possiblePieces.get(rot)));
 
-                    double tempScore = -0.24995*testBoard.aggregateHeight() + 0.61327* testBoard.checkFullLines()
-                            + -0.45911 * testBoard.amountOfHoles() + -0.39059* testBoard.bumpiness();
+                    double tempScore = weights[0] * testBoard.aggregateHeight() + weights[1] * testBoard.checkFullLines()
+                            + weights[2] * testBoard.amountOfHoles() + weights[3]* testBoard.bumpiness();
 //                    testBoard.printBoard();
 //                    System.out.printf(" Aggregate height: %d %n Amount of holes: %d %n Bumpiness: %d %n " +
 //                            "Full lines: %d %n ", testBoard.aggregateHeight(), testBoard.amountOfHoles(),

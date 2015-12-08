@@ -15,9 +15,9 @@ public class GeneticAlgorithm {
     public static final int BOARD_WIDTH = 10;
     public static final int BOARD_HEIGHT = 20;
     public static final boolean tetris = false;
-    public static final int POPULATION = 1000;
+    public static final int POPULATION = 100;
     public static final int MAX_GENERATIONS = 20;
-    public static final int MUTATION_RATE = 5;
+    public static final int MUTATION_RATE = 1;
 
     public static Random rng;
 
@@ -38,7 +38,7 @@ public class GeneticAlgorithm {
 
         //genetic algorithm
         for(int generations = 0; generations < MAX_GENERATIONS; generations++) {
-            System.out.println("Starting generation: " + generations + " out of " + MAX_GENERATIONS);
+            System.out.println("Starting generation: " + (generations + 1) + " out of " + MAX_GENERATIONS);
 
             //let the population play tetris
             letPopulationPlay(population);
@@ -49,6 +49,7 @@ public class GeneticAlgorithm {
             {
                 elites[i] = population[i].clone();
             }
+            killThreads(elites);
             System.out.print("Selection done\n");
 
             //create 300 new indivuals by the selected first hundred with crossover :)
@@ -65,6 +66,11 @@ public class GeneticAlgorithm {
 
             //replace the weakest 300 by the new 300 indivuadals
             int k = 0;
+            Individual[] weakest = new Individual[POPULATION/10 * 3];
+            for(int i = POPULATION/10 * 7; i < population.length; i++)
+            {
+                population[i].killThread();
+            }
             for(int i = (POPULATION/10) * 9; i < population.length; i++, k++){
                 population[i] = children[k];
             }
