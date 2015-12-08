@@ -23,7 +23,7 @@ public class BotWindow extends JPanel
 
     public BotWindow(MainMenu mainMenu) {
         //create the variables
-        Board board = new Board(5, 20);
+        Board board = new Board(10, 20);
         this.bh = new BoardHandler(board, new Board(5,5), true);
         //behaviour
         this.setFocusable(true);

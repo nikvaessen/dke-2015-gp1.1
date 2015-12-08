@@ -12,12 +12,12 @@ import java.util.Random;
  */
 public class GeneticAlgorithm {
 
-    public static final int BOARD_WIDTH = 5;
+    public static final int BOARD_WIDTH = 10;
     public static final int BOARD_HEIGHT = 20;
     public static final boolean tetris = false;
     public static final int POPULATION = 1000;
-    public static final int MAX_GENERATIONS = 100;
-    public static final int MUTATION_RATE = 1;
+    public static final int MAX_GENERATIONS = 20;
+    public static final int MUTATION_RATE = 5;
 
     public static Random rng;
 
@@ -44,15 +44,15 @@ public class GeneticAlgorithm {
             letPopulationPlay(population);
 
             //select the first hundred
-            Individual[] elites = new Individual[POPULATION/10];
+            Individual[] elites = new Individual[POPULATION/10 * 3];
             for(int i = 0; i < elites.length; i++)
             {
                 elites[i] = population[i].clone();
             }
             System.out.print("Selection done\n");
 
-            //create 100 new indivuals by the selected first hundred with crossover :)
-            Individual[] children = new Individual[POPULATION/10];
+            //create 300 new indivuals by the selected first hundred with crossover :)
+            Individual[] children = new Individual[POPULATION/10 * 3];
             for(int i = 0; i < children.length; i+= 2)
             {
                 Individual mother = elites[i];
@@ -63,7 +63,7 @@ public class GeneticAlgorithm {
             }
             System.out.print("cross-over done\n");
 
-            //replace the weakest 100 by the new 100 indivuadals
+            //replace the weakest 300 by the new 300 indivuadals
             int k = 0;
             for(int i = (POPULATION/10) * 9; i < population.length; i++, k++){
                 population[i] = children[k];
