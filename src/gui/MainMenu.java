@@ -120,7 +120,7 @@ public class MainMenu extends JFrame {
         cardPanel.add(highScoreName, highScoreWindow);
         cardPanel.add(botWindowName, botWindow);
         cardPanel.add(simulationWindowname, simWindow);
-        //cardPanel.add(multiPlayerName, multiPlayerWindow);
+        cardPanel.add(multiPlayerName, multiPlayerWindow);
 
         // TODO: 16-11-15 add the others panels when they're done
         this.add(cardPanel);
