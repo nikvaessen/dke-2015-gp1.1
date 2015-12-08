@@ -30,8 +30,8 @@ public class MultiPlayerWindow extends JPanel
     public MultiPlayerWindow( MainMenu mainMenu )
     {
         //create the variables
-        Board board1 = new Board(10 , 20 ) ;
-        Board board2 = new Board(10 , 20 ) ;
+        Board board1 = new Board(5 , 20 ) ;
+        Board board2 = new Board(5 , 20 ) ;
         final HumanInput2 inputController1 = new HumanInput2() ;
         final HumanInput inputController2 = new HumanInput() ;
         this.bh1 = new BoardHandler(board1 , new Board(5, 5), true) ;
