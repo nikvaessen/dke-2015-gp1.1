@@ -169,7 +169,7 @@ public class MultiPlayerWindow extends JPanel
         //add the right panel
         d = new GridBagConstraints();
         d.gridx = 1;
-        d.gridy = 5;
+        d.gridy = 1;
         this.add(rightPanel, d);
 
         final JButton startButton = new JButton("Start");
