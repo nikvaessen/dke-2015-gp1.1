@@ -1,47 +1,67 @@
+/**
+ * Created by baxie on 12/7/15.
+ */
 package bot;
 
 import gui.GamePanel;
 import tetris.Board;
 import tetris.BoardHandler;
-import tetris.GameLoop;
-
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.jar.Pack200;
 
-/**
- * Created by chrx on 12/1/15.
- */
-public class Bot extends Thread{
+public class GeneticBot extends Thread{
     //final variables
     final static char ACTION_MOVE_DOWN = 'd';
     final static char ACTION_MOVE_LEFT = 'l';
     final static char ACTION_MOVE_RIGHT = 'r';
     final static char ACTION_DROP_DOWN = 's';
     final static char ACTION_ROTATE_CLOCKWISE = 'x';
-    final static char ACTION_ROTATE_ANTICLOCKWISE = 'z';
-
-    private final int TIME_BETWEEN_ACTIONS = 1000;
 
     private Random rng;
     private Board board;
     private BoardHandler boardHandler;
-    private GamePanel gamePanel;
+
+    //variables needed for genetic algorithm
+    private boolean gameOver;
+    private int linesCleared;
+    private double[] chromesome;
+    private int MAXIMUM_SPAWNS_ALLOWED = 5000;
+    private int spawns;
 
     //variables for board handling
     char[] actionCommands;
     private int count;
-    private volatile int score;
 
-    public Bot(Board board, BoardHandler boardHandler, GamePanel gamePanel)
+    public GeneticBot(Board board, BoardHandler boardHandler, double[] chromesome)
     {
         this.board = board;
         this.boardHandler = boardHandler;
-        this.gamePanel = gamePanel;
         this.rng = new Random(System.currentTimeMillis());
+        this.chromesome = chromesome;
         count = 0;
+        spawns = 0;
+        linesCleared = 0;
+    }
+
+    public double[] getChromosome()
+    {
+        return chromesome;
+    }
+
+    public void setChromosome(double[] chromesome)
+    {
+        this.chromesome = chromesome;
+    }
+
+    public boolean gameOver()
+    {
+        return gameOver;
+    }
+
+    public int getLinesCleared()
+    {
+        return linesCleared;
     }
 
     public void run()
@@ -60,19 +80,18 @@ public class Bot extends Thread{
         //System.out.println(count);
         if (boardHandler.isPieceDoneFalling()) {
             //System.out.println("Spawning new piece");
-            if (boardHandler.isGameOver()) {
-                System.out.println("Game over");
+            if (boardHandler.isGameOver() || spawns >= MAXIMUM_SPAWNS_ALLOWED) {
+                gameOver = true;
                 return;
             }
             else {
                 int rowsCleared = boardHandler.checkFullLines();
                 if(rowsCleared != 0) {
                     //scoreBoard.setScore(score);
-                    score += rowsCleared*rowsCleared * 100;
                 }
                 boardHandler.spawnPiece();
+                spawns++;
                 makeMovementCommands();
-                gamePanel.repaint();
             }
         }
         try {
@@ -88,42 +107,26 @@ public class Bot extends Thread{
         if (input != ' ') {
             //System.out.println("user input was not empty, repainting");
             boardHandler.giveInput(input);
-            gamePanel.repaint();
         }
         if (count > 10) //1000 ms have passed
         {
             count = 0;
             //System.out.println("10 loops have happened, moving the piece down");
-            boardHandler.giveInput('d');
-            gamePanel.repaint();
-
+            boardHandler.giveInput(ACTION_MOVE_DOWN);
         }
         ////System.out.println("restarting the game loop!");
         try {
             SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        playGame();
-                    }
-                });
+                @Override
+                public void run() {
+                    playGame();
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private boolean wait(int ms)
-    {
-        //System.out.println("Waiting: " + System.currentTimeMillis());
-        try{
-            this.sleep(ms);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return true;
-        //System.out.println("done Waiting: " + System.currentTimeMillis());
-    }
 
     private void makeMovementCommands()
     {
@@ -131,11 +134,8 @@ public class Bot extends Thread{
         Board cloneBoard= board.clone();
 
         char[][] pieceFalling = boardHandler.getFallingPentMatrix();
-        char letterPieceFalling=boardHandler.getFallingPentName();
-        int currentRow = boardHandler.getCurrentRow();
         int currentColumn = boardHandler.getCurrentColumn();
         int[] recommendedPositionAndRotation = getRecommendedPositionAndRotation(botBoard, pieceFalling);
-        int newRow = recommendedPositionAndRotation[0];
         int newColumn = recommendedPositionAndRotation[1];
         int rotation = recommendedPositionAndRotation[2];
         ArrayList<Character> newActionCommands = new ArrayList<>();
@@ -169,9 +169,7 @@ public class Bot extends Thread{
     {
         char action = actionCommands[0];
         char[] newActionCommands = new char[actionCommands.length - 1];
-       // System.out.println("old array: " + Arrays.toString(actionCommands));
-       System.arraycopy(actionCommands, 1, newActionCommands, 0, newActionCommands.length);
-//        System.out.println("new array: " + Arrays.toString(newActionCommands));
+        System.arraycopy(actionCommands, 1, newActionCommands, 0, newActionCommands.length);
         actionCommands = newActionCommands;
         return action;
     }
@@ -196,7 +194,7 @@ public class Bot extends Thread{
                 if(board[i][j] != 'o')
                 {
                     highestRow = i;
-                  //  System.out.println("Highest row: " + highestRow);
+                    //  System.out.println("Highest row: " + highestRow);
                     break;
                 }
             }
@@ -229,13 +227,8 @@ public class Bot extends Thread{
                 {
                     testBoard.placePiece(possiblePieces.get(rot), x, y);
                     //System.out.println(Arrays.deepToString(possiblePieces.get(rot)));
-                    double tempScore = -0.510066*testBoard.aggregateHeight() + 0.760666* testBoard.checkFullLines()
-                            + -0.35663 * testBoard.amountOfHoles() + -0.184483 * testBoard.bumpiness();
-//                    testBoard.printBoard();
-//                    System.out.printf(" Aggregate height: %d %n Amount of holes: %d %n Bumpiness: %d %n " +
-//                            "Full lines: %d %n ", testBoard.aggregateHeight(), testBoard.amountOfHoles(),
-//                            testBoard.bumpiness(), testBoard.checkFullLines());
-//                    System.out.println("Score: " + tempScore);
+                    double tempScore = chromesome[0]*testBoard.aggregateHeight() + chromesome[1]* testBoard.checkFullLines()
+                            + chromesome[2] * testBoard.amountOfHoles() + chromesome[3] * testBoard.bumpiness();
 
                     if(tempScore > bestScore){
                         bestX = x;
@@ -243,8 +236,6 @@ public class Bot extends Thread{
                         bestR = rot;
                         bestScore=tempScore;
                         bestBoard= testBoard.clone();
-                        //System.out.println("Max score: " + bestScore);
-
                     }
                     testBoard.removePiece(possiblePieces.get(rot), x , y);
                 }
@@ -255,10 +246,4 @@ public class Bot extends Thread{
         //bestBoard.printBoard();
         return new int[] {bestX, bestY, bestR};
     }
-
-    public int getScore()
-    {
-        return score;
-    }
-
 }
