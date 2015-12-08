@@ -22,6 +22,6 @@ public abstract class Config
     public static final Dimension SINGLE_PLAYER_SIZE = new Dimension(800, 600);
     public static final Dimension RIGHTPANEL_SIZE = new Dimension(800, 150);
     public static final Dimension LEFTPANEL_SIZE = new Dimension(800, 300);
-    public static final Dimension MULTI_PLAYER_SIZE = new Dimension(MAIN_MENU_WIDTH*3, MAIN_MENU_HEIGHT+300) ;
+    public static final Dimension MULTI_PLAYER_SIZE = new Dimension(MAIN_MENU_WIDTH*3, MAIN_MENU_HEIGHT+200) ;
 
 }
