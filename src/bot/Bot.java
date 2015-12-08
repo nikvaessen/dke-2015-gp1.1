@@ -169,8 +169,8 @@ public class Bot extends Thread{
     {
         char action = actionCommands[0];
         char[] newActionCommands = new char[actionCommands.length - 1];
-       // System.out.println("old array: " + Arrays.toString(actionCommands));
-       System.arraycopy(actionCommands, 1, newActionCommands, 0, newActionCommands.length);
+        // System.out.println("old array: " + Arrays.toString(actionCommands));
+        System.arraycopy(actionCommands, 1, newActionCommands, 0, newActionCommands.length);
 //        System.out.println("new array: " + Arrays.toString(newActionCommands));
         actionCommands = newActionCommands;
         return action;
