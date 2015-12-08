@@ -31,6 +31,33 @@ public class BotWindow extends JPanel
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
+        //create the gamepanel and add it
+        final GamePanel gamePanel = new GamePanel(board);
+        this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
+        gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
+        c = new GridBagConstraints();
+        c.gridx = 1;
+        c.weightx = 0.5;
+        c.gridy = 0;
+        c.weighty = 1;
+        c.gridheight = 3;
+        c.anchor = GridBagConstraints.CENTER;
+        this.add(gamePanel, c);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                new Timer(100, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        gamePanel.repaint();
+                    }
+                }).start();
+            }
+        }).start();
+
+        //create bot Thread
+        final Bot bot = new Bot(board, bh, gamePanel);
+
         //create the scoreboard
         final ScoreBoard scoreBoard = new ScoreBoard();
         c = new GridBagConstraints();
@@ -42,7 +69,7 @@ public class BotWindow extends JPanel
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("Trying to update score");
-                scoreBoard.setScore(gameLoop.getScore());
+                scoreBoard.setScore(bot.getScore());
             }
         }).start();
 
@@ -79,30 +106,6 @@ public class BotWindow extends JPanel
         c.weightx = 0.5;
         this.add(optionList, c);
 
-        //create the gamepanel and add it
-        final GamePanel gamePanel = new GamePanel(board);
-        this.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
-        gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
-        c = new GridBagConstraints();
-        c.gridx = 1;
-        c.weightx = 0.5;
-        c.gridy = 0;
-        c.weighty = 1;
-        c.gridheight = 3;
-        c.anchor = GridBagConstraints.CENTER;
-        this.add(gamePanel, c);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new Timer(100, new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        gamePanel.repaint();
-                    }
-                }).start();
-            }
-        }).start();
-
         //add the buttons
         JPanel buttonPanel = new JPanel();
         buttonPanel.setAlignmentX(30);
@@ -120,10 +123,6 @@ public class BotWindow extends JPanel
         c.anchor = GridBagConstraints.SOUTH;
         c.insets = new Insets(0, 0, 20, 0);
         this.add(new BackButton(mainMenu), c);
-
-        //create bot Thread
-
-        final Bot bot = new Bot(board, bh, gamePanel);
 
         //startbutton
         final JButton startButton = new JButton("Start");
