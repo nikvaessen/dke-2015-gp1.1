@@ -46,8 +46,8 @@ public class simulationRunner extends Thread {
         order.add(pentomino.getFlippdMatrix('z'));
         order.add(pentomino.getMatrix('f', 0));
         order.add(pentomino.getFlippdMatrix('n'));
-        order.add(pentomino.getMatrix('w', 0));
         order.add(pentomino.getMatrix('p', 0));
+        order.add(pentomino.getMatrix('w', 0));
         order.add(pentomino.getMatrix('t', 0));
         order.add(pentomino.getFlippdMatrix('y'));
         order.add(pentomino.getMatrix('x', 0));
@@ -56,9 +56,19 @@ public class simulationRunner extends Thread {
         order.add(pentomino.getMatrix('l', 0));
 
         actionCommands = new char[]{
-                'l', 'l', 's', 'd', 'x', 'l', 's', 'l', 'x', 's', 'x', 'r', 's', 'x', 'l', 's', 'z', 'z', 's', 'l', 'z', 's',
-                'x', 'x', 's', 'l', 's', 'l', 'l', 'x', 's', 'r', 'z', 'z', 's', 'l', 'l', 'z', 's', 'r', 'x', 'x', 's', 'l',
-                'l', 's', 'x', 'x', 'l', 'l', 's', 'r', 'r', 's', 'z', 'r', 'r', 's'
+                'l', 'l', 's',    //v
+                'd', 'x', 's',      //z
+                'l', 'x', 's',      //f
+                'z', 'r','r','s',   //n
+                'x','x','r', 's',   //p
+                'x','l', 's',       //w
+                'l', 'z', 's',      //t
+                'x', 'x','r', 's',  //y
+                'l', 's',           //x
+                'l', 'l', 'x','x','s', //u
+                'r', 'r','r', 's',//i
+                 'z','r','r', 's',//l
+
         };
     }
 
@@ -76,12 +86,14 @@ public class simulationRunner extends Thread {
 
     private void simulateGame() {
         System.out.println("simulate loop started. spawncount: " + spawnCount + " move count: " + moveCount);
-        if (boardHandler.isPieceDoneFalling()) {
+        if (boardHandler.isPieceDoneFalling()&& spawnCount!=12) {
+            boardHandler.checkFullLines();
             System.out.println("Spawning: " + Arrays.deepToString(order.get(spawnCount)));
             boardHandler.hardSpawnPiece(order.get(spawnCount));
             gamePanel.repaint();
             spawnCount++;
         }
+        else if(spawnCount==12){boardHandler.checkFullLines();}
         try {
             System.out.println("sleeping 1 second");
             Thread.sleep(1000);
