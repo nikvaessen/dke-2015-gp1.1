@@ -129,7 +129,7 @@ public class MultiPlayerWindow extends JPanel
 
         //add the scorePanel
         d = new GridBagConstraints();
-        d.gridx = 1;
+        d.gridx = 3;
         d.gridy = 0;
         this.add(scorePanel, d);
 
@@ -141,7 +141,7 @@ public class MultiPlayerWindow extends JPanel
         gamePanel1.setSize(Config.GAME_PANEL_SIZE);
         this.add(gamePanel1, d);
         d = new GridBagConstraints();
-        d.gridx = 2;
+        d.gridx = 5;
         d.gridy = 0;
         gamePanel2.setSize(Config.GAME_PANEL_SIZE);
         this.add(gamePanel2, d);
@@ -268,6 +268,54 @@ public class MultiPlayerWindow extends JPanel
                 requestFocusInWindow();
             }
         });
+
+        //show controls Player 1 (right side)
+        JTextPane textArea = new JTextPane();
+        textArea.setContentType("text/html");
+        textArea.setSize(Config.LEFTPANEL_SIZE.width, 200);
+        textArea.setText(
+                "<html>" +
+                        "<pre>" +
+                        "<b>Controls</b><br />" +
+                        "&rarr;         Move Right<br />" +
+                        "&larr;         Move Left<br />" +
+                        "&darr;         Move Down<br />" +
+                        "<b>Space</b>     Drop<br />" +
+                        "<b>M</b>         Rotate Clockwise<br />" +
+                        "<b>N</b>         Rotate Anticlockwise<br /><" +
+                        "</pre>" +
+                        "</html>");
+        textArea.setEditable(false);
+        textArea.setOpaque(false);
+        d = new GridBagConstraints();
+        d.gridx = 2;
+        d.gridy = 4;
+        d.insets = new Insets(30, 10, 10, 0);
+        scorePanel.add(textArea, d);
+
+        //show controls Player 1 (right side)
+        JTextPane textArea2 = new JTextPane();
+        textArea2.setContentType("text/html");
+        textArea2.setSize(Config.LEFTPANEL_SIZE.width, 200);
+        textArea2.setText(
+                "<html>" +
+                        "<pre>" +
+                        "<b>Controls</b><br />" +
+                        "<b>E</b>         Move Right<br />" +
+                        "<b>Q</b>         Move Left<br />" +
+                        "<b>W</b>         Move Down<br />" +
+                        "<b>V</b>         Drop<br />" +
+                        "<b>C</b>         Rotate Clockwise<br />" +
+                        "<b>X</b>         Rotate Anticlockwise<br /><" +
+                        "</pre>" +
+                        "</html>");
+        textArea2.setEditable(false);
+        textArea2.setOpaque(false);
+        d = new GridBagConstraints();
+        d.gridx = 0;
+        d.gridy = 4;
+        d.insets = new Insets(30, 10, 10, 0);
+        scorePanel.add(textArea2, d);
 
 
 
