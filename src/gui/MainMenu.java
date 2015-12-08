@@ -105,7 +105,7 @@ public class MainMenu extends JFrame {
         this.panels.put(highScoreName, highScoreWindow);
         this.panels.put(botWindowName, botWindow);
         this.panels.put(simulationWindowname, simWindow);
-       // this.panels.put(multiPlayerName, multiPlayerWindow);
+        this.panels.put(multiPlayerName, multiPlayerWindow);
         //// TODO: 16-11-15 add the other panels when they are done
     }
 
