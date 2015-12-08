@@ -105,7 +105,7 @@ public class MainMenu extends JFrame {
         this.panels.put(highScoreName, highScoreWindow);
         this.panels.put(botWindowName, botWindow);
         this.panels.put(simulationWindowname, simWindow);
-       // this.panels.put(multiPlayerName, multiPlayerWindow);
+        this.panels.put(multiPlayerName, multiPlayerWindow);
         //// TODO: 16-11-15 add the other panels when they are done
     }
 
@@ -145,7 +145,7 @@ public class MainMenu extends JFrame {
         buttonHolder.add(highScoresButton);
         buttonHolder.add(botButton);
         buttonHolder.add(simButton);
-        buttonHolder.add(optionsMenuButton);
+        // buttonHolder.add(optionsMenuButton);
         buttonHolder.add(quitButton);
 
         //set up constraints for the buttonpanel and add it to the panel
@@ -234,13 +234,13 @@ public class MainMenu extends JFrame {
             }
         });
 
-        //actionlistener for the option menu
+        /*actionlistener for the option menu
         optionsMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 startDisplaying(optionMenuName);
             }
-        });
+        });*/
 
         //actionlistener for the simulation
         simButton.addActionListener(new ActionListener() {

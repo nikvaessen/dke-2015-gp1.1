@@ -21,8 +21,8 @@ public class MultiPlayerWindow extends JPanel
     private BoardHandler bh2 ;
     private HighScoreList highScoreList;
 
-    private HumanInput inputController1 ;
-    private HumanInput inputController2 ;
+    //private HumanInput2 inputController1 ;
+    //private HumanInput inputController2 ;
 
     private JPanel scorePanel;
     private JPanel rightPanel;
@@ -30,12 +30,12 @@ public class MultiPlayerWindow extends JPanel
     public MultiPlayerWindow( MainMenu mainMenu )
     {
         //create the variables
-        Board board1 = new Board(10 , 20 ) ;
-        Board board2 = new Board(10 , 20 ) ;
-        final HumanInput inputController1 = new HumanInput() ;
+        Board board1 = new Board(5 , 20 ) ;
+        Board board2 = new Board(5 , 20 ) ;
+        final HumanInput2 inputController1 = new HumanInput2() ;
         final HumanInput inputController2 = new HumanInput() ;
-        this.bh1 = new BoardHandler(board1 , new Board(0, 0), true) ;
-        this.bh2 = new BoardHandler(board2 , new Board(0, 0), true) ;
+        this.bh1 = new BoardHandler(board1 , new Board(5, 5), true) ;
+        this.bh2 = new BoardHandler(board2 , new Board(5, 5), true) ;
         this.highScoreList = new HighScoreList() ;
 
 
@@ -57,25 +57,34 @@ public class MultiPlayerWindow extends JPanel
 
         //create the ScoreBoard
         final ScoreBoard scoreBoard = new ScoreBoard() ;
+        final ScoreBoard scoreBoard2 = new ScoreBoard() ;
         GridBagConstraints d = new GridBagConstraints() ;
         d.gridx = 0 ;
         d.gridy = 0 ;
         scorePanel.add(scoreBoard , d) ;
         d.insets = new Insets(30,10,10,0);
+        d = new GridBagConstraints() ;
+        d.gridx = 2 ;
+        d.gridy = 0 ;
+        scorePanel.add(scoreBoard2 , d) ;
+        d.insets = new Insets(30,10,10,0) ;
+
         //add a timer to update ScoreBoard
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("Trying to update score");
                 scoreBoard.setScore(gameLoop1.getScore());
-                scoreBoard.setScore(gameLoop2.getScore());
+                scoreBoard2.setScore(gameLoop2.getScore());
             }
         }).start();
+
+
 
         //create the Highscore Board
         HighScoreBoard highScoreBoard = new HighScoreBoard(highScoreList);
         d = new GridBagConstraints();
-        d.gridx = 0;
+        d.gridx = 1;
         d.gridy = 1;
         d.insets = new Insets(30,10,10,10);
         scorePanel.add(highScoreBoard, d);
@@ -112,15 +121,15 @@ public class MultiPlayerWindow extends JPanel
         });
 
         d = new GridBagConstraints();
-        d.gridx = 0;
-        d.gridy = 5;
+        d.gridx = 1;
+        d.gridy = 3;
         d.weightx = 0.5;
         d.insets = new Insets(30,10,10,0);
         scorePanel.add(optionList, d);
 
         //add the scorePanel
         d = new GridBagConstraints();
-        d.gridx = 1;
+        d.gridx = 3;
         d.gridy = 0;
         this.add(scorePanel, d);
 
@@ -132,14 +141,14 @@ public class MultiPlayerWindow extends JPanel
         gamePanel1.setSize(Config.GAME_PANEL_SIZE);
         this.add(gamePanel1, d);
         d = new GridBagConstraints();
-        d.gridx = 2;
+        d.gridx = 5;
         d.gridy = 0;
         gamePanel2.setSize(Config.GAME_PANEL_SIZE);
         this.add(gamePanel2, d);
 
         //set the Thread
-        gameLoop1 = new GameLoop(bh1, inputController1, gamePanel1, new NextPiecePanel(new Board(1, 1)), highScoreList);
-        gameLoop2 = new GameLoop(bh2, inputController2, gamePanel2, new NextPiecePanel(new Board(1, 1)), highScoreList);
+        gameLoop1 = new GameLoop(bh1, inputController1, gamePanel1, new NextPiecePanel(new Board(5, 5)), highScoreList);
+        gameLoop2 = new GameLoop(bh2, inputController2, gamePanel2, new NextPiecePanel(new Board(5, 5)), highScoreList);
         gameLoop1.start();
         gameLoop2.start();
         gameLoopHasStarted1 = false;
@@ -167,8 +176,8 @@ public class MultiPlayerWindow extends JPanel
         //add the right panel
         d = new GridBagConstraints();
         d.gridx = 1;
-        d.gridy = 5;
-        this.add(rightPanel, d);
+        d.gridy = 4;
+        scorePanel.add(rightPanel, d);
 
         final JButton startButton = new JButton("Start");
         startButton.requestFocus(false);
@@ -260,14 +269,62 @@ public class MultiPlayerWindow extends JPanel
             }
         });
 
+        //show controls Player 1 (right side)
+        JTextPane textArea = new JTextPane();
+        textArea.setContentType("text/html");
+        textArea.setSize(Config.LEFTPANEL_SIZE.width, 200);
+        textArea.setText(
+                "<html>" +
+                        "<pre>" +
+                        "<b>Controls</b><br />" +
+                        "&rarr;         Move Right<br />" +
+                        "&larr;         Move Left<br />" +
+                        "&darr;         Move Down<br />" +
+                        "<b>Space</b>     Drop<br />" +
+                        "<b>M</b>         Rotate Clockwise<br />" +
+                        "<b>N</b>         Rotate Anticlockwise<br /><" +
+                        "</pre>" +
+                        "</html>");
+        textArea.setEditable(false);
+        textArea.setOpaque(false);
+        d = new GridBagConstraints();
+        d.gridx = 2;
+        d.gridy = 4;
+        d.insets = new Insets(30, 10, 10, 0);
+        scorePanel.add(textArea, d);
+
+        //show controls Player 1 (right side)
+        JTextPane textArea2 = new JTextPane();
+        textArea2.setContentType("text/html");
+        textArea2.setSize(Config.LEFTPANEL_SIZE.width, 200);
+        textArea2.setText(
+                "<html>" +
+                        "<pre>" +
+                        "<b>Controls</b><br />" +
+                        "<b>E</b>         Move Right<br />" +
+                        "<b>Q</b>         Move Left<br />" +
+                        "<b>W</b>         Move Down<br />" +
+                        "<b>V</b>         Drop<br />" +
+                        "<b>C</b>         Rotate Clockwise<br />" +
+                        "<b>X</b>         Rotate Anticlockwise<br /><" +
+                        "</pre>" +
+                        "</html>");
+        textArea2.setEditable(false);
+        textArea2.setOpaque(false);
+        d = new GridBagConstraints();
+        d.gridx = 0;
+        d.gridy = 4;
+        d.insets = new Insets(30, 10, 10, 0);
+        scorePanel.add(textArea2, d);
+
 
 
     }
 
-public Dimension getPreferredSize()
-    {
-        return Config.MULTI_PLAYER_SIZE;
-    }
+//public Dimension getPreferredSize()
+  //  {
+   //     return Config.MULTI_PLAYER_SIZE;
+    //}
 
 
 }

@@ -26,7 +26,7 @@ public class SinglePlayerWindow extends JPanel {
 
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
-        Board board = new Board(10, 20);
+        Board board = new Board(5, 20);
         Board nextPieceBoard = new Board(5, 5);
         final HumanInput inputController = new HumanInput();
         this.bh = new BoardHandler(board, nextPieceBoard, true);
@@ -121,8 +121,8 @@ public class SinglePlayerWindow extends JPanel {
                         "&larr;         Move Left<br />" +
                         "&darr;         Move Down<br />" +
                         "<b>Space</b>     Drop<br />" +
-                        "<b>X</b>         Rotate Clockwise<br />" +
-                        "<b>Z</b>         Rotate Anticlockwise<br /><" +
+                        "<b>M</b>         Rotate Clockwise<br />" +
+                        "<b>N</b>         Rotate Anticlockwise<br /><" +
                         "</pre>" +
                         "</html>");
         textArea.setEditable(false);
