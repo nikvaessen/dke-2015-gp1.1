@@ -9,9 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-/**
- * Created by baxie on 15-11-15.
- */
+
 public class MultiPlayerWindow extends JPanel
 {
 
@@ -36,8 +34,8 @@ public class MultiPlayerWindow extends JPanel
         Board board2 = new Board(10 , 20 ) ;
         final HumanInput inputController1 = new HumanInput() ;
         final HumanInput inputController2 = new HumanInput() ;
-        this.bh1 = new BoardHandler(board1 , true) ;
-        this.bh2 = new BoardHandler(board2 , true) ;
+        this.bh1 = new BoardHandler(board1 , new Board(0, 0), true) ;
+        this.bh2 = new BoardHandler(board2 , new Board(0, 0), true) ;
         this.highScoreList = new HighScoreList() ;
 
 
@@ -140,8 +138,8 @@ public class MultiPlayerWindow extends JPanel
         this.add(gamePanel2, d);
 
         //set the Thread
-        gameLoop1 = new GameLoop(bh1, inputController1, gamePanel1, highScoreList);
-        gameLoop2 = new GameLoop(bh2, inputController2, gamePanel2, highScoreList);
+        gameLoop1 = new GameLoop(bh1, inputController1, gamePanel1, new NextPiecePanel(new Board(1, 1)), highScoreList);
+        gameLoop2 = new GameLoop(bh2, inputController2, gamePanel2, new NextPiecePanel(new Board(1, 1)), highScoreList);
         gameLoop1.start();
         gameLoop2.start();
         gameLoopHasStarted1 = false;
@@ -266,9 +264,10 @@ public class MultiPlayerWindow extends JPanel
 
     }
 
-    /*public Dimension getPreferredSize()
+public Dimension getPreferredSize()
     {
         return Config.MULTI_PLAYER_SIZE;
-    }*/
+    }
+
 
 }

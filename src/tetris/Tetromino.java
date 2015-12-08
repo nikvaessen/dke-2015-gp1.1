@@ -72,6 +72,5 @@ public class Tetromino extends Polyomino {
         // i dont want to put it in .dict but i dont know where else to put them?
         super.addFlippedMatrix('l', l1);
         super.addFlippedMatrix('z', z1);
-        
     }
 }

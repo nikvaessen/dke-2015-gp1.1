@@ -19,18 +19,17 @@ public class BotWindow extends JPanel
     private GameLoop gameLoop;
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
-    private BotInput input;
+
 
     public BotWindow(MainMenu mainMenu) {
         //create the variables
         Board board = new Board(10, 20);
-        this.bh = new BoardHandler(board, true);
+        this.bh = new BoardHandler(board, new Board(0,0), true);
         //behaviour
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-
 
         //create the scoreboard
         final ScoreBoard scoreBoard = new ScoreBoard();
@@ -124,7 +123,7 @@ public class BotWindow extends JPanel
 
         //create bot Thread
 
-        final Bot bot = new Bot(board, new BoardHandler(board, false), gamePanel);
+        final Bot bot = new Bot(board, bh, gamePanel);
 
         //startbutton
         final JButton startButton = new JButton("Start");
@@ -161,7 +160,6 @@ public class BotWindow extends JPanel
     {
         return Config.SINGLE_PLAYER_SIZE;
     }
-
 
 
 }

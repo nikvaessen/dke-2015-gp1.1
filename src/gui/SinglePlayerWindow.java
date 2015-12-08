@@ -21,11 +21,15 @@ public class SinglePlayerWindow extends JPanel {
 
     private HumanInput inputController;
 
+    private JPanel leftPanel;
+    private JPanel rightPanel;
+
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
         Board board = new Board(10, 20);
+        Board nextPieceBoard = new Board(5, 5);
         final HumanInput inputController = new HumanInput();
-        this.bh = new BoardHandler(board, true);
+        this.bh = new BoardHandler(board, nextPieceBoard, true);
         this.highScoreList = new HighScoreList();
 
         //behaviour
@@ -34,14 +38,29 @@ public class SinglePlayerWindow extends JPanel {
         this.requestFocusInWindow();
         this.setLayout(new GridBagLayout());
 
+        //create the panels
+        leftPanel = new JPanel();
+        leftPanel.setLayout(new GridBagLayout());
+        leftPanel.setSize(Config.LEFTPANEL_SIZE);
+        rightPanel = new JPanel();
+        rightPanel.setLayout(new GridBagLayout());
+        rightPanel.setSize(Config.RIGHTPANEL_SIZE);
 
+        //show the next piece
+        NextPiecePanel nextPiecePanel = new NextPiecePanel(nextPieceBoard);
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 0;
+        //c.gridheight = 3;
+        c.insets = new Insets(10, 0, 0, 0);
+        c.anchor = GridBagConstraints.CENTER;
+        leftPanel.add(nextPiecePanel, c);
 
         //create the scoreboard
         final ScoreBoard scoreBoard = new ScoreBoard();
-        GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        this.add(scoreBoard, c);
+        c = new GridBagConstraints();
+        c.gridy = 1;
+        c.insets = new Insets(30, 0, 0, 0);
+        leftPanel.add(scoreBoard, c);
         //add a timer that updates the scoreboard every 100 ms.
         new Timer(1000, new ActionListener() {
                     @Override
@@ -54,9 +73,9 @@ public class SinglePlayerWindow extends JPanel {
         //create the highscore board
         HighScoreBoard highScoreBoard = new HighScoreBoard(highScoreList);
         c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 1;
-        this.add(highScoreBoard, c);
+        c.gridy = 2;
+        c.insets = new Insets(10, 0, 0, 0);
+        leftPanel.add(highScoreBoard, c);
 
         //create the combobox to choose between tetris and pentris
         String[] optionStrings = {"Tetris", "Pentris"};
@@ -86,10 +105,39 @@ public class SinglePlayerWindow extends JPanel {
             }
         });
         c = new GridBagConstraints();
+        c.gridy = 3;
+        c.insets = new Insets(10, 0, 0, 0);
+        leftPanel.add(optionList, c);
+
+        //show controls
+        JTextPane textArea = new JTextPane();
+        textArea.setContentType("text/html");
+        textArea.setSize(Config.LEFTPANEL_SIZE.width, 200);
+        textArea.setText(
+                "<html>" +
+                        "<pre>" +
+                        "<b>Controls</b><br />" +
+                        "&rarr;         Move Right<br />" +
+                        "&larr;         Move Left<br />" +
+                        "&darr;         Move Down<br />" +
+                        "<b>Space</b>     Drop<br />" +
+                        "<b>X</b>         Rotate Clockwise<br />" +
+                        "<b>Z</b>         Rotate Anticlockwise<br /><" +
+                        "</pre>" +
+                        "</html>");
+        textArea.setEditable(false);
+        textArea.setOpaque(false);
+        c = new GridBagConstraints();
+        c.gridy = 4;
+        c.insets = new Insets(10, 0, 0, 0);
+        leftPanel.add(textArea, c);
+
+
+        //add the left panel
+        c = new GridBagConstraints();
         c.gridx = 0;
-        c.gridy = 2;
-        c.weightx = 0.5;
-        this.add(optionList, c);
+        c.gridy = 0;
+        this.add(leftPanel, c);
 
         //create the gamepanel and add it
         final GamePanel gamePanel = new GamePanel(board);
@@ -105,7 +153,7 @@ public class SinglePlayerWindow extends JPanel {
         this.add(gamePanel, c);
 
         //set the Thread
-        gameLoop = new GameLoop(bh, inputController, gamePanel, highScoreList);
+        gameLoop = new GameLoop(bh, inputController, gamePanel, nextPiecePanel, highScoreList);
         gameLoop.start();
         gameLoopHasStarted = false;
 
@@ -117,15 +165,21 @@ public class SinglePlayerWindow extends JPanel {
         c.gridx = 2;
         c.weightx = 0.2;
         c.insets = new Insets(250,0,0,0);
-        this.add(buttonPanel, c);
+        rightPanel.add(buttonPanel, c);
 
         //backbutton
         c = new GridBagConstraints();
         c.gridx = 2;
         c.gridy = 2;
         c.anchor = GridBagConstraints.SOUTH;
-        c.insets = new Insets(0, 0, 20, 0);
-        this.add(new BackButton(mainMenu), c);
+        c.insets = new Insets(10, 0, 20, 0);
+        rightPanel.add(new BackButton(mainMenu), c);
+
+        //add the right panel
+        c = new GridBagConstraints();
+        c.gridx = 2;
+        c.gridy = 0;
+        this.add(rightPanel, c);
 
         //startbutton
         final JButton startButton = new JButton("Start");
@@ -163,12 +217,12 @@ public class SinglePlayerWindow extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if(!gameLoop.isPaused()) {
                     gameLoop.setPaused(true);
-                    pauseButton.setText("Unpause");
+                   // pauseButton.setText("Unpause");
                 }
                 else if(gameLoop.isPaused())
                 {
                     gameLoop.setPaused(false);
-                    pauseButton.setText("Pause  ");
+                   // pauseButton.setText("Pause  ");
                 }
             }
         });
