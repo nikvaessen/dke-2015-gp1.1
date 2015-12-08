@@ -24,11 +24,19 @@ public class Bot extends Thread{
     final static char ACTION_ROTATE_ANTICLOCKWISE = 'z';
 
     private final int TIME_BETWEEN_ACTIONS = 1000;
-    private final double[] weights = new double[]
-            {-0.510066,
-              0.760666,
-             -0.35663,
-             -0.184483};
+//    private final double[] tetris_weights = new double[]
+//            {
+//                    -0.1653884804717971, 0.5825979607579386, -0.7429551385421478, -0.13633001575867376
+//            };
+        private final double[] tetris_weights = new double[]
+            {
+                    -0.13177392227967477, 0.24560574285798586, -0.6096201800616352, -0.09659643152291442
+            };
+
+    private final double[] pentris_weights = new double[]
+            {
+                    -0.36791547277471026, 0.8621801108460212, -0.6084040448191494, -0.19515159671479743
+            };
 
     private Random rng;
     private Board board;
@@ -170,17 +178,19 @@ public class Bot extends Thread{
         }
     }
 
-    private boolean testPath(int newRow, int newColumn)
+    private boolean testPath(int newRow, int newColumn, char[][] matrix)
     {
-
-        for(int i=5; i<newRow; i++)
+        for(int row=5; row<newRow; row++)
         {
-            if(board.getCell(i, newColumn) != 'o') return false;
+            for(int i = 0; i < matrix.length; i++)
+            {
+                for(int j = 0; j < matrix[i].length; j++)
+                {
+                    if(matrix[i][j] != 'o' && board.getCell(row, newColumn) != 'o') return false;
+                }
+            }
         }
-
         return true;
-
-
     }
 
     private char getMovementCommand()
@@ -243,20 +253,27 @@ public class Bot extends Thread{
             //System.out.println("Row: " + x + " Column: " + y );
             for(int rot = 0; rot < possiblePieces.size(); rot++)
             {
-                if(testBoard.canPlace(possiblePieces.get(rot), x, y))
+                if(testBoard.canPlace(possiblePieces.get(rot), x, y) && testPath(x,y, possiblePieces.get(rot)))
                 {
                     testBoard.placePiece(possiblePieces.get(rot), x, y);
                     //System.out.println(Arrays.deepToString(possiblePieces.get(rot)));
-
-                    double tempScore = weights[0] * testBoard.aggregateHeight() + weights[1] * testBoard.checkFullLines()
-                            + weights[2] * testBoard.amountOfHoles() + weights[3]* testBoard.bumpiness();
+                    double tempScore;
+                    if(boardHandler.isTetris()){
+                        tempScore = tetris_weights[0] * testBoard.aggregateHeight() + tetris_weights[1] * testBoard.checkFullLines()
+                                + tetris_weights[2] * testBoard.amountOfHoles() + tetris_weights[3]* testBoard.bumpiness();
+                    }
+                    else{
+                        tempScore = pentris_weights[0] * testBoard.aggregateHeight() + pentris_weights[1] * testBoard.checkFullLines()
+                                + pentris_weights[2] * testBoard.amountOfHoles() + pentris_weights[3]* testBoard.bumpiness();
+                    }
+                    
 //                    testBoard.printBoard();
 //                    System.out.printf(" Aggregate height: %d %n Amount of holes: %d %n Bumpiness: %d %n " +
 //                            "Full lines: %d %n ", testBoard.aggregateHeight(), testBoard.amountOfHoles(),
 //                            testBoard.bumpiness(), testBoard.checkFullLines());
 //                    System.out.println("Score: " + tempScore);
 
-                    if(tempScore > bestScore && testPath(x,y)){
+                    if(tempScore > bestScore){
 
                         bestX = x;
                         bestY = y;

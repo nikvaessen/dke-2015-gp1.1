@@ -189,7 +189,7 @@ public class GameLoop extends Thread {
                 boardHandler.giveInput(input);
                 gamePanel.repaint();
             }
-            if (count > 10) //1000 ms have passed
+            if (count > 5) //1000 ms have passed
             {
                 //System.out.println("10 loops have happened, moving the piece down");
                 count = 0;

@@ -1,6 +1,8 @@
 package bot;
 
+import com.sun.management.GarbageCollectorMXBean;
 import com.sun.org.apache.bcel.internal.generic.POP;
+import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
 import tetris.Board;
 import tetris.BoardHandler;
 
@@ -14,14 +16,19 @@ public class GeneticAlgorithm {
 
     public static final int BOARD_WIDTH = 10;
     public static final int BOARD_HEIGHT = 20;
-    public static final boolean tetris = false;
-    public static final int POPULATION = 100;
-    public static final int MAX_GENERATIONS = 20;
+    public static final boolean tetris = true;
+    public static final int POPULATION = 1000;
+    public static final int MAX_GENERATIONS = 100;
     public static final int MUTATION_RATE = 1;
 
     public static Random rng;
 
     public static void main(String[] argv)
+    {
+        runAlgorithm();
+    }
+
+    public static void runAlgorithm()
     {
         Individual[] population = new Individual[POPULATION];
         rng = new Random(System.currentTimeMillis());
@@ -66,19 +73,11 @@ public class GeneticAlgorithm {
 
             //replace the weakest 300 by the new 300 indivuadals
             int k = 0;
-            Individual[] weakest = new Individual[POPULATION/10 * 3];
-            for(int i = POPULATION/10 * 7; i < population.length; i++)
-            {
-                weakest[i].killThread();
-            }
             for(int i = (POPULATION/10) * 9; i < population.length; i++, k++){
                 population[i] = children[k];
             }
             System.out.print("children replaced\n");
 
-            //simulate the sun by mutating certain indivuals
-            mutatePopulation(population);
-            System.out.print("Mutation took place\n");
         }
         System.out.println("Result after evolution");
         //every indivual starts playing it's game
@@ -126,22 +125,28 @@ public class GeneticAlgorithm {
                 zygote[i] = egg[i];
             }
         }
+        if(rng.nextInt(100) < MUTATION_RATE)
+        {
+            int indexToMutate = rng.nextInt(zygote.length);
+            zygote[indexToMutate] = zygote[indexToMutate] + ((rng.nextDouble() - 1.0)/4.0);
+            normalize(zygote);
+        }
         return new Individual(zygote);
     }
 
     
-    public static void mutatePopulation(Individual[] population)
-    {
-        for(int i = 0; i < population.length; i++)
-        {
-            if(rng.nextInt(100) < MUTATION_RATE)
-            {
-                double[] dna = population[i].getChromosome();
-                dna[rng.nextInt(dna.length)] = 2 * rng.nextDouble() - 1;
-                population[i].setChromosome(dna);
-            }
-        }
-    }
+//    public static void mutatePopulation(Individual[] population)
+//    {
+//        for(int i = 0; i < population.length; i++)
+//        {
+//            if(rng.nextInt(100) < MUTATION_RATE)
+//            {
+//                double[] dna = population[i].getChromosome();
+//                dna[rng.nextInt(dna.length)] = 2 * rng.nextDouble() - 1;
+//                population[i].setChromosome(dna);
+//            }
+//        }
+//    }
 
     public static void letPopulationPlay(Individual[] population)
     {
@@ -167,6 +172,20 @@ public class GeneticAlgorithm {
         for(int i = 0; i < population.length; i++)
         {
             population[i] = population[i].clone();
+        }
+    }
+
+    public static void normalize(double[] vector)
+    {
+        double length = 0;
+        for(int i = 0; i < vector.length; i++)
+        {
+            length += (vector[i] * vector[i]);
+        }
+        length = Math.sqrt(length);
+        for(int i=0; i < vector.length; i++)
+        {
+            vector[i] /= length;
         }
     }
 
