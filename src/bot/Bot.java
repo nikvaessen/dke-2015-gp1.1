@@ -24,7 +24,11 @@ public class Bot extends Thread{
     final static char ACTION_ROTATE_ANTICLOCKWISE = 'z';
 
     private final int TIME_BETWEEN_ACTIONS = 1000;
-    private static final double[] weights = new double[] {};
+    private final double[] weights = new double[]
+            {-0.510066,
+              0.760666,
+             -0.35663,
+             -0.184483};
 
     private Random rng;
     private Board board;
