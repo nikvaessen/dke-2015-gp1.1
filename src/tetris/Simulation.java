@@ -27,9 +27,9 @@ public class Simulation extends JPanel {
 
     public Simulation(MainMenu main) {
 
-        b = new Board(5, 12);
+        b = new Board(12, 12);
         a = new Pentomino();
-        c = new BoardHandler(b, new Board(5,5), true);
+        c = new BoardHandler(b, new Board(12,12), true);
         SimulationHasStarted = false;
 
         //create the gamepanel and add it
@@ -73,7 +73,7 @@ public class Simulation extends JPanel {
                                 SimulationHasStarted = true;
                                 startButton.setEnabled(false);
 
-                                c.hardSpawnPiece(a.getMatrix('v', 0));
+                               /* c.hardSpawnPiece(a.getMatrix('v', 0));
                                 try {
                                     Thread.sleep(TIME_BETWEEN_ACTIONS);
                                 } catch (Exception e) {
@@ -151,7 +151,7 @@ public class Simulation extends JPanel {
                                     Thread.sleep(TIME_BETWEEN_ACTIONS);
                                 } catch (Exception e) {
                                 }
-
+//here
                                 c.hardSpawnPiece(a.getMatrix('w', 0));
                                 try {
                                     Thread.sleep(TIME_BETWEEN_ACTIONS);
@@ -327,11 +327,12 @@ public class Simulation extends JPanel {
                                     Thread.sleep(TIME_BETWEEN_ACTIONS);
                                 } catch (Exception e) {
                                 }
-
+*/
                             }
                         });
                     } catch (Exception expenction) {
                         expenction.printStackTrace();
+                        System.out.print("fuck you");
                     }
                 }
             }
