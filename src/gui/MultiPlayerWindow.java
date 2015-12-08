@@ -21,8 +21,8 @@ public class MultiPlayerWindow extends JPanel
     private BoardHandler bh2 ;
     private HighScoreList highScoreList;
 
-    private HumanInput inputController1 ;
-    private HumanInput inputController2 ;
+    //private HumanInput2 inputController1 ;
+    //private HumanInput inputController2 ;
 
     private JPanel scorePanel;
     private JPanel rightPanel;
@@ -32,7 +32,7 @@ public class MultiPlayerWindow extends JPanel
         //create the variables
         Board board1 = new Board(10 , 20 ) ;
         Board board2 = new Board(10 , 20 ) ;
-        final HumanInput inputController1 = new HumanInput() ;
+        final HumanInput2 inputController1 = new HumanInput2() ;
         final HumanInput inputController2 = new HumanInput() ;
         this.bh1 = new BoardHandler(board1 , new Board(5, 5), true) ;
         this.bh2 = new BoardHandler(board2 , new Board(5, 5), true) ;
@@ -57,25 +57,34 @@ public class MultiPlayerWindow extends JPanel
 
         //create the ScoreBoard
         final ScoreBoard scoreBoard = new ScoreBoard() ;
+        final ScoreBoard scoreBoard2 = new ScoreBoard() ;
         GridBagConstraints d = new GridBagConstraints() ;
         d.gridx = 0 ;
         d.gridy = 0 ;
         scorePanel.add(scoreBoard , d) ;
         d.insets = new Insets(30,10,10,0);
+        d = new GridBagConstraints() ;
+        d.gridx = 2 ;
+        d.gridy = 0 ;
+        scorePanel.add(scoreBoard2 , d) ;
+        d.insets = new Insets(30,10,10,0) ;
+
         //add a timer to update ScoreBoard
         new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //System.out.println("Trying to update score");
                 scoreBoard.setScore(gameLoop1.getScore());
-                scoreBoard.setScore(gameLoop2.getScore());
+                scoreBoard2.setScore(gameLoop2.getScore());
             }
         }).start();
+
+
 
         //create the Highscore Board
         HighScoreBoard highScoreBoard = new HighScoreBoard(highScoreList);
         d = new GridBagConstraints();
-        d.gridx = 0;
+        d.gridx = 1;
         d.gridy = 1;
         d.insets = new Insets(30,10,10,10);
         scorePanel.add(highScoreBoard, d);
@@ -112,8 +121,8 @@ public class MultiPlayerWindow extends JPanel
         });
 
         d = new GridBagConstraints();
-        d.gridx = 0;
-        d.gridy = 5;
+        d.gridx = 1;
+        d.gridy = 3;
         d.weightx = 0.5;
         d.insets = new Insets(30,10,10,0);
         scorePanel.add(optionList, d);

@@ -1,32 +1,32 @@
-//to add this tetris.InputController to a panel, make sure the panel is focusable by
-//using the below methods:
-//    panel.setFocusable(true);
-//    panel.requestFocusInWindow();
-//panel has to be focused in order for the KeyListener to be able to listen
 package tetris;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class HumanInput implements KeyListener, InputController {
+/**
+ * Created by Stefan K on 08.12.2015.
+ */
+
+public class HumanInput2 implements KeyListener, InputController {
+
     private char currentInput;
 
-    public HumanInput() {
+    public HumanInput2() {
         currentInput = ' ';
     }
 
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode() == 39)
+        if(e.getKeyCode() == 69)
             currentInput = 'r';
-        if(e.getKeyCode() == 40)
+        if(e.getKeyCode() == 87)
             currentInput = 'd';
-        if(e.getKeyCode() == 37)
+        if(e.getKeyCode() == 81)
             currentInput = 'l';
-        if(e.getKeyCode() == 78)
+        if(e.getKeyCode() == 88)
             currentInput = 'z';
-        if(e.getKeyCode() == 77)
+        if(e.getKeyCode() == 67)
             currentInput = 'x';
-        if (Character.isSpaceChar(e.getKeyChar())) {
+        if (e.getKeyCode() == 86) {
             currentInput = 's';
         }
         //System.out.println(currentInput);

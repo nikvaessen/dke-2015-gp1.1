@@ -121,8 +121,8 @@ public class SinglePlayerWindow extends JPanel {
                         "&larr;         Move Left<br />" +
                         "&darr;         Move Down<br />" +
                         "<b>Space</b>     Drop<br />" +
-                        "<b>X</b>         Rotate Clockwise<br />" +
-                        "<b>Z</b>         Rotate Anticlockwise<br /><" +
+                        "<b>M</b>         Rotate Clockwise<br />" +
+                        "<b>N</b>         Rotate Anticlockwise<br /><" +
                         "</pre>" +
                         "</html>");
         textArea.setEditable(false);
