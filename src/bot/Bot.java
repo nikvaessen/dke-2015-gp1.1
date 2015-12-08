@@ -165,6 +165,19 @@ public class Bot extends Thread{
         }
     }
 
+    private boolean testPath(int newRow, int newColumn)
+    {
+
+        for(int i=5; i<newRow; i++)
+        {
+            if(board.getCell(i, newColumn) != 'o') return false;
+        }
+
+        return true;
+
+
+    }
+
     private char getMovementCommand()
     {
         char action = actionCommands[0];
@@ -229,6 +242,7 @@ public class Bot extends Thread{
                 {
                     testBoard.placePiece(possiblePieces.get(rot), x, y);
                     //System.out.println(Arrays.deepToString(possiblePieces.get(rot)));
+
                     double tempScore = -0.510066*testBoard.aggregateHeight() + 0.760666* testBoard.checkFullLines()
                             + -0.35663 * testBoard.amountOfHoles() + -0.184483 * testBoard.bumpiness();
 //                    testBoard.printBoard();
@@ -237,7 +251,8 @@ public class Bot extends Thread{
 //                            testBoard.bumpiness(), testBoard.checkFullLines());
 //                    System.out.println("Score: " + tempScore);
 
-                    if(tempScore > bestScore){
+                    if(tempScore > bestScore && testPath(x,y)){
+
                         bestX = x;
                         bestY = y;
                         bestR = rot;

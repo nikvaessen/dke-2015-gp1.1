@@ -88,17 +88,12 @@ public class GeneticBot extends Thread{
                 int rowsCleared = boardHandler.checkFullLines();
                 if(rowsCleared != 0) {
                     //scoreBoard.setScore(score);
+                    linesCleared++;
                 }
                 boardHandler.spawnPiece();
                 spawns++;
                 makeMovementCommands();
             }
-        }
-        try {
-            //System.out.println(sleeping for a second");
-            this.sleep(100);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         //System.out.println("Looking for user input");
         char input = getMovementCommand();
@@ -125,6 +120,15 @@ public class GeneticBot extends Thread{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean testPath(int newRow, int newColumn)
+    {
+        for(int i=5; i<newRow; i++)
+        {
+            if(board.getCell(i, newColumn) != 'o') return false;
+        }
+        return true;
     }
 
 
@@ -230,7 +234,7 @@ public class GeneticBot extends Thread{
                     double tempScore = chromesome[0]*testBoard.aggregateHeight() + chromesome[1]* testBoard.checkFullLines()
                             + chromesome[2] * testBoard.amountOfHoles() + chromesome[3] * testBoard.bumpiness();
 
-                    if(tempScore > bestScore){
+                    if(tempScore > bestScore && testPath(x, y)){
                         bestX = x;
                         bestY = y;
                         bestR = rot;
@@ -245,5 +249,13 @@ public class GeneticBot extends Thread{
         //System.out.println("Printing best board:");
         //bestBoard.printBoard();
         return new int[] {bestX, bestY, bestR};
+    }
+
+    public static void killThreads(Individual[] population)
+    {
+        for(int i = 0; i < population.length; i++)
+        {
+            population[i].killThread();
+        }
     }
 }
