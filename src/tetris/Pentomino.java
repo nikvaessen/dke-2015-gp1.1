@@ -167,5 +167,6 @@ public class Pentomino extends Polyomino {
 		super.addFlippedMatrix('v', v1);
 		super.addFlippedMatrix('y', y1);
 		super.addFlippedMatrix('w', w1);
+		super.addFlippedMatrix('z', z1);
     }
 }
