@@ -99,16 +99,9 @@ public class BoardHandler {
      */
     public void hardSpawnPiece(char[][] q)
     {
-        if(nextPiece == null)
-        {
-            nextPiece = q;
-        }
         rowOfPiece = 0;
         columnOfPiece = board.getWidth()/2 - 1;
-        fallingPentMatrix = nextPiece;
-        nextPiece = q;
-        nextPieceBoard.emptyBoard();
-        nextPieceBoard.placePiece(nextPiece, 0, 0);
+        fallingPentMatrix = q;
         kindOfPent = getKindOfPent();
         board.placePiece(fallingPentMatrix, rowOfPiece, columnOfPiece);
         needNewPiece = false;

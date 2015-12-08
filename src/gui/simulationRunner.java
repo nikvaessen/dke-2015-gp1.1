@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -55,7 +56,7 @@ public class simulationRunner extends Thread {
         order.add(pentomino.getMatrix('l', 0));
 
         actionCommands = new char[]{
-                'l', 'l', 's', 'x', 'l', 's', 'l', 'x', 's', 'x', 'r', 's', 'x', 'l', 's', 'z', 'z', 's', 'l', 'z', 's',
+                'l', 'l', 's', 'd', 'x', 'l', 's', 'l', 'x', 's', 'x', 'r', 's', 'x', 'l', 's', 'z', 'z', 's', 'l', 'z', 's',
                 'x', 'x', 's', 'l', 's', 'l', 'l', 'x', 's', 'r', 'z', 'z', 's', 'l', 'l', 'z', 's', 'r', 'x', 'x', 's', 'l',
                 'l', 's', 'x', 'x', 'l', 'l', 's', 'r', 'r', 's', 'z', 'r', 'r', 's'
         };
@@ -74,290 +75,32 @@ public class simulationRunner extends Thread {
     }
 
     private void simulateGame() {
-//        if (boardHandler.()) {
-//            boardHandler.hardSpawnPiece(order.get(spawnCount));
-//            gamePanel.repaint();
-//            spawnCount++;
-//        }
-//        try {
-//            Thread.sleep(1000);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        boardHandler.giveInput(getMovementCommand());
-//        gamePanel.repaint();
-//        try {
-//            SwingUtilities.invokeLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    playGame();
-//                }
-//            });
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        BoardHandler c = boardHandler;
-        Pentomino a = pentomino;
-        new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.repaint();
-            }
-        }).start();
-        c.hardSpawnPiece(a.getMatrix('v', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
+        System.out.println("simulate loop started. spawncount: " + spawnCount + " move count: " + moveCount);
+        if (boardHandler.isPieceDoneFalling()) {
+            System.out.println("Spawning: " + Arrays.deepToString(order.get(spawnCount)));
+            boardHandler.hardSpawnPiece(order.get(spawnCount));
+            gamePanel.repaint();
+            spawnCount++;
         }
-        c.giveInput('l');
         try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
+            System.out.println("sleeping 1 second");
+            Thread.sleep(1000);
         } catch (Exception e) {
+            e.printStackTrace();
         }
-        c.giveInput('s');
+        System.out.println("Sending movmement command and repainting");
+        boardHandler.giveInput(getMovementCommand());
+        gamePanel.repaint();
         try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    simulateGame();
+                }
+            });
         } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        c.hardSpawnPiece(a.getFlippdMatrix('z'));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('l');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.hardSpawnPiece(a.getMatrix('f', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('l');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.hardSpawnPiece(a.getFlippdMatrix('n'));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('r');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.hardSpawnPiece(a.getMatrix('w', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('l');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.hardSpawnPiece(a.getMatrix('p', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('z');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('z');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-
-        c.hardSpawnPiece(a.getMatrix('t', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('l');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('z');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.hardSpawnPiece(a.getFlippdMatrix('y'));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.hardSpawnPiece(a.getMatrix('x', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('l');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.hardSpawnPiece(a.getMatrix('u', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.giveInput('l');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('x');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-        c.hardSpawnPiece(a.getMatrix('i', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('r');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('r');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
-
-        c.hardSpawnPiece(a.getMatrix('l', 0));
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('z');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('r');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('r');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-        c.giveInput('s');
-        try {
-            Thread.sleep(TIME_BETWEEN_ACTIONS);
-        } catch (Exception e) {
-        }
-
     }
 
     private boolean wait(int ms) {
@@ -375,6 +118,7 @@ public class simulationRunner extends Thread {
     private char getMovementCommand() {
         char action = actionCommands[moveCount];
         moveCount++;
+        System.out.println("Giving move command: " + action);
         return action;
     }
 
