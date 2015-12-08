@@ -9,13 +9,13 @@ import java.util.Random;
 /**
  * Created by Jonty on 08/12/2015.
  */
-public class simulationRunner {
+
 
 
     /**
      * Created by chrx on 12/1/15.
      */
-    public class Bot extends Thread{
+    public class simulationRunner extends Thread{
         //final variables
 
         private final int TIME_BETWEEN_ACTIONS = 1000;
@@ -34,7 +34,7 @@ public class simulationRunner {
         private int count;
         private volatile int score;
 
-        public Bot(Board board, BoardHandler boardHandler, GamePanel gamePanel, char order)
+        public simulationRunner(Board board, BoardHandler boardHandler, GamePanel gamePanel, char order)
         {
             this.board = board;
             this.boardHandler = boardHandler;
@@ -140,4 +140,4 @@ public class simulationRunner {
 
     }
 
-}
+
