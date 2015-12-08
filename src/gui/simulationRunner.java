@@ -20,6 +20,7 @@ public class simulationRunner {
 
         private final int TIME_BETWEEN_ACTIONS = 1000;
         int x=0;
+        int i=0;
         private Random rng;
         private Board board;
         private BoardHandler boardHandler;
@@ -68,7 +69,7 @@ public class simulationRunner {
                         //scoreBoard.setScore(score);
                         score += rowsCleared*rowsCleared * 100;
                     }
-                    for(int i=0; i<12; i++)
+                    i++;
                     boardHandler.hardSpawnPiece(order[i]);
                     gamePanel.repaint();
                 }
