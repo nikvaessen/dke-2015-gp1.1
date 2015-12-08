@@ -86,14 +86,16 @@ public class simulationRunner extends Thread {
 
     private void simulateGame() {
         System.out.println("simulate loop started. spawncount: " + spawnCount + " move count: " + moveCount);
-        if (boardHandler.isPieceDoneFalling()&& spawnCount!=12) {
-            boardHandler.checkFullLines();
+        if (boardHandler.isPieceDoneFalling()){
+            if(spawnCount==12) return;//boardHandler.checkFullLines();
+
+           // boardHandler.checkFullLines();
             System.out.println("Spawning: " + Arrays.deepToString(order.get(spawnCount)));
             boardHandler.hardSpawnPiece(order.get(spawnCount));
             gamePanel.repaint();
             spawnCount++;
         }
-        else if(spawnCount==12){boardHandler.checkFullLines();}
+        else
         try {
             System.out.println("sleeping 1 second");
             Thread.sleep(1000);
