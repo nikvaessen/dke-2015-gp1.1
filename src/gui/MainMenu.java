@@ -1,17 +1,10 @@
 package gui;
 
-import tetris.Board;
-import tetris.InputController;
-import tetris.Simulation;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -26,7 +19,7 @@ public class MainMenu extends JFrame {
     private MultiPlayerWindow   multiPlayerWindow;
     private HighScoreWindow     highScoreWindow;
     private BotWindow           botWindow;
-    private Simulation          simWindow;
+    private SimulationWindow    simWindow;
     private OptionsWindow       optionsWindow;
 
     //strings representing all windows in the CardLayout
@@ -98,7 +91,7 @@ public class MainMenu extends JFrame {
         highScoreWindow = new HighScoreWindow(this);
         botWindow = new BotWindow(this);
         multiPlayerWindow = new MultiPlayerWindow(this);
-        simWindow = new Simulation(this);
+        simWindow = new SimulationWindow(this);
 
         //add panels to hashmap
         this.panels.put(singlePlayerName, singlePlayerWindow);

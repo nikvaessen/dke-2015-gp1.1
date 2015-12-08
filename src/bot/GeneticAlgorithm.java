@@ -69,7 +69,7 @@ public class GeneticAlgorithm {
             Individual[] weakest = new Individual[POPULATION/10 * 3];
             for(int i = POPULATION/10 * 7; i < population.length; i++)
             {
-                population[i].killThread();
+                weakest[i].killThread();
             }
             for(int i = (POPULATION/10) * 9; i < population.length; i++, k++){
                 population[i] = children[k];

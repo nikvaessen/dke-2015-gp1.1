@@ -10,8 +10,6 @@ import java.util.Random;
  * Created by Jonty on 08/12/2015.
  */
 
-
-
     /**
      * Created by chrx on 12/1/15.
      */
@@ -25,16 +23,24 @@ import java.util.Random;
         private Board board;
         private BoardHandler boardHandler;
         private GamePanel gamePanel;
-        private Pentomino pentomino;
-        char[][][] order= {pentomino.getMatrix('v', 0), pentomino.getFlippdMatrix('z'), pentomino.getMatrix('f', 0), pentomino.getFlippdMatrix('n'), pentomino.getMatrix('w', 0), pentomino.getMatrix('p', 0), pentomino.getMatrix('t', 0), pentomino.getFlippdMatrix('y'), pentomino.getMatrix('x', 0), pentomino.getMatrix('u', 0), pentomino.getMatrix('i', 0), pentomino.getMatrix('l', 0)};
+        private Pentomino pentomino = new Pentomino();
+        char[][][] order= {
+                pentomino.getMatrix('v', 0), pentomino.getFlippdMatrix('z'), pentomino.getMatrix('f', 0),
+                pentomino.getFlippdMatrix('n'), pentomino.getMatrix('w', 0), pentomino.getMatrix('p', 0),
+                pentomino.getMatrix('t', 0), pentomino.getFlippdMatrix('y'), pentomino.getMatrix('x', 0),
+                pentomino.getMatrix('u', 0), pentomino.getMatrix('i', 0), pentomino.getMatrix('l', 0)
+        };
 
 
         //variables for board handling
-        char[] actionCommands= {'l','l','s','x', 'l', 's', 'l','x','s', 'x','r','s','x','l','s','z','z','s','l','z','s','x','x','s','l','s','l','l','x','s','r','z','z','s','l','l','z','s','r','x','x','s','l','l','s','x','x','l','l','s','r','r','s','z','r','r','s'};
+        char[] actionCommands= {
+                'l','l','s','x', 'l', 's', 'l','x','s', 'x','r','s','x','l','s','z','z','s','l','z','s',
+                'x','x','s','l','s','l','l','x','s','r','z','z','s','l','l','z','s','r','x','x','s','l',
+                'l','s','x','x','l','l','s','r','r','s','z','r','r','s'
+        };
         private int count;
-        private volatile int score;
 
-        public simulationRunner(Board board, BoardHandler boardHandler, GamePanel gamePanel, char order)
+        public simulationRunner(Board board, BoardHandler boardHandler, GamePanel gamePanel)
         {
             this.board = board;
             this.boardHandler = boardHandler;
@@ -67,7 +73,6 @@ import java.util.Random;
                     int rowsCleared = boardHandler.checkFullLines();
                     if(rowsCleared != 0) {
                         //scoreBoard.setScore(score);
-                        score += rowsCleared*rowsCleared * 100;
                     }
                     i++;
                     boardHandler.hardSpawnPiece(order[i]);
