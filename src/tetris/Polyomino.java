@@ -59,18 +59,33 @@ public class Polyomino {
         return this.dict.get(name).getAmountOfMatrixes();
     }
 
+    /**
+     * Adds the matrix into the HashMap
+     * @param key the key of the pentomino that will be added into the HashMap
+     * @param block it represents a single form of a pentomino
+     */
     public void addMatrix(char key, Blocks block)
     {
         this.dict.put(key, block);
         this.keys.add(key);
     }
 
+    /**
+     * It adds the flipped pentomino into the HashMap
+     * @param key the key of the pentomino that will be added into the HashMap
+     * @param block it represents a single form of a pentomino
+     */
     public void addFlippedMatrix(char key, Blocks block)
     {
         this.flip.put(key, block);
         this.flippedKeys.add(key);
     }
 
+    /**
+     * Returns whether or not the HashMap contains the key of the pentomino corresponding to the name parameter
+     * @param name the name of the pentomino
+     * @return whether or not the HashMap contains the key of the pentomino corresponding to the name parameter
+     */
     public boolean hasKey(char name)
     {
         if(dict.containsKey(name))
@@ -118,7 +133,11 @@ public class Polyomino {
         this.dict.get(name).setUsedForAll(false);
     }
 
-
+    /**
+     * Returns whether or not the HashMap contains the key of the flipped pentomino corresponding to the name parameter
+     * @param name the name of the pentomino
+     * @return whether or not the HashMap contains the key of the pentomino corresponding to the name parameter
+     */
     public boolean hasflipKey(char name)
     {
         if(this.flip.containsKey(name))
@@ -131,6 +150,12 @@ public class Polyomino {
         }
     }
 
+    /**
+     * Returns the flipped matrix of the matrix corresponding to the name parameter if it exists
+     * @param name the matrix of which we want to return the flipped matrix
+     * @return the flipped version of the matrix corresponding to the name parameter if it exists
+     * @throws IllegalArgumentException if the flipped version of the matrix corresponding to the parameter name doesn't exist it will throw an exception
+     */
     public char[][] getFlippdMatrix(char name) throws IllegalArgumentException
     {
         if(hasflipKey(name))

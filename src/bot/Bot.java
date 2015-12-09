@@ -62,7 +62,7 @@ public class Bot extends Thread{
 
 
     /**
-     * The method gives the mod a command in order to start playing
+     * The method gives the bot a command in order to start playing
      */
     public void run()
     {
