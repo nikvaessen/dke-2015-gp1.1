@@ -27,6 +27,12 @@ public class BoardHandler {
     private char[] keys;
     private boolean[] keysFlipped;
 
+    /**
+     *
+     * @param board
+     * @param nextPieceBoard
+     * @param tetris
+     */
     public BoardHandler(Board board, Board nextPieceBoard, boolean tetris)
     {
         this.board = board;
