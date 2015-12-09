@@ -35,7 +35,7 @@ public class SinglePlayerWindow extends JPanel {
      */
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
-        board = new Board(5, 20);
+        board = new Board(10, 20);
         nextPieceBoard = new Board(5, 5);
         final HumanInputSP inputController = new HumanInputSP();
         this.bh = new BoardHandler(board, nextPieceBoard, true);

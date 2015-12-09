@@ -34,8 +34,8 @@ public class MultiPlayerWindow extends JPanel
     public MultiPlayerWindow( MainMenu mainMenu )
     {
         //create the variables
-        Board board1 = new Board(5 , 20 ) ;
-        Board board2 = new Board(5 , 20 ) ;
+        Board board1 = new Board(10 , 20 ) ;
+        Board board2 = new Board(10 , 20 ) ;
         final HumanInput2 inputController1 = new HumanInput2() ;
         final HumanInput inputController2 = new HumanInput() ;
         this.bh1 = new BoardHandler(board1 , new Board(5, 5), true) ;
@@ -297,7 +297,7 @@ public class MultiPlayerWindow extends JPanel
         d.insets = new Insets(30, 10, 10, 0);
         scorePanel.add(textArea, d);
 
-        //show controls Player 1 (right side)
+        //show controls Player 2 (left side)
         JTextPane textArea2 = new JTextPane();
         textArea2.setContentType("text/html");
         textArea2.setSize(Config.LEFTPANEL_SIZE.width, 200);
