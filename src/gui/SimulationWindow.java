@@ -1,9 +1,11 @@
 package gui;
 
-import bot.Bot;
-import tetris.*;
-
 import javax.swing.*;
+
+/**
+ * Created by baxie on 8-12-15.
+ */
+import tetris.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,20 +15,20 @@ import java.awt.event.FocusListener;
 /**
  * Created by baxie on 15-11-15.
  */
-public class BotWindow extends JPanel
+public class SimulationWindow extends JPanel
 {
     private GameLoop gameLoop;
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
 
     /**
-     * construct a window which displays a bot playing either tetris or pentris
-     * @param mainMenu the main menu which holds this panel
+     * a panel holding a gamepanel which has a start button to show the perfect ordering of pentris pieces
+     * @param mainMenu
      */
-    public BotWindow(MainMenu mainMenu) {
+    public SimulationWindow(MainMenu mainMenu) {
         //create the variables
-        Board board = new Board(10, 20);
-        this.bh = new BoardHandler(board, new Board(5,5), true);
+        Board board = new Board(5, 17);
+        this.bh = new BoardHandler(board, new Board(5,17), true);
         //behaviour
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -58,22 +60,7 @@ public class BotWindow extends JPanel
         }).start();
 
         //create bot Thread
-        final Bot bot = new Bot(board, bh, gamePanel);
-
-        //create the scoreboard
-        final ScoreBoard scoreBoard = new ScoreBoard();
-        c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        this.add(scoreBoard, c);
-        //add a timer that updates the scoreboard every 100 ms.
-        new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //System.out.println("Trying to update score");
-                scoreBoard.setScore(bot.getScore());
-            }
-        }).start();
+        final simulationRunner bot = new simulationRunner(board, bh, gamePanel);
 
         //create the combobox to choose between tetris and pentris
         String[] optionStrings = {"Tetris", "Pentris"};

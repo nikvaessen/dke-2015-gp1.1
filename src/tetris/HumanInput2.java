@@ -3,18 +3,22 @@ package tetris;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-/**
- * Created by Stefan K on 08.12.2015.
- */
 
 public class HumanInput2 implements KeyListener, InputController {
 
     private char currentInput;
 
+    /**
+     * Constructor for the current input
+     */
     public HumanInput2() {
         currentInput = ' ';
     }
 
+    /**
+     * Identifies which button was pressed and associates it with the correct input
+     * @param e the button that is pressed
+     */
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == 69)
             currentInput = 'r';
@@ -33,6 +37,7 @@ public class HumanInput2 implements KeyListener, InputController {
         //displayInfo(e, "Pressed: ");
     }
 
+
     public void keyReleased(KeyEvent e) {
         //displayInfo(e, "KEY RELEASED: ");
     }
@@ -41,6 +46,11 @@ public class HumanInput2 implements KeyListener, InputController {
         //displayInfo(e, "KEY RELEASED: ");
     }
 
+    /**
+     * Used to display the code for the button pressed
+     * @param e the button that is pressed
+     * @param s the string which will contain the code of the button
+     */
     public void displayInfo(KeyEvent e, String s) {
         String keyString;
         int keyCode = e.getKeyCode();
@@ -48,6 +58,10 @@ public class HumanInput2 implements KeyListener, InputController {
         System.out.println(keyString);
     }
 
+    /**
+     * Used to test whether there is a new input
+     * @return whether there is a new input or not
+     */
     public boolean hasNewInput() {
         if (currentInput == ' ') {
             return false;
@@ -55,6 +69,10 @@ public class HumanInput2 implements KeyListener, InputController {
         return true;
     }
 
+    /**
+     * Used to return the current input
+     * @return the current input
+     */
     public char getCurrentInput() {
         char toReturn = currentInput;
         currentInput = ' ';

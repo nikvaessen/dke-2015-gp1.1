@@ -24,10 +24,19 @@ public class SinglePlayerWindow extends JPanel {
     private JPanel leftPanel;
     private JPanel rightPanel;
 
+    private Board board;
+    private Board nextPieceBoard;
+    private boolean tetris;
+    private GamePanel gamePanel;
+
+    /**
+     * creates a panel where a single player game of tetris or pentris can be played in
+     * @param mainMenu the main menu holding this panel
+     */
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
-        Board board = new Board(5, 20);
-        Board nextPieceBoard = new Board(5, 5);
+        board = new Board(5, 20);
+        nextPieceBoard = new Board(5, 5);
         final HumanInput inputController = new HumanInput();
         this.bh = new BoardHandler(board, nextPieceBoard, true);
         this.highScoreList = new HighScoreList();
@@ -87,13 +96,45 @@ public class SinglePlayerWindow extends JPanel {
                 if(optionList.getSelectedIndex() == 0)
                 {
                     bh.switchToTetris();
+                    tetris=true;
+
                 }
                 else if(optionList.getSelectedIndex() == 1)
                 {
                     bh.switchToPentris();
+                    tetris=false;
                 }
             }
         });
+
+//        String[] optionSizes = {"5x20", "10x20"};
+//        final JComboBox optionSize = new JComboBox(optionSizes);
+//        optionList.setSelectedIndex(0);
+//        optionList.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(optionSize.getSelectedIndex() == 0)
+//                {
+//                    System.out.println("I need to sleep pleeease");
+//                    board=new Board(5,20);
+//                    bh= new BoardHandler(board, nextPieceBoard, tetris);
+//                    gamePanel= new GamePanel(board);
+//                    gamePanel.repaint();
+//                    repaint();
+//
+//                }
+//                else if(optionSize.getSelectedIndex() == 1)
+//                {        System.out.println("I need to sleep pleeease 2");
+//                    board=new Board(10,20);
+//                    bh= new BoardHandler(board, nextPieceBoard, tetris);
+//                    gamePanel= new GamePanel(board);
+//                    gamePanel.repaint();
+//                    repaint();
+//                }
+//            }
+//        });
+//        leftPanel.add(optionSize);
+
         optionList.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -140,7 +181,7 @@ public class SinglePlayerWindow extends JPanel {
         this.add(leftPanel, c);
 
         //create the gamepanel and add it
-        final GamePanel gamePanel = new GamePanel(board);
+        gamePanel = new GamePanel(board);
         this.setSize(Config.SINGLE_PLAYER_SIZE);
         gamePanel.setSize(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT);
         c = new GridBagConstraints();
@@ -262,8 +303,4 @@ public class SinglePlayerWindow extends JPanel {
         });
     }
 
-    /*public Dimension getPreferredSize()
-    {
-        return Config.SINGLE_PLAYER_SIZE;
-    }*/
 }

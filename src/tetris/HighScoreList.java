@@ -14,6 +14,9 @@ public class HighScoreList
 
     private boolean hasNewScore;
 
+    /**
+     * Constructor for the high score list
+     */
     public HighScoreList(){
 
         highScores = new HashMap<String, Integer>();
@@ -21,16 +24,29 @@ public class HighScoreList
         hasNewScore = false;
     }
 
+    /**
+     * It adds a new score and name o the high score list
+     * @param name the name that will be added in the high score list
+     * @param score the score that will be added in the high score list
+     */
     public void add(String name, int score){
         highScores.put(name, score);
         saveScore(formatString(name, score));
     }
 
+    /**
+     * Check whether there is a new high score or not
+     * @return whether there is a new highscore or not
+     */
     public boolean hasNewScore()
     {
         return hasNewScore;
     }
 
+    /**
+     * Returns the high score list
+     * @return the high score list
+     */
     public ArrayList<String> getHighScoreList()
     {
         hasNewScore = false;
@@ -53,6 +69,9 @@ public class HighScoreList
         return highScoreList;
     }
 
+    /**
+     * It reads the scores
+     */
     private void readScores()
     {
         Scanner in;
@@ -73,6 +92,9 @@ public class HighScoreList
         }
     }
 
+    /**
+     * It prints the scores
+     */
     public void printScores()
     {
         ArrayList<String> toPrint = getHighScoreList();
@@ -84,7 +106,10 @@ public class HighScoreList
         }
     }
 
-
+    /**
+     * It saves the score into the high score list
+     * @param newScore the score that needs to be saved
+     */
     private void saveScore(String newScore)
     {
         PrintWriter writer;
@@ -97,6 +122,12 @@ public class HighScoreList
         }
     }
 
+    /**
+     * It constructs a string containing the name of the person and tge corresponding score
+     * @param name the name of the player that will be put in the score list
+     * @param score the score corresponding to that player
+     * @return a string containing the name an score of the player
+     */
     private String formatString(String name, int score)
     {
         return String.format("%s,%s",name, Integer.toString(score));

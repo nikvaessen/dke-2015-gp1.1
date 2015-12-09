@@ -12,6 +12,9 @@ public class ScoreBoard extends JPanel{
     private JLabel scoreLabel;
     private JLabel scoreValueLabel;
 
+    /**
+     * construct panel which displays a score
+     */
     public ScoreBoard()
     {
         //variable creation
@@ -26,17 +29,29 @@ public class ScoreBoard extends JPanel{
         setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
+    /**
+     * construct panel which displays a score
+     * @param initialValue the initial score the panel displays
+     */
     public ScoreBoard(int initialValue)
     {
         this.score = initialValue;
     }
 
+    /**
+     * the preferred size of the panel
+     * @return the preferred size of the panel
+     */
     public Dimension getPreferredSize()
     {
         return new Dimension(150,50);
     }
 
 
+    /**
+     * set the score of the panel
+     * @param newValue the new value of the score
+     */
     public void setScore(int newValue)
     {
         this.score = newValue;

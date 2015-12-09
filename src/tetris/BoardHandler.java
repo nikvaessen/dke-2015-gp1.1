@@ -27,6 +27,12 @@ public class BoardHandler {
     private char[] keys;
     private boolean[] keysFlipped;
 
+    /**
+     * Constructor for the board handler
+     * @param board the board on which the game is played
+     * @param nextPieceBoard the board with the next piece
+     * @param tetris whether the board handler plays tetris or pentris
+     */
     public BoardHandler(Board board, Board nextPieceBoard, boolean tetris)
     {
         this.board = board;
@@ -43,36 +49,62 @@ public class BoardHandler {
         rng = new Random(System.currentTimeMillis());
     }
 
+    /**
+     * It sets the game to play Tetris
+     */
     public void switchToTetris()
     {
         polyomino = new Tetromino();
     }
 
+    /**
+     * It sets the game to play Pentris
+     */
     public void switchToPentris()
     {
         polyomino = new Pentomino();
     }
 
+    /**
+     * gets the current matrix of piece being 'handled' by the class
+     * @return the matrix of the piece being handled
+     */
     public char[][] getFallingPentMatrix()
     {
         return fallingPentMatrix;
     }
 
+    /**
+     * get the current kind of piece currently being handled
+     * @return
+     */
     public char getFallingPentName()
     {
         return kindOfPent;
     }
 
+    /**
+     * get the current row of the first block of the piece falling
+     * @return the current row of the first block of the piece falling
+     */
     public int getCurrentRow()
     {
         return rowOfPiece;
     }
 
+    /**
+     * get the current column of the first block of the piece falling
+     * @return the current column of the first block of the piece falling
+     */
     public int getCurrentColumn()
     {
         return columnOfPiece;
     }
 
+    /**
+     * Returns whether the game is playing pentris or not
+     * @return true if the game is playing pentris, false if not
+     */
     public boolean isPentris()
     {
         if(polyomino instanceof Pentomino)
@@ -84,6 +116,10 @@ public class BoardHandler {
         }
     }
 
+    /**
+     * Returns whether the game is playing tetris or not
+     * @return true if the game is playing tetris, false if not
+     */
     public boolean isTetris()
     {
         if(polyomino instanceof  Tetromino)
@@ -94,21 +130,16 @@ public class BoardHandler {
             return false;
         }
     }
+
     /**
      * Spawns a random pentomino in the top row(s) of the board.
+     * @param q the matrix of the matrix falling
      */
     public void hardSpawnPiece(char[][] q)
     {
-        if(nextPiece == null)
-        {
-            nextPiece = q;
-        }
         rowOfPiece = 0;
         columnOfPiece = board.getWidth()/2 - 1;
-        fallingPentMatrix = nextPiece;
-        nextPiece = q;
-        nextPieceBoard.emptyBoard();
-        nextPieceBoard.placePiece(nextPiece, 0, 0);
+        fallingPentMatrix = q;
         kindOfPent = getKindOfPent();
         board.placePiece(fallingPentMatrix, rowOfPiece, columnOfPiece);
         needNewPiece = false;
@@ -137,7 +168,7 @@ public class BoardHandler {
 
     /**
      * returns a random matrix of a pentomino
-     * @return
+     * @return random matrix of a pentomino
      */
     private char[][] getRandomPentomino()
     {
@@ -193,6 +224,10 @@ public class BoardHandler {
         return toReturn;
     }
 
+    /**
+     * It moves the piece to the given input
+     * @param input the input where the piece will be moved
+     */
     public void giveInput(char input)
     {
         //System.out.println("row of piece: "+ rowOfPiece + " column of piece: " + columnOfPiece);
@@ -207,6 +242,10 @@ public class BoardHandler {
         }
     }
 
+    /**
+     * It rotates the pentomino to the given input
+     * @param input the input to which the pentomino will be placed after rotation
+     */
     private void rotatePentomino(char input)
     {
         //determine the new matrix of the piece
@@ -239,7 +278,10 @@ public class BoardHandler {
         }
     }
 
-    //direction can be 'l' for left, 'r' for roght and 'd' for down and 'space' for super down
+    /**
+     * It moves the pentomino to the given direction
+     * @param direction the direction to which the pentomino will be moved
+     */
     private void movePentominoTo(char direction) {
         //determine the new values to move the piece left or right
         int rowTranslation = 0;
@@ -296,6 +338,9 @@ public class BoardHandler {
         }
     }
 
+    /**
+     * It removes the current piece from the current position
+     */
     private void removeCurrentPiece()
     {
         for(int i = 0; i < fallingPentMatrix.length; i++)
@@ -308,6 +353,9 @@ public class BoardHandler {
         }
     }
 
+    /**
+     * It redraws the piece to the stored position
+     */
     private void redrawCurrentPiece()
     {
         for(int i = 0; i < fallingPentMatrix.length; i++)
@@ -320,6 +368,10 @@ public class BoardHandler {
         }
     }
 
+    /**
+     * Checks whether the game is over
+     * @return true if the game is over, false if the game is not over
+     */
     public boolean isGameOver()
     {
         for(int row=0; row<5; row++)
@@ -330,6 +382,10 @@ public class BoardHandler {
         return false;
     }
 
+    /**
+     * It checks the amount of full lines the board has
+     * @return the amount of full lines the board has
+     */
     public int checkFullLines()
     {
         int rowsCleared = 0;
@@ -351,6 +407,10 @@ public class BoardHandler {
         return rowsCleared;
     }
 
+    /**
+     * Clears the specified row
+     * @param row1 the row that will be cleared
+     */
    private void clearLine(int row1)
     {
         for(int row=row1; row>5; row--)
@@ -362,17 +422,30 @@ public class BoardHandler {
         }
     }
 
+    /**
+     * Returns whether there needs to be a newly spawned piece
+     * @return true if there needs to be a new spawned piece, false if not
+     */
     public boolean isPieceDoneFalling()
     {
         return needNewPiece;
     }
 
+    /**
+     * It resets the board so a new game can be started
+     */
     public void resetBoard()
     {
         this.needNewPiece = false;
         board.emptyBoard();
     }
 
+    /**
+     * It rotates a given matrix clockwise or anticlockwise
+     * @param matrixToRotate the matrix that will be rotated
+     * @param clockwise true for clockwise, false for anticlockwise
+     * @return the rotated matrix
+     */
     public static char[][] rotateMatrix(char[][] matrixToRotate, boolean clockwise){
 		/*
 		step 1: To rotate a matrix, first transpose the matrix so that the first column becomes the
@@ -433,6 +506,10 @@ public class BoardHandler {
         return rotatedMatrix;
     }
 
+    /**
+     * Loops through the matrix of the currently falling piece to return the king of piece it is
+     * @return the kind of piece the currently falling piece is
+     */
     private char getKindOfPent()
     {
         for(int i = 0; i < fallingPentMatrix.length; i++)

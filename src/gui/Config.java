@@ -17,7 +17,7 @@ public abstract class Config
 
     //dimensions of single player window
 
-    public static final Dimension GAME_PANEL_SIZE = new Dimension(200,580);
+    public static final Dimension GAME_PANEL_SIZE = new Dimension(400,580); //200 for 5 width
     public static final Dimension NEXT_PIECE_SIZE = new Dimension(150, 150);
     public static final Dimension SINGLE_PLAYER_SIZE = new Dimension(800, 600);
     public static final Dimension RIGHTPANEL_SIZE = new Dimension(800, 150);

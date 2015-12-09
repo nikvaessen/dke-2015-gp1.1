@@ -1,24 +1,15 @@
 package gui;
 
-import tetris.Board;
-import tetris.InputController;
-import tetris.Simulation;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import javax.swing.event.AncestorListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-/**
- * Created by Aleksandra and Nik on 2015-11-10.
- */
+
 public class MainMenu extends JFrame {
     //Every panel the we want to potentially display
     private JPanel              mainPanel;          //holds the image header and all the buttons
@@ -26,8 +17,8 @@ public class MainMenu extends JFrame {
     private MultiPlayerWindow   multiPlayerWindow;
     private HighScoreWindow     highScoreWindow;
     private BotWindow           botWindow;
-    private Simulation          simWindow;
-    private OptionsWindow       optionsWindow;
+    private SimulationWindow    simWindow;
+
 
     //strings representing all windows in the CardLayout
     private final String mainMenuName = "main";
@@ -52,6 +43,9 @@ public class MainMenu extends JFrame {
     private JButton simButton;
     private JButton quitButton;
 
+    /**
+     * creates a main menu with buttons to go to other panels
+     */
     public MainMenu() {
         //set up the panels and their buttons and the image header
         this.panels = new HashMap<String, JPanel>();
@@ -77,6 +71,9 @@ public class MainMenu extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * set up the main panel which holds everything else
+     */
     private void setUpMainPanel()
     {
         mainPanel = new JPanel(); //to hold image and buttons
@@ -92,13 +89,16 @@ public class MainMenu extends JFrame {
         this.add(mainPanel);
     }
 
+    /**
+     * create the other panels behind the main panel
+     */
     private void setUpOtherPanels()
     {
         singlePlayerWindow = new SinglePlayerWindow(this);
         highScoreWindow = new HighScoreWindow(this);
         botWindow = new BotWindow(this);
         multiPlayerWindow = new MultiPlayerWindow(this);
-        simWindow = new Simulation(this);
+        simWindow = new SimulationWindow(this);
 
         //add panels to hashmap
         this.panels.put(singlePlayerName, singlePlayerWindow);
@@ -109,6 +109,9 @@ public class MainMenu extends JFrame {
         //// TODO: 16-11-15 add the other panels when they are done
     }
 
+    /**
+     * set uo the card layout so you can switch between panels
+     */
     private void setUpCardLayout()
     {
         this.cardLayout = new CardLayout();
@@ -126,6 +129,9 @@ public class MainMenu extends JFrame {
         this.add(cardPanel);
     }
 
+    /**
+     * set up the buttons which makes the card panel display other panels
+     */
     private void setUpButtons()
     {
         //set up the the buttons
@@ -157,6 +163,9 @@ public class MainMenu extends JFrame {
         mainPanel.add(buttonHolder, c);
     }
 
+    /**
+     * set up the header image on the main panel
+     */
     private void setUpImage()
     {
         try{
@@ -174,6 +183,9 @@ public class MainMenu extends JFrame {
         }
     }
 
+    /**
+     * display who made the program
+     */
     private void setUpMadeByText()
     {
         //create text area to show who made me :)
@@ -200,6 +212,9 @@ public class MainMenu extends JFrame {
         mainPanel.add(textArea, c);
     }
 
+    /**
+     * set up the action listeners for the buttons to display another panel
+     */
     private void setUpActionListeners()
     {
         //actionlistener for the singlePlayerWindow
@@ -260,6 +275,10 @@ public class MainMenu extends JFrame {
     }
 
 
+    /**
+     * function to choose which panel the card layout should display
+     * @param nameOfPanelToDisplay the name of the panel to display in the card layout
+     */
     private void startDisplaying(String nameOfPanelToDisplay)
     {
         cardLayout.show(cardPanel, nameOfPanelToDisplay);
@@ -267,6 +286,9 @@ public class MainMenu extends JFrame {
         this.pack();
     }
 
+    /**
+     * sets the card panel back to the main panel
+     */
     public void goBackToMainMenu()
     {
         startDisplaying(mainMenuName);
