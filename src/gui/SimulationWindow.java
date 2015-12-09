@@ -5,12 +5,7 @@ import javax.swing.*;
 /**
  * Created by baxie on 8-12-15.
  */
-
-import bot.Bot;
-import bot.BotInput;
 import tetris.*;
-
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,7 +1,6 @@
 package gui;
 
 import bot.Bot;
-import bot.BotInput;
 import tetris.*;
 
 import javax.swing.*;

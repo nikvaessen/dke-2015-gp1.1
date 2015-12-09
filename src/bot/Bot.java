@@ -3,13 +3,9 @@ package bot;
 import gui.GamePanel;
 import tetris.Board;
 import tetris.BoardHandler;
-import tetris.GameLoop;
-
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.jar.Pack200;
 
 /**
  * Created by chrx on 12/1/15.
@@ -48,6 +44,13 @@ public class Bot extends Thread{
     private int count;
     private volatile int score;
 
+    /**
+     * Constructor for our bot
+     * @param board the Board class our bot is playing on
+     * @param boardHandler the BoardHandler which has the same board as the one from the Board class parameter
+     * @param gamePanel the GamePanel which holds the same board as the previous 2 parameters
+     *
+     */
     public Bot(Board board, BoardHandler boardHandler, GamePanel gamePanel)
     {
         this.board = board;
@@ -57,6 +60,10 @@ public class Bot extends Thread{
         count = 0;
     }
 
+
+    /**
+     * The method gives the mod a command in order to start playing
+     */
     public void run()
     {
         SwingUtilities.invokeLater(new Runnable() {
@@ -67,6 +74,9 @@ public class Bot extends Thread{
         });
     }
 
+    /**
+     * Loop which makes the bot play the game
+     */
     private void playGame()
     {
         count++;
@@ -124,20 +134,10 @@ public class Bot extends Thread{
         }
     }
 
-    private boolean wait(int ms)
-    {
-        //System.out.println("Waiting: " + System.currentTimeMillis());
-        try{
-            this.sleep(ms);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return true;
-        //System.out.println("done Waiting: " + System.currentTimeMillis());
-    }
 
+    /**
+     * Sets the correct movement for a bot turn by changing the actionCommands variable
+     */
     private void makeMovementCommands()
     {
         char[][] botBoard = board.getBoard();
@@ -178,6 +178,13 @@ public class Bot extends Thread{
         }
     }
 
+    /**
+     * Makes sure the piece can move to the place where it will placed
+     * @param newRow the row in which the piece will be placed
+     * @param newColumn the column in which the piece will be placed
+     * @param matrix the matrix of the current falling piece
+     * @return returns whether the piece can be placed
+     */
     private boolean testPath(int newRow, int newColumn, char[][] matrix)
     {
         for(int row=5; row<newRow; row++)
@@ -186,13 +193,17 @@ public class Bot extends Thread{
             {
                 for(int j = 0; j < matrix[i].length; j++)
                 {
-                    if(matrix[i][j] != 'o' && board.getCell(row, newColumn) != 'o') return false;
+                    if(matrix[i][j] != 'o' && board.getCell((row + i), (newColumn + j)) != 'o') return false;
                 }
             }
         }
         return true;
     }
 
+    /**
+     * Returns the first value of the actionCommands array and deletes the value from the array
+     * @return the first value of the array
+     */
     private char getMovementCommand()
     {
         char action = actionCommands[0];
@@ -204,6 +215,12 @@ public class Bot extends Thread{
         return action;
     }
 
+    /**
+     * Returns the position and rotation the bot should place the piece in
+     * @param board the board on which the piece should be placed
+     * @param piece the piece that the bot must place
+     * @return returns an array where the first 2 values are the coordinates and the third value is the rotation
+     */
     private int[] getRecommendedPositionAndRotation(char[][] board, char[][] piece)
     {
         Board testBoard = new Board(0,0);
@@ -272,9 +289,8 @@ public class Bot extends Thread{
 //                            "Full lines: %d %n ", testBoard.aggregateHeight(), testBoard.amountOfHoles(),
 //                            testBoard.bumpiness(), testBoard.checkFullLines());
 //                    System.out.println("Score: " + tempScore);
-
-                    if(tempScore > bestScore){
-
+                    if(tempScore > bestScore && isGameOver(testBoard)){
+                        isGameOver(testBoard);
                         bestX = x;
                         bestY = y;
                         bestR = rot;
@@ -293,9 +309,28 @@ public class Bot extends Thread{
         return new int[] {bestX, bestY, bestR};
     }
 
+    /**
+     * Returns the score of the bot
+     * @return the score
+     */
     public int getScore()
     {
         return score;
+    }
+
+    /**
+     * Tests whether the game is over or not
+     * @param board the board on which the bot is playing the game
+     * @return whether the game is over or not
+     */
+    public boolean isGameOver(Board board)
+    {
+        for(int i=0; i<5; i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                if (board.getCell(i, j) != 'o') return true;
+            }
+        }
+        return false;
     }
 
 }

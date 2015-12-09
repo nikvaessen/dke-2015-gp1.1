@@ -16,9 +16,9 @@ public class GeneticAlgorithm {
 
     public static final int BOARD_WIDTH = 10;
     public static final int BOARD_HEIGHT = 20;
-    public static final boolean tetris = true;
+    public static final boolean tetris = false;
     public static final int POPULATION = 1000;
-    public static final int MAX_GENERATIONS = 100;
+    public static final int MAX_GENERATIONS = 10;
     public static final int MUTATION_RATE = 1;
 
     public static Random rng;
@@ -28,6 +28,9 @@ public class GeneticAlgorithm {
         runAlgorithm();
     }
 
+    /**
+     * Runs the Genetic Algorithm
+     */
     public static void runAlgorithm()
     {
         Individual[] population = new Individual[POPULATION];
@@ -101,6 +104,10 @@ public class GeneticAlgorithm {
         killThreads(population);
     }
 
+    /**
+     * It prints out the given population
+     * @param population the population you want to get printed out
+     */
     public static void printPopulation(Individual[] population)
     {
         for(int i = 0; i < population.length; i++)
@@ -110,6 +117,12 @@ public class GeneticAlgorithm {
         }
     }
 
+    /**
+     * Uses crossover to create another individual
+     * @param mother one of the individuals used in the crossover
+     * @param father the other individual used in the crossover
+     * @return the resulting individual of the crossover
+     */
     public static Individual createChild(Individual mother, Individual father)
     {
         double[] sperm = father.getChromosome();
@@ -134,20 +147,10 @@ public class GeneticAlgorithm {
         return new Individual(zygote);
     }
 
-    
-//    public static void mutatePopulation(Individual[] population)
-//    {
-//        for(int i = 0; i < population.length; i++)
-//        {
-//            if(rng.nextInt(100) < MUTATION_RATE)
-//            {
-//                double[] dna = population[i].getChromosome();
-//                dna[rng.nextInt(dna.length)] = 2 * rng.nextDouble() - 1;
-//                population[i].setChromosome(dna);
-//            }
-//        }
-//    }
-
+    /**
+     * Starts every thread in every individual
+     * @param population the population on which you want to play
+     */
     public static void letPopulationPlay(Individual[] population)
     {
         //every indivual starts playing it's game
@@ -175,6 +178,10 @@ public class GeneticAlgorithm {
         }
     }
 
+    /**
+     * Normalizes a given input vector
+     * @param vector the vector you want to normalize
+     */
     public static void normalize(double[] vector)
     {
         double length = 0;
@@ -189,6 +196,10 @@ public class GeneticAlgorithm {
         }
     }
 
+    /**
+     * Kills every thread of every population
+     * @param pop the population for which we want to kill the threads
+     */
     public static void killThreads(Individual[] pop)
     {
         for(int i = 0; i < pop.length; i++)

@@ -16,6 +16,10 @@ public class Individual {
     private boolean gameStartedRunning;
     private boolean gameDone;
 
+    /**
+     *
+     * @param chromosome
+     */
     public Individual(double[] chromosome) {
         this.chromosome = chromosome;
         this.fitness = 0;

@@ -33,6 +33,12 @@ public class GeneticBot extends Thread{
     char[] actionCommands;
     private int count;
 
+    /**
+     * Constructor for the genetic bot
+     * @param board the Board class our bot is playing on
+     * @param boardHandler the BoardHandler which has the same board as the one from the Board class parameter
+     * @param chromesome the weights used by this bot
+     */
     public GeneticBot(Board board, BoardHandler boardHandler, double[] chromesome)
     {
         this.board = board;
@@ -44,26 +50,27 @@ public class GeneticBot extends Thread{
         linesCleared = 0;
     }
 
-    public double[] getChromosome()
-    {
-        return chromesome;
-    }
-
-    public void setChromosome(double[] chromesome)
-    {
-        this.chromesome = chromesome;
-    }
-
+    /**
+     * returns if game is over
+     * @return true for game over, false if not
+     */
     public boolean gameOver()
     {
         return gameOver;
     }
 
+    /**
+     * returns the amount of lines the bot was able to clear
+     * @return the amount able to be cleared by the bot
+     */
     public int getLinesCleared()
     {
         return linesCleared;
     }
 
+    /**
+     * The method gives the mod a command in order to start playing
+     */
     public void run()
     {
         SwingUtilities.invokeLater(new Runnable() {
@@ -74,26 +81,33 @@ public class GeneticBot extends Thread{
         });
     }
 
+    /**
+     * Loop which makes the bot play the game
+     */
     private void playGame()
     {
         count++;
         //System.out.println(count);
         if (boardHandler.isPieceDoneFalling()) {
             //System.out.println("Spawning new piece");
-            if (boardHandler.isGameOver() || spawns >= MAXIMUM_SPAWNS_ALLOWED) {
-                gameOver = true;
+            if (boardHandler.isGameOver()) {
+                System.out.println("Game over");
                 return;
             }
             else {
                 int rowsCleared = boardHandler.checkFullLines();
                 if(rowsCleared != 0) {
                     //scoreBoard.setScore(score);
-                    linesCleared++;
                 }
                 boardHandler.spawnPiece();
-                spawns++;
                 makeMovementCommands();
             }
+        }
+        try {
+            //System.out.println(sleeping for a second");
+            this.sleep(100);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         //System.out.println("Looking for user input");
         char input = getMovementCommand();
@@ -107,7 +121,7 @@ public class GeneticBot extends Thread{
         {
             count = 0;
             //System.out.println("10 loops have happened, moving the piece down");
-            boardHandler.giveInput(ACTION_MOVE_DOWN);
+            boardHandler.giveInput('d');
         }
         ////System.out.println("restarting the game loop!");
         try {
@@ -122,24 +136,21 @@ public class GeneticBot extends Thread{
         }
     }
 
-    private boolean testPath(int newRow, int newColumn)
-    {
-        for(int i=5; i<newRow; i++)
-        {
-            if(board.getCell(i, newColumn) != 'o') return false;
-        }
-        return true;
-    }
 
-
+    /**
+     * Sets the correct movement for a bot turn by changing the actionCommands variable
+     */
     private void makeMovementCommands()
     {
         char[][] botBoard = board.getBoard();
         Board cloneBoard= board.clone();
 
         char[][] pieceFalling = boardHandler.getFallingPentMatrix();
+        char letterPieceFalling=boardHandler.getFallingPentName();
+        int currentRow = boardHandler.getCurrentRow();
         int currentColumn = boardHandler.getCurrentColumn();
         int[] recommendedPositionAndRotation = getRecommendedPositionAndRotation(botBoard, pieceFalling);
+        int newRow = recommendedPositionAndRotation[0];
         int newColumn = recommendedPositionAndRotation[1];
         int rotation = recommendedPositionAndRotation[2];
         ArrayList<Character> newActionCommands = new ArrayList<>();
@@ -169,15 +180,49 @@ public class GeneticBot extends Thread{
         }
     }
 
+    /**
+     * Makes sure the piece can move to the place where it will placed
+     * @param newRow the row in which the piece will be placed
+     * @param newColumn the column in which the piece will be placed
+     * @param matrix the matrix of the current falling piece
+     * @return returns whether the piece can be placed
+     */
+    private boolean testPath(int newRow, int newColumn, char[][] matrix)
+    {
+        for(int row=5; row<newRow; row++)
+        {
+            for(int i = 0; i < matrix.length; i++)
+            {
+                for(int j = 0; j < matrix[i].length; j++)
+                {
+                    if(matrix[i][j] != 'o' && board.getCell((row + i), (newColumn + j)) != 'o') return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Returns the first value of the actionCommands array and deletes the value from the array
+     * @return the first value of the array
+     */
     private char getMovementCommand()
     {
         char action = actionCommands[0];
         char[] newActionCommands = new char[actionCommands.length - 1];
+        // System.out.println("old array: " + Arrays.toString(actionCommands));
         System.arraycopy(actionCommands, 1, newActionCommands, 0, newActionCommands.length);
+//        System.out.println("new array: " + Arrays.toString(newActionCommands));
         actionCommands = newActionCommands;
         return action;
     }
 
+    /**
+     * Returns the position and rotation the bot should place the piece in
+     * @param board the board on which the piece should be placed
+     * @param piece the piece that the bot must place
+     * @return returns an array where the first 2 values are the coordinates and the third value is the rotation
+     */
     private int[] getRecommendedPositionAndRotation(char[][] board, char[][] piece)
     {
         Board testBoard = new Board(0,0);
@@ -227,19 +272,34 @@ public class GeneticBot extends Thread{
             //System.out.println("Row: " + x + " Column: " + y );
             for(int rot = 0; rot < possiblePieces.size(); rot++)
             {
-                if(testBoard.canPlace(possiblePieces.get(rot), x, y))
+                if(testBoard.canPlace(possiblePieces.get(rot), x, y) && testPath(x,y, possiblePieces.get(rot)))
                 {
                     testBoard.placePiece(possiblePieces.get(rot), x, y);
                     //System.out.println(Arrays.deepToString(possiblePieces.get(rot)));
-                    double tempScore = chromesome[0]*testBoard.aggregateHeight() + chromesome[1]* testBoard.checkFullLines()
-                            + chromesome[2] * testBoard.amountOfHoles() + chromesome[3] * testBoard.bumpiness();
+                    double tempScore;
+                    if(boardHandler.isTetris()){
+                        tempScore = chromesome[0] * testBoard.aggregateHeight() + chromesome[1] * testBoard.checkFullLines()
+                                + chromesome[2] * testBoard.amountOfHoles() + chromesome[3]* testBoard.bumpiness();
+                    }
+                    else{
+                        tempScore = chromesome[0] * testBoard.aggregateHeight() + chromesome[1] * testBoard.checkFullLines()
+                                + chromesome[2] * testBoard.amountOfHoles() + chromesome[3]* testBoard.bumpiness();
+                    }
 
-                    if(tempScore > bestScore && testPath(x, y)){
+//                    testBoard.printBoard();
+//                    System.out.printf(" Aggregate height: %d %n Amount of holes: %d %n Bumpiness: %d %n " +
+//                            "Full lines: %d %n ", testBoard.aggregateHeight(), testBoard.amountOfHoles(),
+//                            testBoard.bumpiness(), testBoard.checkFullLines());
+//                    System.out.println("Score: " + tempScore);
+                    if(tempScore > bestScore && isGameOver(testBoard)){
+                        isGameOver(testBoard);
                         bestX = x;
                         bestY = y;
                         bestR = rot;
                         bestScore=tempScore;
                         bestBoard= testBoard.clone();
+                        //System.out.println("Max score: " + bestScore);
+
                     }
                     testBoard.removePiece(possiblePieces.get(rot), x , y);
                 }
@@ -251,11 +311,18 @@ public class GeneticBot extends Thread{
         return new int[] {bestX, bestY, bestR};
     }
 
-    public static void killThreads(Individual[] population)
+    /**
+     * Tests whether the game is over or not
+     * @param board the board on which the bot is playing the game
+     * @return whether the game is over or not
+     */
+    public boolean isGameOver(Board board)
     {
-        for(int i = 0; i < population.length; i++)
-        {
-            population[i].killThread();
+        for(int i=0; i<5; i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                if (board.getCell(i, j) != 'o') return true;
+            }
         }
+        return false;
     }
 }
