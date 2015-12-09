@@ -21,6 +21,10 @@ public class SimulationWindow extends JPanel
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
 
+    /**
+     * a panel holding a gamepanel which has a start button to show the perfect ordering of pentris pieces
+     * @param mainMenu
+     */
     public SimulationWindow(MainMenu mainMenu) {
         //create the variables
         Board board = new Board(5, 17);

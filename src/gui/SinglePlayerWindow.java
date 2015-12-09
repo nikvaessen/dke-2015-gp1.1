@@ -24,6 +24,10 @@ public class SinglePlayerWindow extends JPanel {
     private JPanel leftPanel;
     private JPanel rightPanel;
 
+    /**
+     * creates a panel where a single player game of tetris or pentris can be played in
+     * @param mainMenu the main menu holding this panel
+     */
     public SinglePlayerWindow(MainMenu mainMenu) {
         //create the variables
         Board board = new Board(5, 20);
@@ -262,8 +266,4 @@ public class SinglePlayerWindow extends JPanel {
         });
     }
 
-    /*public Dimension getPreferredSize()
-    {
-        return Config.SINGLE_PLAYER_SIZE;
-    }*/
 }

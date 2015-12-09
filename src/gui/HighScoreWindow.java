@@ -20,6 +20,10 @@ public class HighScoreWindow extends JPanel {
 
     private Font font = new Font("SansSerif", Font.PLAIN, 25);
 
+    /**
+     * construct a panel which displays the 5 best scoring players in a HighScoreList object
+     * @param mainMenu
+     */
     public HighScoreWindow(MainMenu mainMenu) {
         highScores = new HashMap<String, String>();
         this.setPreferredSize(new Dimension(Config.MAIN_MENU_WIDTH, Config.MAIN_MENU_HEIGHT));
@@ -32,6 +36,9 @@ public class HighScoreWindow extends JPanel {
         //printScores();
     }
 
+    /**
+     * sets up the header image for this panel
+     */
     private void setUpImage() {
         try {
             ImageHolderPanel image = new ImageHolderPanel(ImageIO.read(new File(Config.MAIN_MENU_HEADER_IMAGE)));
@@ -46,10 +53,18 @@ public class HighScoreWindow extends JPanel {
         }
     }
 
+    /**
+     * add a high score
+     * @param name the name of the new high score
+     * @param score the score of the new high score
+     */
     public void add(String name, String score) {
         highScores.put(name, score);
     }
 
+    /**
+     * read the scores from the file
+     */
     public void readScores() {
         Scanner in;
         try {
@@ -69,6 +84,10 @@ public class HighScoreWindow extends JPanel {
     }
 
 
+    /**
+     * prints out all the names stored in the high score
+     * @param highScores the hashmap storing the names
+     */
     public void printNames(HashMap<String, String> highScores) {
         JTextArea names = new JTextArea();
         names.setFont(font);
@@ -98,6 +117,10 @@ public class HighScoreWindow extends JPanel {
         this.add(names, c);
     }
 
+    /**
+     * prints the scores of a high score
+     * @param highScores the hashmap holding the high score
+     */
     public void printScores(HashMap<String, String> highScores) {
         JTextArea scores = new JTextArea();
         scores.setFont(font);
@@ -128,6 +151,10 @@ public class HighScoreWindow extends JPanel {
         this.add(scores, c);
     }
 
+    /**
+     * adds the back button to the panel
+     * @param mainMenu the main menu to go back to
+     */
     public void addBackButton(MainMenu mainMenu) {
         BackButton back = new BackButton(mainMenu);
         GridBagConstraints c = new GridBagConstraints();

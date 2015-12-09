@@ -19,7 +19,10 @@ public class BotWindow extends JPanel
     private boolean gameLoopHasStarted;
     private BoardHandler bh;
 
-
+    /**
+     * construct a window which displays a bot playing either tetris or pentris
+     * @param mainMenu the main menu which holds this panel
+     */
     public BotWindow(MainMenu mainMenu) {
         //create the variables
         Board board = new Board(10, 20);
