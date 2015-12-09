@@ -31,7 +31,7 @@ public class Bot extends Thread{
 
     private final double[] pentris_weights = new double[]
             {
-                    -0.36791547277471026, 0.8621801108460212, -0.6084040448191494, -0.19515159671479743
+                    -0.49957273958047954, 0.29594893328418037, -0.7942169712292743, -0.17540932859336716
             };
 
     private Random rng;

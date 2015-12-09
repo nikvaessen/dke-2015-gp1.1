@@ -12,8 +12,8 @@ public class GeneticAlgorithm {
     public static final int BOARD_HEIGHT = 20;
     public static final boolean tetris = true;
     public static final int POPULATION = 100;
-    public static final int MAX_GENERATIONS = 1000;
-    public static final int MUTATION_RATE = 5;
+    public static final int MAX_GENERATIONS = 15;
+    public static final int MUTATION_RATE = 15;
 
     public static Random rng;
 
@@ -27,14 +27,16 @@ public class GeneticAlgorithm {
      */
     public static void runAlgorithm()
     {
+        System.out.println("with forced starting pop with 15 mut");
         Individual[] population = new Individual[POPULATION];
         rng = new Random(System.currentTimeMillis());
         //fill population with bots
         for(int i = 0; i < population.length; i++)
         {
             Board boardForBot = new Board(BOARD_WIDTH, BOARD_HEIGHT);
-            double[] chromosome = new double[] { 2 * rng.nextDouble() - 1,2 * rng.nextDouble() -
-                    1,2 * rng.nextDouble() - 1, 2 * rng.nextDouble() - 1};
+            double[] chromosome = new double[] {-0.49957273958047954, 0.29594893328418037, -0.7942169712292743, -0.17540932859336716 };
+//            double[] chromosome = new double[] { 2 * rng.nextDouble() - 1,2 * rng.nextDouble() -
+//                    1,2 * rng.nextDouble() - 1, 2 * rng.nextDouble() - 1};
             population[i] = new Individual(chromosome);
         }
         //population[POPULATION] = new Individual(new double[] {-0.510066, 0.76066, -0.35663, -0.184483});
