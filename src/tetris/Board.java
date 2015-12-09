@@ -28,6 +28,9 @@ public class Board {
         emptyBoard();
 	}
 
+	/**
+	 * make the board empty by replacing all cells with value 'o'
+	 */
     public void emptyBoard()
     {
         // Fill all the board with o's (empty fields).
@@ -105,6 +108,10 @@ public class Board {
 		return counter;
 	}
 
+	/**
+	 * checks if all cells of the board are empty(have value 'o')
+	 * @return true of empty, false if not empty
+     */
 	public boolean isBoardEmpty() {
         for (int i = 0; i < board.length; i++)
             for (int j = 0; j < board[i].length; j++)
@@ -159,6 +166,11 @@ public class Board {
 	}
 
 
+	/**
+	 * cgeck if a given coordinate can be used to place pieces in
+	 * @param coord the coordinates in the form {{x1, x2 ..., xn}{y1, y2, ... yn})
+	 * @return true of possible, false if not
+     */
 	public boolean canPlace(int[][] coord) {
 		//Checks whether the given matrix goes out of bounds of the board. Return false if it does. (Jonty thinks and
 		// hopes this is true)
@@ -228,6 +240,12 @@ public class Board {
 		return pad;
 	}
 
+	/**
+	 * remove a piece from a certain location
+	 * @param matrix the matrix of the piece to be removed
+	 * @param x the row of the piece
+     * @param y the column of piece
+     */
 	public void removePiece(char[][] matrix, int x , int y)
 	{
 		for(int i = 0; i < matrix.length; i++)
@@ -240,70 +258,6 @@ public class Board {
 				}
 			}
 		}
-	}
-
-	public int getScore(char[][] matrix, int x, int y)
-	{
-		int score = 0;
-		for(int i = 0; i < matrix.length; i++)
-		{
-			for(int j = 0; j < matrix[i].length; j++)
-			{
-				if(matrix[i][j] != 'o')
-				{
-
-					try {
-						if (board[i + x - 1][j + y - 1] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e) {}
-
-					try {
-						if (board[i + x - 1][j + y] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e){}
-
-					try {
-						if (board[i + x - 1][j + y + 1] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e){}
-
-					try {
-						if (board[i + x ][j + y - 1] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e){}
-
-					try {
-						if (board[i + x][j + y + 1] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e){}
-
-					try {
-						if (board[i + x + 1][j + y - 1] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e){}
-
-					try {
-						if (board[i + x + 1][j + y] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e){}
-
-					try {
-						if (board[i + x + 1][j + y + 1] != 'o')
-							score++;
-					}
-					catch(ArrayIndexOutOfBoundsException e){}
-
-				}
-			}
-		}
-		return score;
 	}
 
 	/**
@@ -362,6 +316,11 @@ public class Board {
 		return true;
 	}
 
+    /**
+     * returns the height of all the columns of the board. The height is determined by computing where the first
+     * not empty cell is at
+     * @return the height of all columns combined
+     */
 	public int aggregateHeight()
 	{
 		int height=0;
@@ -372,6 +331,10 @@ public class Board {
 		return height;
 	}
 
+    /**
+     * the amount of empty holes in a tetris board
+     * @return the amount of holes
+     */
 	public int amountOfHoles()
 	{
 		int holes=0;
@@ -382,6 +345,11 @@ public class Board {
 		return holes;
 	}
 
+    /**
+     * returns the height of a column
+     * @param column the column you want to have the height of
+     * @return the height of that column
+     */
 	public int columnHeight(int column)
 	{
 		int height=0;
@@ -391,6 +359,10 @@ public class Board {
 		return height;
 	}
 
+    /**
+     * returns the amount of bumpiness, or the absolute difference of the height of every column combined
+     * @return the bumpiness
+     */
 	public int bumpiness()
 	{
 		int bumpiness=0;
@@ -401,6 +373,10 @@ public class Board {
 		return bumpiness;
 	}
 
+    /**
+     * returns how many full lines/rows there are in the board
+     * @return the amount of full rows
+     */
 	public int checkFullLines()
 	{
 		int rowsCleared = 0;
@@ -421,6 +397,10 @@ public class Board {
 		return rowsCleared;
 	}
 
+    /**
+     * returns a cloned object
+     * @return the cloned object
+     */
 	public Board clone()
 	{
 		Board boardToReturn= new Board(board[0].length, board.length);

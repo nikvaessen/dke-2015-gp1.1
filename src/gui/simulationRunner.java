@@ -35,6 +35,12 @@ public class simulationRunner extends Thread {
     char[] actionCommands;
     ArrayList<char[][]> order;
 
+    /**
+     * A thread which plays the optimal ordering on a gamepanel
+     * @param board the board of the gamepanel
+     * @param boardHandler the bourdhandler of the board of the gamepanel
+     * @param gamePanel the gamepanel to display the optimal ordering on
+     */
     public simulationRunner(Board board, BoardHandler boardHandler, GamePanel gamePanel) {
         this.board = board;
         this.boardHandler = boardHandler;
@@ -72,6 +78,9 @@ public class simulationRunner extends Thread {
         };
     }
 
+    /**
+     * start the perfect ordering animation
+     */
     public void run() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -84,6 +93,9 @@ public class simulationRunner extends Thread {
         });
     }
 
+    /**
+     * loop whichs plays the optimal ordering
+     */
     private void simulateGame() {
         System.out.println("simulate loop started. spawncount: " + spawnCount + " move count: " + moveCount);
         if (boardHandler.isPieceDoneFalling()){
@@ -117,18 +129,10 @@ public class simulationRunner extends Thread {
         }
     }
 
-    private boolean wait(int ms) {
-        //System.out.println("Waiting: " + System.currentTimeMillis());
-        try {
-            sleep(ms);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return true;
-        //System.out.println("done Waiting: " + System.currentTimeMillis());
-    }
-
-
+    /**
+     * method to get the new command for the optimal ordering
+     * @return the char representing the next action
+     */
     private char getMovementCommand() {
         char action = actionCommands[moveCount];
         moveCount++;
