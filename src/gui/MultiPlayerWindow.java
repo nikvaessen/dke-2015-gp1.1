@@ -27,6 +27,10 @@ public class MultiPlayerWindow extends JPanel
     private JPanel scorePanel;
     private JPanel rightPanel;
 
+    /**
+     * panel which holds 2 gamepanels so you can play tetris against each other
+     * @param mainMenu
+     */
     public MultiPlayerWindow( MainMenu mainMenu )
     {
         //create the variables
@@ -320,11 +324,5 @@ public class MultiPlayerWindow extends JPanel
 
 
     }
-
-//public Dimension getPreferredSize()
-  //  {
-   //     return Config.MULTI_PLAYER_SIZE;
-    //}
-
 
 }

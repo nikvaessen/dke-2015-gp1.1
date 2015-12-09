@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
  */
 public class BackButton extends JButton {
 
+    /**
+     * constructor for a backbutton which goes back to the main menu
+     * @param mainMenu the main menu to return to
+     */
     public BackButton(final MainMenu mainMenu)
     {
         super("< back");

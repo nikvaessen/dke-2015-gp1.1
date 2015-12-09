@@ -16,6 +16,10 @@ public class HighScoreBoard extends JPanel {
     private HighScoreList highScoreList;
     private JTextArea highScoreDisplay;
 
+    /**
+     * creates a panel which displays the best 5 highscores of a highScoreList object
+     * @param highScoreList the highscore list which has to be displayed
+     */
     public HighScoreBoard(final HighScoreList highScoreList)
     {
         this.highScoreList = highScoreList;
@@ -43,11 +47,19 @@ public class HighScoreBoard extends JPanel {
         }).start();
     }
 
+    /**
+     * sets the prefered size of this panel
+     * @return the preferred size
+     */
     public Dimension getPreferredSize()
     {
         return highScoreDisplay.getPreferredSize();
     }
 
+    /**
+     * update the board to display new high scores
+     * @param list
+     */
     private void updateHighScoreDisplay(ArrayList<String> list)
     {
         String newDisplayText = "";

@@ -45,6 +45,9 @@ public class MainMenu extends JFrame {
     private JButton simButton;
     private JButton quitButton;
 
+    /**
+     * creates a main menu with buttons to go to other panels
+     */
     public MainMenu() {
         //set up the panels and their buttons and the image header
         this.panels = new HashMap<String, JPanel>();
@@ -70,6 +73,9 @@ public class MainMenu extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * set up the main panel which holds everything else
+     */
     private void setUpMainPanel()
     {
         mainPanel = new JPanel(); //to hold image and buttons
@@ -85,6 +91,9 @@ public class MainMenu extends JFrame {
         this.add(mainPanel);
     }
 
+    /**
+     * create the other panels behind the main panel
+     */
     private void setUpOtherPanels()
     {
         singlePlayerWindow = new SinglePlayerWindow(this);
@@ -102,6 +111,9 @@ public class MainMenu extends JFrame {
         //// TODO: 16-11-15 add the other panels when they are done
     }
 
+    /**
+     * set uo the card layout so you can switch between panels
+     */
     private void setUpCardLayout()
     {
         this.cardLayout = new CardLayout();
@@ -119,6 +131,9 @@ public class MainMenu extends JFrame {
         this.add(cardPanel);
     }
 
+    /**
+     * set up the buttons which makes the card panel display other panels
+     */
     private void setUpButtons()
     {
         //set up the the buttons
@@ -150,6 +165,9 @@ public class MainMenu extends JFrame {
         mainPanel.add(buttonHolder, c);
     }
 
+    /**
+     * set up the header image on the main panel
+     */
     private void setUpImage()
     {
         try{
@@ -167,6 +185,9 @@ public class MainMenu extends JFrame {
         }
     }
 
+    /**
+     * display who made the program
+     */
     private void setUpMadeByText()
     {
         //create text area to show who made me :)
@@ -193,6 +214,9 @@ public class MainMenu extends JFrame {
         mainPanel.add(textArea, c);
     }
 
+    /**
+     * set up the action listeners for the buttons to display another panel
+     */
     private void setUpActionListeners()
     {
         //actionlistener for the singlePlayerWindow
@@ -253,6 +277,10 @@ public class MainMenu extends JFrame {
     }
 
 
+    /**
+     * function to choose which panel the card layout should display
+     * @param nameOfPanelToDisplay the name of the panel to display in the card layout
+     */
     private void startDisplaying(String nameOfPanelToDisplay)
     {
         cardLayout.show(cardPanel, nameOfPanelToDisplay);
@@ -260,6 +288,9 @@ public class MainMenu extends JFrame {
         this.pack();
     }
 
+    /**
+     * sets the card panel back to the main panel
+     */
     public void goBackToMainMenu()
     {
         startDisplaying(mainMenuName);
