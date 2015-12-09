@@ -90,24 +90,19 @@ public class GeneticBot extends Thread{
         //System.out.println(count);
         if (boardHandler.isPieceDoneFalling()) {
             //System.out.println("Spawning new piece");
-            if (boardHandler.isGameOver()) {
-                System.out.println("Game over");
+            if (boardHandler.isGameOver() || spawns >= MAXIMUM_SPAWNS_ALLOWED) {
+                gameOver = true;
                 return;
             }
             else {
                 int rowsCleared = boardHandler.checkFullLines();
                 if(rowsCleared != 0) {
-                    //scoreBoard.setScore(score);
+                    linesCleared+= rowsCleared;
                 }
+                spawns++;
                 boardHandler.spawnPiece();
                 makeMovementCommands();
             }
-        }
-        try {
-            //System.out.println(sleeping for a second");
-            this.sleep(100);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         //System.out.println("Looking for user input");
         char input = getMovementCommand();
@@ -117,7 +112,7 @@ public class GeneticBot extends Thread{
             //System.out.println("user input was not empty, repainting");
             boardHandler.giveInput(input);
         }
-        if (count > 10) //1000 ms have passed
+        if (count > 4) //1000 ms have passed
         {
             count = 0;
             //System.out.println("10 loops have happened, moving the piece down");
@@ -324,5 +319,14 @@ public class GeneticBot extends Thread{
             }
         }
         return false;
+    }
+
+    /**
+     * returns the how many lines the bot has currently cleared
+     * @return the amount of lines cleared
+     */
+    public int getCurrentLinesCleared()
+    {
+        return linesCleared;
     }
 }

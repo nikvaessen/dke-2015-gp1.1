@@ -1,11 +1,5 @@
 package bot;
-
-import com.sun.management.GarbageCollectorMXBean;
-import com.sun.org.apache.bcel.internal.generic.POP;
-import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
 import tetris.Board;
-import tetris.BoardHandler;
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -18,7 +12,7 @@ public class GeneticAlgorithm {
     public static final int BOARD_HEIGHT = 20;
     public static final boolean tetris = false;
     public static final int POPULATION = 1000;
-    public static final int MAX_GENERATIONS = 10;
+    public static final int MAX_GENERATIONS = 100;
     public static final int MUTATION_RATE = 1;
 
     public static Random rng;
