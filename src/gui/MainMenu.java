@@ -9,9 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-/**
- * Created by Aleksandra and Nik on 2015-11-10.
- */
+
 public class MainMenu extends JFrame {
     //Every panel the we want to potentially display
     private JPanel              mainPanel;          //holds the image header and all the buttons
@@ -20,7 +18,7 @@ public class MainMenu extends JFrame {
     private HighScoreWindow     highScoreWindow;
     private BotWindow           botWindow;
     private SimulationWindow    simWindow;
-    private OptionsWindow       optionsWindow;
+
 
     //strings representing all windows in the CardLayout
     private final String mainMenuName = "main";
