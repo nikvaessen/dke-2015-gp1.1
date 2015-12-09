@@ -1,7 +1,9 @@
 package tetris;
 
+
+
 /**
- * Created by chrx on 12/1/15.
+ * Implements the interface of the input controller
  */
 public interface InputController
 {

@@ -29,6 +29,14 @@ public class GameLoop extends Thread {
     private volatile int score;
     private String nameOfPlayer ;
 
+    /**
+     * Constructor for the game loop
+     * @param boardHandler has the board the game is played on
+     * @param inputController holds the input given by the player
+     * @param gamePanel  the game panel which holds the board of the game
+     * @param nextPiecePanel  panel containing the next piece
+     * @param highScoreList  the list with the high scores
+     */
     public GameLoop(BoardHandler boardHandler, InputController inputController, GamePanel gamePanel,
                     NextPiecePanel nextPiecePanel, tetris.HighScoreList highScoreList)
     {
@@ -50,11 +58,18 @@ public class GameLoop extends Thread {
         score = 0;
     }
 
+    /**
+     * It starts the thread
+     */
     public void run()
     {
         waitingForGameStartLoop();
     }
 
+    /**
+     *
+     * @param isPaused
+     */
     public void setPaused(boolean isPaused)
     {
         this.isPaused = isPaused;
