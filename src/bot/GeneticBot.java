@@ -26,7 +26,7 @@ public class GeneticBot extends Thread{
     private boolean gameOver;
     private int linesCleared;
     private double[] chromesome;
-    private int MAXIMUM_SPAWNS_ALLOWED = 5000;
+    private int MAXIMUM_SPAWNS_ALLOWED = 500;
     private int spawns;
 
     //variables for board handling

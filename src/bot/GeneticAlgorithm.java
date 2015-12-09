@@ -10,10 +10,10 @@ public class GeneticAlgorithm {
 
     public static final int BOARD_WIDTH = 10;
     public static final int BOARD_HEIGHT = 20;
-    public static final boolean tetris = false;
-    public static final int POPULATION = 1000;
-    public static final int MAX_GENERATIONS = 100;
-    public static final int MUTATION_RATE = 1;
+    public static final boolean tetris = true;
+    public static final int POPULATION = 100;
+    public static final int MAX_GENERATIONS = 1000;
+    public static final int MUTATION_RATE = 5;
 
     public static Random rng;
 
@@ -74,7 +74,6 @@ public class GeneticAlgorithm {
                 population[i] = children[k];
             }
             System.out.print("children replaced\n");
-
         }
         System.out.println("Result after evolution");
         //every indivual starts playing it's game
