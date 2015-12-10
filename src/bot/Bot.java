@@ -152,8 +152,6 @@ public class Bot extends Thread{
         int newColumn = recommendedPositionAndRotation[1];
         int rotation = recommendedPositionAndRotation[2];
         ArrayList<Character> newActionCommands = new ArrayList<>();
-        newActionCommands.add('d');
-        newActionCommands.add('d');
         for(int i = rotation; i > 0; i-- )
         {
             newActionCommands.add(ACTION_ROTATE_CLOCKWISE);

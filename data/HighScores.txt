@@ -1,1 +1,5 @@
-null,0
+Bianca,700
+Nik,500
+Stefan,400
+Jonty,200
+Jan,200

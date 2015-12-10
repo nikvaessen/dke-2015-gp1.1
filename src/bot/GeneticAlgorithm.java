@@ -10,10 +10,10 @@ public class GeneticAlgorithm {
 
     public static final int BOARD_WIDTH = 10;
     public static final int BOARD_HEIGHT = 20;
-    public static final boolean tetris = true;
-    public static final int POPULATION = 100;
-    public static final int MAX_GENERATIONS = 15;
-    public static final int MUTATION_RATE = 15;
+    public static final boolean tetris = false;
+    public static final int POPULATION = 1000;
+    public static final int MAX_GENERATIONS = 50;
+    public static final int MUTATION_RATE = 50;
 
     public static Random rng;
 
@@ -33,8 +33,9 @@ public class GeneticAlgorithm {
         //fill population with bots
         for(int i = 0; i < population.length; i++)
         {
-            Board boardForBot = new Board(BOARD_WIDTH, BOARD_HEIGHT);
-            double[] chromosome = new double[] {-0.49957273958047954, 0.29594893328418037, -0.7942169712292743, -0.17540932859336716 };
+            double[] chromosome = new double[] {
+                    -0.49957273958047954, 0.29594893328418037, -0.7942169712292743, -0.17540932859336716
+            };
 //            double[] chromosome = new double[] { 2 * rng.nextDouble() - 1,2 * rng.nextDouble() -
 //                    1,2 * rng.nextDouble() - 1, 2 * rng.nextDouble() - 1};
             population[i] = new Individual(chromosome);
@@ -49,8 +50,8 @@ public class GeneticAlgorithm {
             //let the population play tetris
             letPopulationPlay(population);
 
-            //select the first hundred
-            Individual[] elites = new Individual[POPULATION/10 * 3];
+            //select the 300 random individuals
+            Individual[] elites = new Individual[POPULATION/10];
             for(int i = 0; i < elites.length; i++)
             {
                 elites[i] = population[i].clone();
@@ -58,8 +59,8 @@ public class GeneticAlgorithm {
             killThreads(elites);
             System.out.print("Selection done\n");
 
-            //create 300 new indivuals by the selected first hundred with crossover :)
-            Individual[] children = new Individual[POPULATION/10 * 3];
+            //create 100 new indivuals by the selected first hundred with crossover :)
+            Individual[] children = new Individual[POPULATION/10];
             for(int i = 0; i < children.length; i+= 2)
             {
                 Individual mother = elites[i];
@@ -70,7 +71,7 @@ public class GeneticAlgorithm {
             }
             System.out.print("cross-over done\n");
 
-            //replace the weakest 300 by the new 300 indivuadals
+            //replace the weakest 10 by the new 100 indivuadals
             int k = 0;
             for(int i = (POPULATION/10) * 9; i < population.length; i++, k++){
                 population[i] = children[k];

@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Main {
 	public static void main(String[] argv) {
-		//GeneticAlgorithm.main(new String[] {"hi"});
+		//GeneticAlgoriscthm.main(new String[] {"hi"});
     	new MainMenu();
 	}
 }

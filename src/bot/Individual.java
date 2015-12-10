@@ -64,7 +64,7 @@ public class Individual {
     }
 
     /**
-     * make the indivudual start playing the game
+     * make the individual start playing the game
      */
     public void run()
     {
